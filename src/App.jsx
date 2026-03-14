@@ -394,7 +394,7 @@ export default function App() {
           <button
             type="submit"
             disabled={!hasText || isStreaming}
-            className={`absolute right-2 bottom-1.5 w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+            className={`absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
