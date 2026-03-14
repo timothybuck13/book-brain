@@ -377,9 +377,10 @@ export default function App() {
 
   // ── Chat input bar ──────────────────────────────────────────
   function renderInput() {
+    const hasText = input.trim().length > 0
     return (
-      <div className="flex-shrink-0 border-t border-gray-200 bg-white px-4 py-3">
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto flex gap-2 items-end">
+      <div className="flex-shrink-0 bg-[#f2f2f2] px-4 py-3">
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto relative">
           <textarea
             ref={textareaRef}
             value={input}
@@ -387,13 +388,17 @@ export default function App() {
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
             placeholder="Ask about books..."
             rows={1}
-            className="flex-1 resize-none rounded-xl border border-gray-200 px-4 py-2.5 text-base md:text-sm font-serif focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-colors bg-gray-50 overflow-hidden"
+            className="w-full resize-none rounded-full border border-gray-300 pl-5 pr-12 py-3 text-base md:text-sm font-serif focus:outline-none focus:border-gray-400 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
             disabled={isStreaming}
           />
           <button
             type="submit"
-            disabled={!input.trim() || isStreaming}
-            className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            disabled={!hasText || isStreaming}
+            className={`absolute right-2 bottom-1.5 w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+              hasText && !isStreaming
+                ? 'bg-[#1a1a1a] text-white hover:bg-black'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
