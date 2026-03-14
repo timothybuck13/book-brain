@@ -199,7 +199,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
                   type="text"
                   value={addTitle}
                   onChange={e => setAddTitle(e.target.value)}
-                  placeholder="Title *"
+                  placeholder="Title"
                   required
                   className="text-base md:text-sm font-sans border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
                   autoFocus
@@ -208,7 +208,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
                   type="text"
                   value={addAuthor}
                   onChange={e => setAddAuthor(e.target.value)}
-                  placeholder="Author *"
+                  placeholder="Author"
                   required
                   className="text-base md:text-sm font-sans border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
                 />
