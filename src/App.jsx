@@ -550,7 +550,7 @@ export default function App() {
                 <p className="font-sans text-gray-500 text-sm md:text-base leading-relaxed mb-8 max-w-md mx-auto">
                   Your library is ready. Book Brain now knows your reading history and can give you personalized recommendations. Try asking:
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     "What should I read next?",
                     "What are my reading patterns?",
@@ -594,7 +594,7 @@ export default function App() {
                   Explore 530 books from 10 years of reading. Ask for recommendations, discover patterns, or find your next read.
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   "I have similar taste to Timothy — what should I read next?",
                   "What are the best fantasy series here?",
@@ -660,7 +660,7 @@ export default function App() {
                     : 'AI-powered recommendations from 10 years of reading — 530 books and counting.'}
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {(userBooks.length > 0 ? [
                   "What should I read next?",
                   "What are my reading patterns?",
