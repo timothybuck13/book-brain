@@ -174,7 +174,7 @@ export default function App() {
             </svg>
           </button>
           <div className="flex items-center gap-2">
-            <span className="text-xl">📚</span>
+            <img src="/logo.jpg" alt="Book Brain" className="w-7 h-7 rounded-md" />
             <h1 className="font-display text-lg tracking-wide">Book Brain</h1>
           </div>
         </header>
@@ -184,7 +184,7 @@ export default function App() {
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10">
-                <div className="text-5xl mb-4">📚</div>
+                <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
                 <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-3">Book Brain</h2>
                 <p className="text-gray-500 font-serif text-sm md:text-base leading-relaxed max-w-md mx-auto">
                   AI-powered recommendations from 10 years of reading — 560 books and counting.

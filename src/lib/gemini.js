@@ -1,17 +1,17 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { books } from '../data/books'
+import { books as timothyBooks } from '../data/books'
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyB2G8z2IRL2My09bhT1ZnrRygIuvD2J5Yw'
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ''
 const genAI = new GoogleGenerativeAI(apiKey)
 
-// Build a compact book catalog for the system prompt
-function buildBookCatalog() {
+// Build Timothy's catalog (the demo library)
+function buildTimothyCatalog() {
   const lines = []
   let totalBooks = 0
   const favoritesList = []
 
-  for (const year of Object.keys(books).sort().reverse()) {
-    const yearData = books[year]
+  for (const year of Object.keys(timothyBooks).sort().reverse()) {
+    const yearData = timothyBooks[year]
     for (const category of Object.keys(yearData)) {
       for (const book of yearData[category]) {
         totalBooks++
@@ -25,11 +25,37 @@ function buildBookCatalog() {
   return { catalog: lines.join('\n'), totalBooks, favoritesList }
 }
 
-const { catalog, totalBooks, favoritesList } = buildBookCatalog()
+const timothy = buildTimothyCatalog()
 
-const systemPrompt = `You are Book Brain, an AI book recommendation assistant built on Timothy Buck's personal reading library.
+// Build a user's catalog from their imported books
+function buildUserCatalog(userBooks) {
+  if (!userBooks || userBooks.length === 0) return null
 
-Timothy has read ${totalBooks} books over 10 years (2016-2025), spanning fiction, nonfiction, and poetry. He reads about 53 books per year. You have his complete reading history below.
+  const lines = []
+  const rated5 = []
+
+  for (const book of userBooks) {
+    const year = book.date_read ? new Date(book.date_read).getFullYear() : 'unknown'
+    const ratingStr = book.rating ? ` | rating: ${book.rating}/5` : ''
+    const shelves = book.shelves ? ` | shelves: ${book.shelves}` : ''
+    lines.push(`- "${book.title}" by ${book.author} | ${year}${ratingStr}${shelves}`)
+
+    if (book.rating === 5) {
+      rated5.push(`"${book.title}" by ${book.author} (${year})`)
+    }
+  }
+
+  return {
+    catalog: lines.join('\n'),
+    totalBooks: userBooks.length,
+    topRated: rated5,
+  }
+}
+
+function getTimothySystemPrompt() {
+  return `You are Book Brain, an AI book recommendation assistant. Right now you're working with Timothy Buck's personal reading library as a demo.
+
+Timothy has read ${timothy.totalBooks} books over 10 years (2016-2025), spanning fiction, nonfiction, and poetry. He reads about 53 books per year. You have his complete reading history below.
 
 ## Timothy's Reading Profile
 - **Heavy fantasy/sci-fi reader**: Brandon Sanderson (Stormlight, Mistborn, Wax & Wayne), Robert Jordan (Wheel of Time), Frank Herbert (Dune), Cixin Liu (Three-Body), Pierce Brown (Red Rising), R.F. Kuang, Martha Wells (Murderbot), Becky Chambers, N.K. Jemisin, Jim Butcher (Dresden Files), Christopher Ruocchio (Sun Eater)
@@ -40,10 +66,10 @@ Timothy has read ${totalBooks} books over 10 years (2016-2025), spanning fiction
 - **Favorites show his peak taste**: These are the books he singled out as the best each year
 
 ## All-Time Favorites (★)
-${favoritesList.map(f => '★ ' + f).join('\n')}
+${timothy.favoritesList.map(f => '★ ' + f).join('\n')}
 
 ## Complete Library
-${catalog}
+${timothy.catalog}
 
 ## Your Behavior
 1. When recommending books Timothy HAS read, always mention the year he read it and whether it was a favorite. Include the Amazon link if available.
@@ -54,9 +80,43 @@ ${catalog}
 6. You can analyze his reading patterns, suggest what to read next in a series he started, identify gaps in his reading, etc.
 7. Keep responses focused and not too long — aim for 3-5 book recommendations unless asked for more.
 8. If someone asks about a book he's read, share that context. If they ask about one he hasn't, you can still discuss it knowledgeably.
-9. Don't be afraid to have opinions about books. Be genuine.`
+9. Don't be afraid to have opinions about books. Be genuine.
+10. Remember: this is the DEMO library. The user chatting may not be Timothy — they're exploring what Book Brain can do with a real reading history.`
+}
 
-export async function streamChat(messages, onChunk) {
+function getUserSystemPrompt(userBooks, userName) {
+  const userCatalog = buildUserCatalog(userBooks)
+  if (!userCatalog) return null
+
+  const topRatedSection = userCatalog.topRated.length > 0
+    ? `\n## 5-Star Books (★)\n${userCatalog.topRated.map(f => '★ ' + f).join('\n')}`
+    : ''
+
+  return `You are Book Brain, an AI book recommendation assistant working with ${userName || 'a reader'}'s personal reading library.
+
+This reader has logged ${userCatalog.totalBooks} books. You have their complete reading history below.
+${topRatedSection}
+
+## Complete Library
+${userCatalog.catalog}
+
+## Your Behavior
+1. When recommending books they've already read, mention their rating if available and when they read it.
+2. When recommending NEW books, explain why they'd appeal based on their taste patterns and reading history.
+3. Be conversational and warm — like a well-read friend, not a search engine.
+4. Use markdown formatting: **bold** for book titles.
+5. You can analyze their reading patterns, suggest what to read next, identify gaps, recommend based on their highest-rated books, etc.
+6. Keep responses focused — aim for 3-5 book recommendations unless asked for more.
+7. If they haven't rated many books, focus on the titles and authors to infer preferences.
+8. Don't be afraid to have opinions about books. Be genuine.`
+}
+
+export async function streamChat(messages, onChunk, { userBooks = null, userName = null } = {}) {
+  // Use user's library if they have books, otherwise demo with Timothy's
+  const systemPrompt = (userBooks && userBooks.length > 0)
+    ? getUserSystemPrompt(userBooks, userName)
+    : getTimothySystemPrompt()
+
   const model = genAI.getGenerativeModel({
     model: 'gemini-2.0-flash',
     systemInstruction: systemPrompt,
