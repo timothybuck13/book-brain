@@ -442,11 +442,8 @@ export default function App() {
           <div className="max-w-md w-full text-center">
             <img src="/logo.jpg" alt="Book Brain" className="w-20 h-20 rounded-2xl mx-auto mb-6" />
             <h1 className="font-sans font-semibold text-3xl md:text-4xl tracking-wide mb-4">Book Brain</h1>
-            <p className="font-sans text-gray-500 text-lg md:text-xl leading-relaxed mb-3">
-              Your AI-powered reading companion.
-            </p>
-            <p className="font-sans text-gray-400 text-sm md:text-base leading-relaxed mb-8">
-              Import your Goodreads library and get personalized book recommendations powered by your actual reading history.
+            <p className="font-sans text-gray-500 text-lg md:text-xl leading-relaxed mb-8">
+              Get personalized book recommendations powered by your actual reading history.
             </p>
 
             {/* Primary CTA */}
