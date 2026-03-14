@@ -64,7 +64,7 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-display text-xl tracking-wide">Import from Goodreads</h2>
+          <h2 className="font-sans font-semibold text-xl tracking-wide">Import from Goodreads</h2>
           <button onClick={onClose} className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -75,11 +75,11 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
         {status === 'idle' || status === 'error' ? (
           <>
             <div className="mb-4">
-              <p className="font-serif text-sm text-gray-600 leading-relaxed">
+              <p className="font-sans text-sm text-gray-600 leading-relaxed">
                 Export your Goodreads library as a CSV file, then upload it here. We'll import all the books you've read.
               </p>
               <div className="mt-3 bg-amber-50 rounded-lg p-3">
-                <p className="font-serif text-xs text-amber-800 leading-relaxed">
+                <p className="font-sans text-xs text-amber-800 leading-relaxed">
                   <strong>How to export:</strong> Go to{' '}
                   <a
                     href="https://www.goodreads.com/review/import"
@@ -111,41 +111,41 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
                 className="hidden"
               />
               
-              <p className="font-serif text-sm text-gray-500">
+              <p className="font-sans text-sm text-gray-500">
                 Drop your Goodreads CSV here or <span className="text-amber-600 underline">browse</span>
               </p>
             </div>
 
             {error && (
-              <p className="mt-3 text-sm text-red-600 font-serif">{error}</p>
+              <p className="mt-3 text-sm text-red-600 font-sans">{error}</p>
             )}
           </>
         ) : status === 'parsing' ? (
           <div className="py-8 text-center">
             
-            <p className="font-serif text-sm text-gray-500">Reading your library...</p>
+            <p className="font-sans text-sm text-gray-500">Reading your library...</p>
           </div>
         ) : status === 'importing' ? (
           <div className="py-8 text-center">
             
-            <p className="font-serif text-sm text-gray-500">
+            <p className="font-sans text-sm text-gray-500">
               Importing {progress?.parsed || 0} books...
             </p>
           </div>
         ) : status === 'done' ? (
           <div className="py-8 text-center">
             
-            <p className="font-serif text-lg text-gray-800 mb-1">
+            <p className="font-sans text-lg text-gray-800 mb-1">
               Imported {result?.imported || 0} books!
             </p>
             {result?.skipped > 0 && (
-              <p className="font-serif text-sm text-gray-500">
+              <p className="font-sans text-sm text-gray-500">
                 {result.skipped} already in your library (skipped)
               </p>
             )}
             <button
               onClick={onClose}
-              className="mt-4 px-6 py-2 bg-amber-600 text-white rounded-xl font-serif text-sm hover:bg-amber-700 transition-colors"
+              className="mt-4 px-6 py-2 bg-amber-600 text-white rounded-xl font-sans text-sm hover:bg-amber-700 transition-colors"
             >
               Start Chatting
             </button>

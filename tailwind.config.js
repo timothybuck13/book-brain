@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"PT Serif"', 'Georgia', 'serif'],
-        display: ['"Gilda Display"', '"PT Serif"', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },

@@ -21,7 +21,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         <div className="p-3 border-b border-gray-200">
           <button
             onClick={onNew}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-serif hover:bg-amber-700 transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
@@ -33,7 +33,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         {/* Conversations list */}
         <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
           {conversations.length === 0 ? (
-            <p className="text-center text-gray-400 text-xs font-serif py-8 px-4">
+            <p className="text-center text-gray-400 text-xs font-sans py-8 px-4">
               No conversations yet. Start chatting!
             </p>
           ) : (
@@ -48,7 +48,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
               >
                 <button
                   onClick={() => onSelect(convo.id)}
-                  className="flex-1 text-left px-3 py-2.5 text-sm font-serif truncate min-w-0"
+                  className="flex-1 text-left px-3 py-2.5 text-sm font-sans truncate min-w-0"
                 >
                   {convo.title || 'Untitled'}
                 </button>
@@ -88,7 +88,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
             href="https://timothybuck.me/reading"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-xs text-gray-400 hover:text-amber-600 transition-colors font-serif"
+            className="flex items-center gap-2 text-xs text-gray-400 hover:text-amber-600 transition-colors font-sans"
           >
             
             <span>View Timothy's full reading list</span>

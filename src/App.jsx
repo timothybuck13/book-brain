@@ -296,7 +296,7 @@ export default function App() {
           {showBack && (
             <button
               onClick={() => { setAppState('landing'); setMessages([]) }}
-              className="p-1.5 -ml-1 rounded-lg hover:bg-gray-100 transition-colors text-gray-500 text-sm font-serif flex items-center gap-1"
+              className="p-1.5 -ml-1 rounded-lg hover:bg-gray-100 transition-colors text-gray-500 text-sm font-sans flex items-center gap-1"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -316,7 +316,7 @@ export default function App() {
           )}
           <div className="flex items-center gap-2">
             <img src="/logo.jpg" alt="Book Brain" className="w-7 h-7 rounded-md" />
-            <h1 className="font-display text-lg tracking-wide">Book Brain</h1>
+            <h1 className="font-sans font-semibold text-lg tracking-wide">Book Brain</h1>
           </div>
         </div>
 
@@ -324,7 +324,7 @@ export default function App() {
           {showSignUp && (
             <button
               onClick={handleSignIn}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-600 text-white text-sm font-serif hover:bg-amber-700 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 transition-colors"
             >
               Sign Up Free
             </button>
@@ -354,7 +354,7 @@ export default function App() {
                   </div>
                   <button
                     onClick={() => { setShowUserMenu(false); setShowImportModal(true) }}
-                    className="w-full text-left px-3 py-2 text-sm font-serif text-gray-600 hover:bg-gray-50 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
                   >
                     
                     Import Goodreads
@@ -362,7 +362,7 @@ export default function App() {
                   </button>
                   <button
                     onClick={handleSignOut}
-                    className="w-full text-left px-3 py-2 text-sm font-serif text-gray-600 hover:bg-gray-50 flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
                   >
                      Sign Out
                   </button>
@@ -388,7 +388,7 @@ export default function App() {
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
             placeholder="Ask about books..."
             rows={1}
-            className="w-full resize-none rounded-2xl border border-gray-200 pl-4 pr-12 py-3.5 text-base font-serif focus:outline-none focus:border-gray-300 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
+            className="w-full resize-none rounded-2xl border border-gray-200 pl-4 pr-12 py-3.5 text-base font-sans focus:outline-none focus:border-gray-300 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
             disabled={isStreaming}
           />
           <button
@@ -405,7 +405,7 @@ export default function App() {
             </svg>
           </button>
         </form>
-        <p className="text-center text-xs text-gray-400 mt-2 font-serif">
+        <p className="text-center text-xs text-gray-400 mt-2 font-sans">
           Powered by Gemini · Built by <a href="https://timothybuck.me" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-500">Timothy Buck</a>
         </p>
       </div>
@@ -418,7 +418,7 @@ export default function App() {
       <div className="h-dvh flex items-center justify-center bg-[#f2f2f2]">
         <div className="text-center">
           <img src="/logo.jpg" alt="Book Brain" className="w-14 h-14 rounded-xl mx-auto mb-3 animate-pulse" />
-          <p className="font-serif text-sm text-gray-400">Loading...</p>
+          <p className="font-sans text-sm text-gray-400">Loading...</p>
         </div>
       </div>
     )
@@ -431,15 +431,15 @@ export default function App() {
         <div className="flex-1 flex items-center justify-center px-4">
           <div className="max-w-md w-full text-center">
             <img src="/logo.jpg" alt="Book Brain" className="w-20 h-20 rounded-2xl mx-auto mb-6" />
-            <h1 className="font-display text-3xl md:text-4xl tracking-wide mb-4">Book Brain</h1>
-            <p className="font-serif text-gray-500 text-base md:text-lg leading-relaxed mb-8">
+            <h1 className="font-sans font-semibold text-3xl md:text-4xl tracking-wide mb-4">Book Brain</h1>
+            <p className="font-sans text-gray-500 text-base md:text-lg leading-relaxed mb-8">
               Your AI-powered reading companion. Import your Goodreads library and get personalized book recommendations powered by your actual reading history.
             </p>
 
             {/* Primary CTA */}
             <button
               onClick={handleSignIn}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-amber-600 text-white font-serif text-base hover:bg-amber-700 transition-colors mb-3"
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-amber-600 text-white font-sans text-base hover:bg-amber-700 transition-colors mb-3"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -453,7 +453,7 @@ export default function App() {
             {/* Secondary CTA */}
             <button
               onClick={() => setAppState('demo')}
-              className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-serif text-base hover:bg-white hover:border-gray-400 transition-colors mb-6"
+              className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-sans text-base hover:bg-white hover:border-gray-400 transition-colors mb-6"
             >
               Try it with Timothy's 560-book library →
             </button>
@@ -461,13 +461,13 @@ export default function App() {
             {/* Tertiary CTA */}
             <button
               onClick={handleSignIn}
-              className="text-sm font-serif text-gray-400 hover:text-amber-600 transition-colors underline underline-offset-2"
+              className="text-sm font-sans text-gray-400 hover:text-amber-600 transition-colors underline underline-offset-2"
             >
               Already have an account? Log in
             </button>
           </div>
         </div>
-        <p className="text-center text-xs text-gray-400 pb-4 font-serif">
+        <p className="text-center text-xs text-gray-400 pb-4 font-sans">
           Built by <a href="https://timothybuck.me" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-500">Timothy Buck</a>
         </p>
       </div>
@@ -484,14 +484,14 @@ export default function App() {
             {onboardingStep === 'upload' && (
               <div className="text-center">
                 
-                <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-2">Let's set up your library</h2>
-                <p className="font-serif text-gray-500 text-sm md:text-base leading-relaxed mb-6 max-w-md mx-auto">
+                <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-2">Let's set up your library</h2>
+                <p className="font-sans text-gray-500 text-sm md:text-base leading-relaxed mb-6 max-w-md mx-auto">
                   Import your Goodreads reading history so Book Brain can give you personalized recommendations.
                 </p>
 
                 <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-4 text-left">
-                  <h3 className="font-serif font-bold text-gray-800 text-sm mb-3">How to export from Goodreads:</h3>
-                  <ol className="font-serif text-sm text-gray-600 space-y-2 list-decimal list-inside mb-5">
+                  <h3 className="font-sans font-bold text-gray-800 text-sm mb-3">How to export from Goodreads:</h3>
+                  <ol className="font-sans text-sm text-gray-600 space-y-2 list-decimal list-inside mb-5">
                     <li>
                       Go to{' '}
                       <a href="https://www.goodreads.com/review/import" target="_blank" rel="noopener noreferrer" className="text-amber-600 underline hover:text-amber-700">
@@ -514,13 +514,13 @@ export default function App() {
                   >
                     <input ref={fileRef} type="file" accept=".csv" onChange={(e) => handleOnboardingFile(e.target.files?.[0])} className="hidden" />
                     
-                    <p className="font-serif text-sm text-gray-500">
+                    <p className="font-sans text-sm text-gray-500">
                       Drop your Goodreads CSV here or <span className="text-amber-600 underline">browse</span>
                     </p>
                   </div>
 
                   {importError && (
-                    <p className="mt-3 text-sm text-red-600 font-serif">{importError}</p>
+                    <p className="mt-3 text-sm text-red-600 font-sans">{importError}</p>
                   )}
                 </div>
               </div>
@@ -529,21 +529,21 @@ export default function App() {
             {onboardingStep === 'importing' && (
               <div className="text-center">
                 
-                <h2 className="font-display text-2xl tracking-wide mb-2">Importing your books...</h2>
-                <p className="font-serif text-gray-500 text-sm">This might take a moment.</p>
+                <h2 className="font-sans font-semibold text-2xl tracking-wide mb-2">Importing your books...</h2>
+                <p className="font-sans text-gray-500 text-sm">This might take a moment.</p>
               </div>
             )}
 
             {onboardingStep === 'done' && (
               <div className="text-center">
                 
-                <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-2">
+                <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-2">
                   {importResult?.imported || 0} books imported!
                 </h2>
                 {importResult?.skipped > 0 && (
-                  <p className="font-serif text-sm text-gray-400 mb-2">{importResult.skipped} duplicates skipped</p>
+                  <p className="font-sans text-sm text-gray-400 mb-2">{importResult.skipped} duplicates skipped</p>
                 )}
-                <p className="font-serif text-gray-500 text-sm md:text-base leading-relaxed mb-8 max-w-md mx-auto">
+                <p className="font-sans text-gray-500 text-sm md:text-base leading-relaxed mb-8 max-w-md mx-auto">
                   Your library is ready. Book Brain now knows your reading history and can give you personalized recommendations. Try asking:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
@@ -558,7 +558,7 @@ export default function App() {
                     <button
                       key={prompt}
                       onClick={() => transitionToChat(prompt)}
-                      className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-amber-400 hover:shadow-sm transition-all text-sm font-serif text-gray-600 leading-snug"
+                      className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-amber-400 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug"
                     >
                       {prompt}
                     </button>
@@ -585,8 +585,8 @@ export default function App() {
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10">
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
-                <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-3">Timothy's Library</h2>
-                <p className="text-gray-500 font-serif text-sm md:text-base leading-relaxed max-w-md mx-auto">
+                <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">Timothy's Library</h2>
+                <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-md mx-auto">
                   Explore 560 books from 10 years of reading. Ask for recommendations, discover patterns, or find your next read.
                 </p>
               </div>
@@ -600,7 +600,7 @@ export default function App() {
                   <button
                     key={prompt}
                     onClick={() => { setInput(prompt); setTimeout(() => textareaRef.current?.focus(), 50) }}
-                    className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-serif text-gray-600 leading-snug"
+                    className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug"
                   >
                     {prompt}
                   </button>
@@ -645,12 +645,12 @@ export default function App() {
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10">
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
-                <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-3">
+                <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">
                   {userBooks.length > 0
                     ? `Your ${userBooks.length}-Book Library`
                     : 'Book Brain'}
                 </h2>
-                <p className="text-gray-500 font-serif text-sm md:text-base leading-relaxed max-w-md mx-auto">
+                <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-md mx-auto">
                   {userBooks.length > 0
                     ? 'Ask me anything about your reading history, or get personalized recommendations.'
                     : 'AI-powered recommendations from 10 years of reading — 560 books and counting.'}
@@ -671,7 +671,7 @@ export default function App() {
                   <button
                     key={prompt}
                     onClick={() => { setInput(prompt); setTimeout(() => textareaRef.current?.focus(), 50) }}
-                    className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-serif text-gray-600 leading-snug"
+                    className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug"
                   >
                     {prompt}
                   </button>
