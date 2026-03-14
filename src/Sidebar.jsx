@@ -17,17 +17,9 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0
       `}>
-        {/* New chat button */}
-        <div className="p-3 border-b border-gray-200">
-          <button
-            onClick={onNew}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-            New Chat
-          </button>
+        {/* Header */}
+        <div className="px-4 py-3 border-b border-gray-200">
+          <h2 className="font-sans font-semibold text-sm text-gray-500 uppercase tracking-wider">History</h2>
         </div>
 
         {/* Conversations list */}
@@ -82,17 +74,17 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
           )}
         </div>
 
-        {/* Footer */}
+        {/* New Chat button at bottom */}
         <div className="p-3 border-t border-gray-200">
-          <a
-            href="https://timothybuck.me/reading"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-xs text-gray-400 hover:text-amber-600 transition-colors font-sans"
+          <button
+            onClick={onNew}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 transition-colors"
           >
-            
-            <span>View Timothy's full reading list</span>
-          </a>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            New Chat
+          </button>
         </div>
       </aside>
     </>
