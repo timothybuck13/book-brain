@@ -406,9 +406,11 @@ export default function App() {
             </svg>
           </button>
         </form>
-        <p className="text-center text-xs text-gray-400 mt-2 font-sans">
-          Powered by Gemini · Built by <a href="https://timothybuck.me" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-500">Timothy Buck</a>
-        </p>
+        {!user && (
+          <p className="text-center text-xs text-gray-400 mt-2 font-sans">
+            Powered by Gemini · Built by <a href="https://timothybuck.me" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-500">Timothy Buck</a>
+          </p>
+        )}
       </div>
     )
   }
