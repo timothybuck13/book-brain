@@ -380,7 +380,7 @@ export default function App() {
     const hasText = input.trim().length > 0
     return (
       <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pb-4 pt-2">
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto relative bg-white rounded-2xl shadow-sm border border-gray-200">
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto relative bg-white rounded-full shadow-sm border border-gray-200">
           <textarea
             ref={textareaRef}
             value={input}
@@ -388,7 +388,7 @@ export default function App() {
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
             placeholder="Ask about books..."
             rows={1}
-            className="w-full resize-none bg-transparent rounded-2xl pl-4 pr-14 py-4 text-base font-sans focus:outline-none overflow-hidden"
+            className="w-full resize-none bg-transparent rounded-full pl-5 pr-14 py-3.5 text-base font-sans focus:outline-none overflow-hidden"
             disabled={isStreaming}
           />
           <button
