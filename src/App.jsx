@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { supabase, isSupabaseReady, signInWithGoogle, signOut, getUserBooks, importBooks } from './lib/supabase'
+import { supabase, isSupabaseReady, signInWithGoogle, signOut, getUserBooks, importBooks, addUserBook, deleteUserBook } from './lib/supabase'
 import { streamChat } from './lib/gemini'
 import { parseGoodreadsCSV } from './lib/goodreads'
 import Sidebar from './Sidebar'
 import ChatMessage from './ChatMessage'
 import ImportModal from './ImportModal'
+import LibraryView from './LibraryView'
 
 export default function App() {
   // App state: 'loading' | 'landing' | 'demo' | 'onboarding' | 'chat'
@@ -20,6 +21,7 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [showImportModal, setShowImportModal] = useState(false)
+  const [showLibrary, setShowLibrary] = useState(false)
 
   // Onboarding state
   const [onboardingStep, setOnboardingStep] = useState('upload') // 'upload' | 'importing' | 'done'
@@ -353,12 +355,17 @@ export default function App() {
                     <p className="text-xs text-gray-400 truncate">{user.email}</p>
                   </div>
                   <button
+                    onClick={() => { setShowUserMenu(false); setShowLibrary(true) }}
+                    className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
+                  >
+                    My Library
+                    {userBooks.length > 0 && <span className="ml-auto text-xs text-gray-400">{userBooks.length} books</span>}
+                  </button>
+                  <button
                     onClick={() => { setShowUserMenu(false); setShowImportModal(true) }}
                     className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
                   >
-                    
                     Import Goodreads
-                    {userBooks.length > 0 && <span className="ml-auto text-xs text-gray-400">{userBooks.length} books</span>}
                   </button>
                   <button
                     onClick={handleSignOut}
@@ -646,6 +653,15 @@ export default function App() {
       <div className="flex-1 flex flex-col min-w-0">
         {renderHeader()}
 
+        {showLibrary ? (
+          <LibraryView
+            user={user}
+            userBooks={userBooks}
+            setUserBooks={setUserBooks}
+            onClose={() => setShowLibrary(false)}
+          />
+        ) : (
+        <>
         <div className="flex-1 overflow-y-auto">
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
@@ -695,6 +711,8 @@ export default function App() {
         </div>
 
         {renderInput()}
+        </>
+        )}
       </div>
 
       {/* Re-import modal (from user menu) */}

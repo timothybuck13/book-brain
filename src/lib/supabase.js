@@ -106,3 +106,37 @@ export async function deleteUserBooks(userId) {
     .eq('user_id', userId)
   return !error
 }
+
+export async function addUserBook(userId, book) {
+  const { data, error } = await supabase
+    .from('user_books')
+    .insert({
+      user_id: userId,
+      title: book.title,
+      author: book.author,
+      rating: book.rating || null,
+      date_read: book.date_read || null,
+      isbn: book.isbn || null,
+      shelves: book.shelves || null,
+      review: book.review || null,
+    })
+    .select()
+    .single()
+  if (error) {
+    console.error('Error adding book:', error)
+    throw error
+  }
+  return data
+}
+
+export async function deleteUserBook(bookId) {
+  const { error } = await supabase
+    .from('user_books')
+    .delete()
+    .eq('id', bookId)
+  if (error) {
+    console.error('Error deleting book:', error)
+    throw error
+  }
+  return true
+}
