@@ -594,7 +594,7 @@ export default function App() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
                 {[
-                  "What should I read if I loved Dune?",
+                  "Suggest a few books for someone who likes the same books as Timothy",
                   "What are the best fantasy series here?",
                   "Recommend something short and profound",
                   "What poetry would you suggest?",
@@ -665,7 +665,7 @@ export default function App() {
                   "Suggest something outside my comfort zone",
                   "What's my most-read genre?",
                 ] : [
-                  "What should I read if I loved Dune?",
+                  "Suggest a few books for someone who likes the same books as Timothy",
                   "What are the best fantasy series here?",
                   "Recommend something short and profound",
                   "What poetry would you suggest?",
