@@ -396,7 +396,7 @@ export default function App() {
             disabled={!hasText || isStreaming}
             className={`absolute right-2 bottom-1.5 w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
               hasText && !isStreaming
-                ? 'bg-[#1a1a1a] text-white hover:bg-black'
+                ? 'bg-amber-600 text-white hover:bg-amber-700'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
           >
