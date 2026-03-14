@@ -612,7 +612,7 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div className="max-w-2xl mx-auto px-4 py-6 space-y-1">
+            <div className="max-w-2xl mx-auto py-6 space-y-1">
               {messages.map((msg, i) => (
                 <ChatMessage key={msg.id || i} message={msg} isStreaming={isStreaming && i === messages.length - 1 && msg.role === 'model'} />
               ))}
@@ -683,7 +683,7 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div className="max-w-2xl mx-auto px-4 py-6 space-y-1">
+            <div className="max-w-2xl mx-auto py-6 space-y-1">
               {messages.map((msg, i) => (
                 <ChatMessage key={msg.id || i} message={msg} isStreaming={isStreaming && i === messages.length - 1 && msg.role === 'model'} />
               ))}
