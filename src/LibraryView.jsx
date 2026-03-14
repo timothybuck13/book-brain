@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from 'react'
-import { addUserBook, deleteUserBook } from './lib/supabase'
+import { addUserBook, deleteUserBook, deleteUserBooks } from './lib/supabase'
 
 export default function LibraryView({ user, userBooks, setUserBooks, onClose }) {
   const [search, setSearch] = useState('')
@@ -11,6 +11,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
   const [addDate, setAddDate] = useState('')
   const [saving, setSaving] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
+  const [deleteAllConfirm, setDeleteAllConfirm] = useState(false)
   const searchRef = useRef(null)
 
   const filtered = useMemo(() => {
@@ -68,6 +69,16 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
     }
   }
 
+  async function handleDeleteAll() {
+    try {
+      await deleteUserBooks(user.id)
+      setUserBooks([])
+      setDeleteAllConfirm(false)
+    } catch (err) {
+      console.error('Failed to delete all books:', err)
+    }
+  }
+
   function StarRating({ rating, interactive, onChange }) {
     return (
       <div className="flex gap-0.5">
@@ -99,14 +110,42 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
           <h2 className="font-sans font-semibold text-lg">My Library</h2>
           <span className="text-sm text-gray-400 font-sans">{userBooks.length} books</span>
         </div>
-        <button
-          onClick={onClose}
-          className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div className="flex items-center gap-2">
+          {deleteAllConfirm ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-red-600 font-sans">Delete all books?</span>
+              <button
+                onClick={handleDeleteAll}
+                className="text-xs font-sans text-white bg-red-600 hover:bg-red-700 px-2 py-1 rounded-md transition-colors"
+              >
+                Yes, delete
+              </button>
+              <button
+                onClick={() => setDeleteAllConfirm(false)}
+                className="text-xs font-sans text-gray-500 hover:text-gray-700 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            userBooks.length > 0 && (
+              <button
+                onClick={() => setDeleteAllConfirm(true)}
+                className="text-xs font-sans text-red-500 hover:text-red-600 transition-colors"
+              >
+                Delete All
+              </button>
+            )
+          )}
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Search + Sort + Add */}
