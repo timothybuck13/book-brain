@@ -110,33 +110,8 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
           <h2 className="font-sans font-semibold text-lg">My Library</h2>
           <span className="text-sm text-gray-400 font-sans">{userBooks.length} books</span>
         </div>
-        <div className="flex items-center gap-4">
-          {deleteAllConfirm ? (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-red-600 font-sans">Delete all books?</span>
-              <button
-                onClick={handleDeleteAll}
-                className="text-xs font-sans text-white bg-red-600 hover:bg-red-700 px-2 py-1 rounded-md transition-colors"
-              >
-                Yes, delete
-              </button>
-              <button
-                onClick={() => setDeleteAllConfirm(false)}
-                className="text-xs font-sans text-gray-500 hover:text-gray-700 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-          ) : (
-            userBooks.length > 0 && (
-              <button
-                onClick={() => setDeleteAllConfirm(true)}
-                className="text-xs font-sans text-red-500 hover:text-red-600 transition-colors"
-              >
-                Delete All
-              </button>
-            )
-          )}
+        <div className="flex items-center">
+          
           <button
             onClick={onClose}
             className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
@@ -184,6 +159,32 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
               </svg>
               Add Book
             </button>
+            {deleteAllConfirm ? (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-red-600 font-sans">Delete all?</span>
+                <button
+                  onClick={handleDeleteAll}
+                  className="text-xs font-sans text-white bg-red-600 hover:bg-red-700 px-2 py-1 rounded-md transition-colors"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setDeleteAllConfirm(false)}
+                  className="text-xs font-sans text-gray-500 hover:text-gray-700 px-2 py-1 rounded-md hover:bg-gray-100 transition-colors"
+                >
+                  No
+                </button>
+              </div>
+            ) : (
+              userBooks.length > 0 && (
+                <button
+                  onClick={() => setDeleteAllConfirm(true)}
+                  className="text-xs font-sans text-red-500 hover:text-red-600 transition-colors whitespace-nowrap"
+                >
+                  Delete All
+                </button>
+              )
+            )}
           </div>
         </div>
       </div>
