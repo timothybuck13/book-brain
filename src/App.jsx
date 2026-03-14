@@ -356,7 +356,7 @@ export default function App() {
                     onClick={() => { setShowUserMenu(false); setShowImportModal(true) }}
                     className="w-full text-left px-3 py-2 text-sm font-serif text-gray-600 hover:bg-gray-50 flex items-center gap-2"
                   >
-                    <span>📂</span>
+                    
                     Import Goodreads
                     {userBooks.length > 0 && <span className="ml-auto text-xs text-gray-400">{userBooks.length} books</span>}
                   </button>
@@ -364,7 +364,7 @@ export default function App() {
                     onClick={handleSignOut}
                     className="w-full text-left px-3 py-2 text-sm font-serif text-gray-600 hover:bg-gray-50 flex items-center gap-2"
                   >
-                    <span>👋</span> Sign Out
+                     Sign Out
                   </button>
                 </div>
               )}
@@ -483,7 +483,7 @@ export default function App() {
           <div className="max-w-lg w-full py-8">
             {onboardingStep === 'upload' && (
               <div className="text-center">
-                <div className="text-5xl mb-4">📚</div>
+                
                 <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-2">Let's set up your library</h2>
                 <p className="font-serif text-gray-500 text-sm md:text-base leading-relaxed mb-6 max-w-md mx-auto">
                   Import your Goodreads reading history so Book Brain can give you personalized recommendations.
@@ -513,7 +513,7 @@ export default function App() {
                     onClick={() => fileRef.current?.click()}
                   >
                     <input ref={fileRef} type="file" accept=".csv" onChange={(e) => handleOnboardingFile(e.target.files?.[0])} className="hidden" />
-                    <div className="text-3xl mb-2">📂</div>
+                    
                     <p className="font-serif text-sm text-gray-500">
                       Drop your Goodreads CSV here or <span className="text-amber-600 underline">browse</span>
                     </p>
@@ -528,7 +528,7 @@ export default function App() {
 
             {onboardingStep === 'importing' && (
               <div className="text-center">
-                <div className="text-5xl mb-4 animate-pulse">📖</div>
+                
                 <h2 className="font-display text-2xl tracking-wide mb-2">Importing your books...</h2>
                 <p className="font-serif text-gray-500 text-sm">This might take a moment.</p>
               </div>
@@ -536,7 +536,7 @@ export default function App() {
 
             {onboardingStep === 'done' && (
               <div className="text-center">
-                <div className="text-5xl mb-4">🎉</div>
+                
                 <h2 className="font-display text-2xl md:text-3xl tracking-wide mb-2">
                   {importResult?.imported || 0} books imported!
                 </h2>

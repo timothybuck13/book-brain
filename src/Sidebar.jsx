@@ -90,7 +90,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-xs text-gray-400 hover:text-amber-600 transition-colors font-serif"
           >
-            <span>📖</span>
+            
             <span>View Timothy's full reading list</span>
           </a>
         </div>

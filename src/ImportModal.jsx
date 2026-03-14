@@ -110,7 +110,7 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
                 onChange={handleFileSelect}
                 className="hidden"
               />
-              <div className="text-3xl mb-2">📂</div>
+              
               <p className="font-serif text-sm text-gray-500">
                 Drop your Goodreads CSV here or <span className="text-amber-600 underline">browse</span>
               </p>
@@ -122,19 +122,19 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
           </>
         ) : status === 'parsing' ? (
           <div className="py-8 text-center">
-            <div className="text-3xl mb-3 animate-pulse">📖</div>
+            
             <p className="font-serif text-sm text-gray-500">Reading your library...</p>
           </div>
         ) : status === 'importing' ? (
           <div className="py-8 text-center">
-            <div className="text-3xl mb-3 animate-pulse">📚</div>
+            
             <p className="font-serif text-sm text-gray-500">
               Importing {progress?.parsed || 0} books...
             </p>
           </div>
         ) : status === 'done' ? (
           <div className="py-8 text-center">
-            <div className="text-4xl mb-3">🎉</div>
+            
             <p className="font-serif text-lg text-gray-800 mb-1">
               Imported {result?.imported || 0} books!
             </p>

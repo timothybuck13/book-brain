@@ -18,7 +18,7 @@ export default function ChatMessage({ message, isStreaming }) {
     <div className="flex justify-start mb-4">
       <div className="max-w-[85%]">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-sm">📚</span>
+          
           <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Book Brain</span>
         </div>
         <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 font-serif text-sm leading-relaxed text-gray-800 shadow-sm border border-gray-100">
