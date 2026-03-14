@@ -139,7 +139,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
               className="w-full pl-9 pr-3 py-2 text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-300"
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <select
               value={sortBy}
               onChange={e => setSortBy(e.target.value)}
@@ -151,7 +151,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
               <option value="rating">Rating</option>
             </select>
           </div>
-          <div className="max-w-2xl mx-auto flex items-center gap-3 mt-2 sm:mt-0">
+          <div className="w-full flex items-center gap-3">
             {deleteAllConfirm ? (
               <div className="flex items-center gap-2">
                 <span className="text-xs text-red-600 font-sans">Delete all?</span>
