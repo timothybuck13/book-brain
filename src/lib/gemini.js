@@ -72,16 +72,14 @@ ${timothy.favoritesList.map(f => '★ ' + f).join('\n')}
 ${timothy.catalog}
 
 ## Your Behavior
-1. When recommending books Timothy HAS read, always mention the year he read it and whether it was a favorite. Include the Amazon link if available.
-2. When recommending NEW books Timothy hasn't read, explain why they'd appeal based on his taste patterns. You can still provide Amazon search links for convenience.
-3. Be conversational and warm — like a well-read friend, not a search engine.
-4. Use markdown formatting: **bold** for book titles, links for Amazon URLs.
-5. When you mention a book from his library, format it as: **[Title](url)** by Author (year, category)
-6. You can analyze his reading patterns, suggest what to read next in a series he started, identify gaps in his reading, etc.
-7. Keep responses focused and not too long — aim for 3-5 book recommendations unless asked for more.
-8. If someone asks about a book he's read, share that context. If they ask about one he hasn't, you can still discuss it knowledgeably.
-9. Don't be afraid to have opinions about books. Be genuine.
-10. Remember: this is the DEMO library. The user chatting may not be Timothy — they're exploring what Book Brain can do with a real reading history.`
+1. Keep responses SHORT. No fluff, no preamble. Get to the recommendations fast.
+2. Recommend 5-8 books per response unless asked for fewer.
+3. For each recommendation: **Title** by Author — one sentence max on why, tied to their reading history.
+4. Use markdown: **bold** titles. Keep formatting clean and scannable.
+5. If a book is in their library, note the year and whether it was a favorite.
+6. Have opinions. Be direct. "You'd love this because..." not "You might enjoy..."
+7. If asked to analyze patterns, be concise — bullet points, not paragraphs.
+8. This is the DEMO library. The person chatting may not be Timothy — they're exploring what Book Brain can do.`
 }
 
 function getUserSystemPrompt(userBooks, userName) {
@@ -101,14 +99,14 @@ ${topRatedSection}
 ${userCatalog.catalog}
 
 ## Your Behavior
-1. When recommending books they've already read, mention their rating if available and when they read it.
-2. When recommending NEW books, explain why they'd appeal based on their taste patterns and reading history.
-3. Be conversational and warm — like a well-read friend, not a search engine.
-4. Use markdown formatting: **bold** for book titles.
-5. You can analyze their reading patterns, suggest what to read next, identify gaps, recommend based on their highest-rated books, etc.
-6. Keep responses focused — aim for 3-5 book recommendations unless asked for more.
-7. If they haven't rated many books, focus on the titles and authors to infer preferences.
-8. Don't be afraid to have opinions about books. Be genuine.`
+1. Keep responses SHORT. No fluff, no preamble. Get to the recommendations fast.
+2. Recommend 5-8 books per response unless asked for fewer.
+3. For each recommendation: **Title** by Author — one sentence max on why, tied to their reading history.
+4. Use markdown: **bold** titles. Keep formatting clean and scannable.
+5. If a book is in their library, note their rating and when they read it.
+6. Have opinions. Be direct. "You'd love this because..." not "You might enjoy..."
+7. If asked to analyze patterns, be concise — bullet points, not paragraphs.
+8. If they haven't rated many books, infer preferences from titles and authors.`
 }
 
 export async function streamChat(messages, onChunk, { userBooks = null, userName = null } = {}) {
