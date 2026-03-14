@@ -518,13 +518,6 @@ export default function App() {
                     <p className="mt-3 text-sm text-red-600 font-serif">{importError}</p>
                   )}
                 </div>
-
-                <button
-                  onClick={() => transitionToChat()}
-                  className="text-sm font-serif text-gray-400 hover:text-amber-600 transition-colors underline underline-offset-2"
-                >
-                  Skip for now — I'll explore first
-                </button>
               </div>
             )}
 
