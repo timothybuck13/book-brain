@@ -388,13 +388,13 @@ export default function App() {
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
             placeholder="Ask about books..."
             rows={1}
-            className="w-full resize-none rounded-full border border-gray-300 pl-5 pr-12 py-3 text-base md:text-sm font-serif focus:outline-none focus:border-gray-400 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
+            className="w-full resize-none rounded-full border border-gray-300 pl-4 pr-11 py-2.5 text-base md:text-sm font-serif focus:outline-none focus:border-gray-400 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
             disabled={isStreaming}
           />
           <button
             type="submit"
             disabled={!hasText || isStreaming}
-            className={`absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full transition-colors ${
+            className={`absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full transition-colors ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
