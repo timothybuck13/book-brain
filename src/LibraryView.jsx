@@ -161,14 +161,14 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search by title or author..."
-              className="w-full pl-9 pr-3 py-2 text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-300"
+              className="w-full pl-9 pr-3 py-2 text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-300"
             />
           </div>
           <div className="flex gap-2">
             <select
               value={sortBy}
               onChange={e => setSortBy(e.target.value)}
-              className="text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
+              className="text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
             >
               <option value="date_read">Date Read</option>
               <option value="title">Title</option>
@@ -201,7 +201,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
                   onChange={e => setAddTitle(e.target.value)}
                   placeholder="Title *"
                   required
-                  className="text-sm font-sans border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
+                  className="text-base md:text-sm font-sans border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
                   autoFocus
                 />
                 <input
@@ -210,7 +210,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
                   onChange={e => setAddAuthor(e.target.value)}
                   placeholder="Author *"
                   required
-                  className="text-sm font-sans border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
+                  className="text-base md:text-sm font-sans border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
                 />
               </div>
               <div className="flex items-center gap-4 mb-3">
@@ -224,7 +224,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
                     type="date"
                     value={addDate}
                     onChange={e => setAddDate(e.target.value)}
-                    className="text-sm font-sans border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:border-gray-300"
+                    className="text-base md:text-sm font-sans border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:border-gray-300"
                   />
                 </div>
               </div>
