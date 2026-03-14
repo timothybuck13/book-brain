@@ -388,7 +388,7 @@ export default function App() {
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
             placeholder="Ask about books..."
             rows={1}
-            className="w-full resize-none bg-transparent rounded-full pl-5 pr-14 py-3 text-base font-sans focus:outline-none overflow-hidden leading-6"
+            className="w-full resize-none bg-transparent rounded-full pl-5 pr-14 py-3 text-base font-sans font-extralight focus:outline-none overflow-hidden leading-6"
             disabled={isStreaming}
           />
           <button
