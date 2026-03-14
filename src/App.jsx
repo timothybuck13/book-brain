@@ -455,7 +455,7 @@ export default function App() {
               onClick={() => setAppState('demo')}
               className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-sans text-base hover:bg-white hover:border-gray-400 transition-colors mb-6"
             >
-              Try it with Timothy's 560-book library →
+              Try it with Timothy's 530-book library →
             </button>
 
             {/* Tertiary CTA */}
@@ -587,7 +587,7 @@ export default function App() {
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">Timothy's Library</h2>
                 <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-md mx-auto">
-                  Explore 560 books from 10 years of reading. Ask for recommendations, discover patterns, or find your next read.
+                  Explore 530 books from 10 years of reading. Ask for recommendations, discover patterns, or find your next read.
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
@@ -653,7 +653,7 @@ export default function App() {
                 <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-md mx-auto">
                   {userBooks.length > 0
                     ? 'Ask me anything about your reading history, or get personalized recommendations.'
-                    : 'AI-powered recommendations from 10 years of reading — 560 books and counting.'}
+                    : 'AI-powered recommendations from 10 years of reading — 530 books and counting.'}
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
