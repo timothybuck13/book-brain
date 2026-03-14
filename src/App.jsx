@@ -388,20 +388,20 @@ export default function App() {
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
             placeholder="Ask about books..."
             rows={1}
-            className="w-full resize-none rounded-full border border-gray-300 pl-4 pr-11 py-2.5 text-base md:text-sm font-serif focus:outline-none focus:border-gray-400 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
+            className="w-full resize-none rounded-full border border-gray-200 pl-4 pr-10 py-2 text-base md:text-sm font-serif focus:outline-none focus:border-gray-300 focus:ring-0 transition-colors bg-white overflow-hidden shadow-sm"
             disabled={isStreaming}
           />
           <button
             type="submit"
             disabled={!hasText || isStreaming}
-            className={`absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full transition-colors ${
+            className={`absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center rounded-full transition-colors ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
             </svg>
           </button>
         </form>
