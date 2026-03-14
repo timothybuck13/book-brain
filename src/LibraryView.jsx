@@ -123,10 +123,10 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
         </div>
       </div>
 
-      {/* Search + Sort + Add */}
+      {/* Search + Actions */}
       <div className="px-4 py-3 bg-white border-b border-gray-100 flex-shrink-0">
-        <div className="max-w-2xl mx-auto flex flex-col sm:flex-row gap-2">
-          <div className="flex-1 relative">
+        <div className="max-w-2xl mx-auto space-y-2">
+          <div className="relative">
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -139,19 +139,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
               className="w-full pl-9 pr-3 py-2 text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-gray-300"
             />
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <select
-              value={sortBy}
-              onChange={e => setSortBy(e.target.value)}
-              className="text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
-            >
-              <option value="date_read">Date Read</option>
-              <option value="title">Title</option>
-              <option value="author">Author</option>
-              <option value="rating">Rating</option>
-            </select>
-          </div>
-          <div className="w-full flex items-center gap-3">
+          <div className="flex items-center">
             {deleteAllConfirm ? (
               <div className="flex items-center gap-2">
                 <span className="text-xs text-red-600 font-sans">Delete all?</span>
@@ -179,16 +167,27 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
               )
             )}
             <div className="flex-1" />
-            <span className="text-xs font-sans text-gray-400 whitespace-nowrap">{filtered.length} book{filtered.length !== 1 ? 's' : ''}</span>
-            <button
-              onClick={() => setShowAddForm(!showAddForm)}
-              className="flex items-center gap-1.5 px-3 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Add Book
-            </button>
+            <div className="flex items-center gap-2">
+              <select
+                value={sortBy}
+                onChange={e => setSortBy(e.target.value)}
+                className="text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300"
+              >
+                <option value="date_read">Date Read</option>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="rating">Rating</option>
+              </select>
+              <button
+                onClick={() => setShowAddForm(!showAddForm)}
+                className="flex items-center gap-1.5 px-3 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Add Book
+              </button>
+            </div>
           </div>
         </div>
       </div>
