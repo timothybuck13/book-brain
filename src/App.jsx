@@ -590,7 +590,7 @@ export default function App() {
               <div className="text-center mb-10">
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">Timothy's Library</h2>
-                <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-md mx-auto">
+                <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-[30rem] mx-auto">
                   Explore 530 books from 10 years of reading. Ask for recommendations, discover patterns, or find your next read.
                 </p>
               </div>
