@@ -380,7 +380,7 @@ export default function App() {
     const hasText = input.trim().length > 0
     return (
       <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pb-4 pt-2">
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 px-5 py-1">
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-5 pr-2.5 py-1">
           <textarea
             ref={textareaRef}
             value={input}
