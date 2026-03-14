@@ -110,7 +110,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
           <h2 className="font-sans font-semibold text-lg">My Library</h2>
           <span className="text-sm text-gray-400 font-sans">{userBooks.length} books</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {deleteAllConfirm ? (
             <div className="flex items-center gap-2">
               <span className="text-xs text-red-600 font-sans">Delete all books?</span>
