@@ -154,3 +154,45 @@
   animation: fadeInScale 0.25s ease-out both;
   animation-delay: 0.05s;
 }
+
+/* ── Hover micro-interactions ──────────────────────────────── */
+
+/* Card lift — suggestion cards, book rows, onboarding prompts */
+.card-hover {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.card-hover:active {
+  transform: translateY(0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* Button press — tactile click feel on primary buttons */
+.btn-press {
+  transition: transform 0.12s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-press:hover {
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.25);
+}
+.btn-press:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+/* Send button glow on enabled hover */
+.send-glow:not(:disabled):hover {
+  box-shadow: 0 0 12px rgba(217, 119, 6, 0.4);
+}
+
+/* Sidebar conversation row hover highlight */
+.sidebar-row {
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.sidebar-row:active {
+  transform: scale(0.99);
+}

@@ -145,7 +145,7 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
             )}
             <button
               onClick={onClose}
-              className="mt-4 px-6 py-2 bg-amber-600 text-white rounded-xl font-sans text-sm hover:bg-amber-700 transition-colors"
+              className="mt-4 px-6 py-2 bg-amber-600 text-white rounded-xl font-sans text-sm hover:bg-amber-700 btn-press"
             >
               Start Chatting
             </button>

@@ -326,7 +326,7 @@ export default function App() {
           {showSignUp && (
             <button
               onClick={handleSignIn}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 btn-press"
             >
               Sign Up Free
             </button>
@@ -402,7 +402,7 @@ export default function App() {
           <button
             type="submit"
             disabled={!hasText || isStreaming}
-            className={`ml-2 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+            className={`ml-2 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all send-glow ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700 scale-100'
                 : 'bg-gray-100 text-gray-300 scale-90'
@@ -449,7 +449,7 @@ export default function App() {
             {/* Primary CTA */}
             <button
               onClick={handleSignIn}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-amber-600 text-white font-sans text-base hover:bg-amber-700 transition-colors mb-3 animate-fade-in-up stagger-2"
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-amber-600 text-white font-sans text-base hover:bg-amber-700 mb-3 animate-fade-in-up stagger-2 btn-press"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -463,7 +463,7 @@ export default function App() {
             {/* Secondary CTA */}
             <button
               onClick={() => setAppState('demo')}
-              className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-sans text-base hover:bg-white hover:border-gray-400 transition-colors mb-6 animate-fade-in-up stagger-3"
+              className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-sans text-base hover:bg-white hover:border-gray-400 transition-colors mb-6 animate-fade-in-up stagger-3 card-hover"
             >
               Try it with Timothy's 530-book library →
             </button>
@@ -568,7 +568,7 @@ export default function App() {
                     <button
                       key={prompt}
                       onClick={() => transitionToChat(prompt)}
-                      className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-amber-400 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug animate-fade-in-up stagger-${i + 1}`}
+                      className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-amber-400 text-sm font-sans text-gray-600 leading-snug animate-fade-in-up card-hover stagger-${i + 1}`}
                     >
                       {prompt}
                     </button>
@@ -610,7 +610,7 @@ export default function App() {
                   <button
                     key={prompt}
                     onClick={() => { setInput(prompt); setTimeout(() => textareaRef.current?.focus(), 50) }}
-                    className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug animate-fade-in-up stagger-${i + 1}`}
+                    className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 text-sm font-sans text-gray-600 leading-snug animate-fade-in-up card-hover stagger-${i + 1}`}
                   >
                     {prompt}
                   </button>
@@ -690,7 +690,7 @@ export default function App() {
                   <button
                     key={prompt}
                     onClick={() => { setInput(prompt); setTimeout(() => textareaRef.current?.focus(), 50) }}
-                    className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug animate-fade-in-up stagger-${i + 1}`}
+                    className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 text-sm font-sans text-gray-600 leading-snug animate-fade-in-up card-hover stagger-${i + 1}`}
                   >
                     {prompt}
                   </button>

@@ -32,7 +32,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
             conversations.map((convo) => (
               <div
                 key={convo.id}
-                className={`group flex items-center gap-1 rounded-lg transition-colors cursor-pointer ${
+                className={`group flex items-center gap-1 rounded-lg cursor-pointer sidebar-row ${
                   activeConvoId === convo.id
                     ? 'bg-amber-50 text-amber-800'
                     : 'hover:bg-gray-50 text-gray-600'
@@ -78,7 +78,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         <div className="p-3 border-t border-gray-200">
           <button
             onClick={onNew}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 btn-press"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
