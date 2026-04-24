@@ -121,16 +121,37 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
             )}
           </>
         ) : status === 'parsing' ? (
-          <div className="py-8 text-center">
-            
-            <p className="font-sans text-sm text-gray-500">Reading your library...</p>
+          <div className="py-6">
+            <p className="font-sans text-sm text-gray-500 text-center mb-4">Reading your library...</p>
+            <div className="space-y-2">
+              {[1, 2, 3].map(i => (
+                <div key={i} className={`skeleton-book-row animate-fade-in-up stagger-${i}`}>
+                  <div className="skeleton skeleton-cover" />
+                  <div className="skeleton-lines">
+                    <div className="skeleton skeleton-text-lg" style={{ width: `${75 - i * 10}%` }} />
+                    <div className="skeleton skeleton-text" style={{ width: `${55 - i * 8}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : status === 'importing' ? (
-          <div className="py-8 text-center">
-            
-            <p className="font-sans text-sm text-gray-500">
+          <div className="py-6">
+            <p className="font-sans text-sm text-gray-500 text-center mb-4">
               Importing {progress?.parsed || 0} books...
             </p>
+            <div className="space-y-2">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className={`skeleton-book-row animate-fade-in-up stagger-${i}`}>
+                  <div className="skeleton skeleton-cover" />
+                  <div className="skeleton-lines">
+                    <div className="skeleton skeleton-text-lg" style={{ width: `${80 - i * 12}%` }} />
+                    <div className="skeleton skeleton-text" style={{ width: `${60 - i * 8}%` }} />
+                  </div>
+                  <div className="w-10 h-3 skeleton skeleton-text flex-shrink-0" />
+                </div>
+              ))}
+            </div>
           </div>
         ) : status === 'done' ? (
           <div className="py-8 text-center">

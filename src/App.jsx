@@ -425,10 +425,21 @@ export default function App() {
   // ── Loading ─────────────────────────────────────────────────
   if (appState === 'loading') {
     return (
-      <div className="h-dvh flex items-center justify-center bg-[#f2f2f2]">
-        <div className="text-center">
-          <img src="/logo.jpg" alt="Book Brain" className="w-14 h-14 rounded-xl mx-auto mb-3 animate-pulse" />
-          <p className="font-sans text-sm text-gray-400">Loading...</p>
+      <div className="h-dvh flex flex-col bg-[#f2f2f2]">
+        {/* Skeleton header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md skeleton" />
+            <div className="w-24 h-5 skeleton skeleton-text-lg" />
+          </div>
+          <div className="w-7 h-7 skeleton skeleton-circle" />
+        </div>
+        {/* Skeleton content */}
+        <div className="flex-1 flex items-center justify-center px-4">
+          <div className="text-center">
+            <img src="/logo.jpg" alt="Book Brain" className="w-14 h-14 rounded-xl mx-auto mb-3 animate-pulse-glow" />
+            <div className="w-20 h-3 skeleton skeleton-text mx-auto" />
+          </div>
         </div>
       </div>
     )
@@ -537,10 +548,22 @@ export default function App() {
             )}
 
             {onboardingStep === 'importing' && (
-              <div className="text-center">
+              <div className="text-center animate-fade-in">
                 
                 <h2 className="font-sans font-semibold text-2xl tracking-wide mb-2">Importing your books...</h2>
-                <p className="font-sans text-gray-500 text-sm">This might take a moment.</p>
+                <p className="font-sans text-gray-500 text-sm mb-6">This might take a moment.</p>
+                <div className="space-y-2 max-w-sm mx-auto">
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <div key={i} className={`skeleton-book-row animate-fade-in-up stagger-${i}`}>
+                      <div className="skeleton skeleton-cover" />
+                      <div className="skeleton-lines">
+                        <div className={`skeleton skeleton-text-lg`} style={{ width: `${70 - i * 8}%` }} />
+                        <div className={`skeleton skeleton-text`} style={{ width: `${50 - i * 5}%` }} />
+                      </div>
+                      <div className="w-12 h-3 skeleton skeleton-text flex-shrink-0" />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 

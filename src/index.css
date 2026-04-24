@@ -155,6 +155,102 @@
   animation-delay: 0.05s;
 }
 
+/* ── Skeleton / shimmer loading states ─────────────────────── */
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+.skeleton-text {
+  height: 12px;
+  border-radius: 4px;
+}
+
+.skeleton-text-lg {
+  height: 16px;
+  border-radius: 4px;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+/* Skeleton book row */
+.skeleton-book-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #f3f4f6;
+}
+
+.skeleton-book-row .skeleton-cover {
+  width: 32px;
+  height: 44px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.skeleton-book-row .skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Skeleton chat messages */
+.skeleton-message {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-message .skeleton-bubble {
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-message.sent {
+  justify-content: flex-end;
+}
+
+.skeleton-message.sent .skeleton-bubble {
+  background: #e5e7eb;
+  border: none;
+}
+
+/* Stagger skeleton rows for a wave effect */
+.skeleton-stagger-1 { animation-delay: 0.05s; }
+.skeleton-stagger-2 { animation-delay: 0.1s; }
+.skeleton-stagger-3 { animation-delay: 0.15s; }
+.skeleton-stagger-4 { animation-delay: 0.2s; }
+.skeleton-stagger-5 { animation-delay: 0.25s; }
+
+/* Pulse-fade for the loading spinner replacement */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+
 /* ── Hover micro-interactions ──────────────────────────────── */
 
 /* Card lift — suggestion cards, book rows, onboarding prompts */
