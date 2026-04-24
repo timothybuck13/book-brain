@@ -251,6 +251,41 @@
   animation: pulseGlow 1.8s ease-in-out infinite;
 }
 
+/* ── Input focus animations & form UX ──────────────────────── */
+
+/* Warm focus ring for standalone inputs (search, add-book fields) */
+.input-focus {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.input-focus:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+  background-color: #fff;
+}
+
+/* Chat input bar — container lifts and glows when any child is focused */
+.chat-input-bar {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.chat-input-bar:focus-within {
+  border-color: #e5e7eb;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06), 0 0 0 3px rgba(217, 119, 6, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Textarea caret color */
+.chat-input-bar textarea {
+  caret-color: #d97706;
+}
+
+/* Select dropdown focus */
+select.input-focus:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+  background-color: #fff;
+  outline: none;
+}
+
 /* ── Hover micro-interactions ──────────────────────────────── */
 
 /* Card lift — suggestion cards, book rows, onboarding prompts */
