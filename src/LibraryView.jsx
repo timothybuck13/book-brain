@@ -253,10 +253,37 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
 
           {/* Empty state */}
           {filtered.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-400 font-sans text-sm">
-                {search ? 'No books match your search.' : 'No books yet. Add one or import from Goodreads.'}
-              </p>
+            <div className="text-center py-16 px-4 animate-fade-in">
+              {search ? (
+                <>
+                  <div className="mx-auto mb-4 w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center">
+                    <svg className="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-500 font-sans text-sm font-medium mb-1">No matches found</p>
+                  <p className="text-gray-400 font-sans text-xs">Try a different title or author name.</p>
+                </>
+              ) : (
+                <>
+                  <div className="mx-auto mb-4 w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center">
+                    <svg className="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-500 font-sans text-sm font-medium mb-1">Your library is empty</p>
+                  <p className="text-gray-400 font-sans text-xs mb-4">Add books manually or import your Goodreads history to get started.</p>
+                  <button
+                    onClick={() => setShowAddForm(true)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add Your First Book
+                  </button>
+                </>
+              )}
             </div>
           )}
 
