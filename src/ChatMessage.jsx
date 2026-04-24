@@ -6,7 +6,7 @@ export default function ChatMessage({ message, isStreaming }) {
 
   if (isUser) {
     return (
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-end mb-4 animate-message-in">
         <div className="max-w-[85%] bg-[#1a1a1a] text-white rounded-2xl rounded-br-md px-4 py-2.5 font-sans text-sm leading-relaxed">
           {message.content}
         </div>
@@ -15,7 +15,7 @@ export default function ChatMessage({ message, isStreaming }) {
   }
 
   return (
-    <div className="flex justify-start mb-4">
+    <div className="flex justify-start mb-4 animate-message-in">
       <div className="max-w-[30rem]">
         <div className="flex items-center gap-2 mb-1">
           <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Book Brain</span>

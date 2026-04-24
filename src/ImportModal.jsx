@@ -58,9 +58,9 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 animate-backdrop" onClick={onClose}>
       <div
-        className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl"
+        className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl animate-modal"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">

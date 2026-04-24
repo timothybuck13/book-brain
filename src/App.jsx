@@ -439,17 +439,17 @@ export default function App() {
     return (
       <div className="h-dvh flex flex-col bg-[#f2f2f2]">
         <div className="flex-1 flex items-center justify-center px-4">
-          <div className="max-w-md w-full text-center">
-            <img src="/logo.jpg" alt="Book Brain" className="w-20 h-20 rounded-2xl mx-auto mb-6" />
-            <h1 className="font-sans font-semibold text-3xl md:text-4xl tracking-wide mb-4">Book Brain</h1>
-            <p className="font-sans text-gray-500 text-lg md:text-xl leading-relaxed mb-8">
+          <div className="max-w-md w-full text-center animate-fade-in">
+            <img src="/logo.jpg" alt="Book Brain" className="w-20 h-20 rounded-2xl mx-auto mb-6 animate-fade-in-scale" />
+            <h1 className="font-sans font-semibold text-3xl md:text-4xl tracking-wide mb-4 animate-fade-in-up">Book Brain</h1>
+            <p className="font-sans text-gray-500 text-lg md:text-xl leading-relaxed mb-8 animate-fade-in-up stagger-1">
               Get personalized book recommendations powered by your actual reading history.
             </p>
 
             {/* Primary CTA */}
             <button
               onClick={handleSignIn}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-amber-600 text-white font-sans text-base hover:bg-amber-700 transition-colors mb-3"
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-amber-600 text-white font-sans text-base hover:bg-amber-700 transition-colors mb-3 animate-fade-in-up stagger-2"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -463,7 +463,7 @@ export default function App() {
             {/* Secondary CTA */}
             <button
               onClick={() => setAppState('demo')}
-              className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-sans text-base hover:bg-white hover:border-gray-400 transition-colors mb-6"
+              className="w-full px-6 py-3 rounded-xl border border-gray-300 text-gray-600 font-sans text-base hover:bg-white hover:border-gray-400 transition-colors mb-6 animate-fade-in-up stagger-3"
             >
               Try it with Timothy's 530-book library →
             </button>
@@ -471,7 +471,7 @@ export default function App() {
             {/* Tertiary CTA */}
             <button
               onClick={handleSignIn}
-              className="text-sm font-sans text-gray-400 hover:text-amber-600 transition-colors underline underline-offset-2"
+              className="text-sm font-sans text-gray-400 hover:text-amber-600 transition-colors underline underline-offset-2 animate-fade-in-up stagger-4"
             >
               Already have an account? Log in
             </button>
@@ -492,7 +492,7 @@ export default function App() {
         <div className="flex-1 flex items-center justify-center px-4 overflow-y-auto">
           <div className="max-w-lg w-full py-8">
             {onboardingStep === 'upload' && (
-              <div className="text-center">
+              <div className="text-center animate-fade-in">
                 
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-2">Let's set up your library</h2>
                 <p className="font-sans text-gray-500 text-sm md:text-base leading-relaxed mb-6 max-w-md mx-auto">
@@ -545,7 +545,7 @@ export default function App() {
             )}
 
             {onboardingStep === 'done' && (
-              <div className="text-center">
+              <div className="text-center animate-fade-in">
                 
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-2">
                   {importResult?.imported || 0} books imported!
@@ -564,11 +564,11 @@ export default function App() {
                     "What's my most-read genre?",
                     "Find me a short, powerful book",
                     "What are my blind spots as a reader?",
-                  ].map((prompt) => (
+                  ].map((prompt, i) => (
                     <button
                       key={prompt}
                       onClick={() => transitionToChat(prompt)}
-                      className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-amber-400 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug"
+                      className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-amber-400 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug animate-fade-in-up stagger-${i + 1}`}
                     >
                       {prompt}
                     </button>
@@ -593,7 +593,7 @@ export default function App() {
         <div className="flex-1 overflow-y-auto">
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
-              <div className="text-center mb-10">
+              <div className="text-center mb-10 animate-fade-in">
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">Timothy's Library</h2>
                 <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-[30rem] mx-auto">
@@ -606,11 +606,11 @@ export default function App() {
                   "What are the best fantasy series here?",
                   "Recommend something short and profound",
                   "What poetry would you suggest?",
-                ].map((prompt) => (
+                ].map((prompt, i) => (
                   <button
                     key={prompt}
                     onClick={() => { setInput(prompt); setTimeout(() => textareaRef.current?.focus(), 50) }}
-                    className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug"
+                    className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug animate-fade-in-up stagger-${i + 1}`}
                   >
                     {prompt}
                   </button>
@@ -662,7 +662,7 @@ export default function App() {
         <div className="flex-1 overflow-y-auto">
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
-              <div className="text-center mb-10">
+              <div className="text-center mb-10 animate-fade-in">
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">
                   {userBooks.length > 0
@@ -686,11 +686,11 @@ export default function App() {
                   "What are the best fantasy series here?",
                   "Recommend something short and profound",
                   "What poetry would you suggest?",
-                ]).map((prompt) => (
+                ]).map((prompt, i) => (
                   <button
                     key={prompt}
                     onClick={() => { setInput(prompt); setTimeout(() => textareaRef.current?.focus(), 50) }}
-                    className="text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug"
+                    className={`text-left px-4 py-3 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all text-sm font-sans text-gray-600 leading-snug animate-fade-in-up stagger-${i + 1}`}
                   >
                     {prompt}
                   </button>
