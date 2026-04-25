@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { parseGoodreadsCSV } from './lib/goodreads'
 import { importBooks } from './lib/supabase'
 
@@ -9,6 +9,44 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
   const fileRef = useRef(null)
+  const modalRef = useRef(null)
+
+  // Close on Escape key
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
+
+  // Focus trap inside modal
+  useEffect(() => {
+    const modal = modalRef.current
+    if (!modal) return
+
+    // Auto-focus the modal container
+    modal.focus()
+
+    function handleTab(e) {
+      if (e.key !== 'Tab') return
+      const focusable = modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    modal.addEventListener('keydown', handleTab)
+    return () => modal.removeEventListener('keydown', handleTab)
+  }, [status])
 
   async function handleFile(file) {
     if (!file || !file.name.endsWith('.csv')) {
@@ -58,14 +96,19 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 animate-backdrop" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 animate-backdrop" onClick={onClose} role="presentation">
       <div
-        className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl animate-modal"
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Import from Goodreads"
+        tabIndex={-1}
+        className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl animate-modal focus:outline-none"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-sans font-semibold text-xl tracking-wide">Import from Goodreads</h2>
-          <button onClick={onClose} className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
+          <button onClick={onClose} className="p-1 text-gray-400 hover:text-gray-600 transition-colors" aria-label="Close import dialog">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>

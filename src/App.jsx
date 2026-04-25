@@ -116,13 +116,20 @@ export default function App() {
     }
   }, [input])
 
-  // Close user menu on outside click
+  // Close user menu on outside click or Escape
   useEffect(() => {
     function handleClick(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) setShowUserMenu(false)
     }
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') setShowUserMenu(false)
+    }
     document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handleClick)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [])
 
   // ── Conversation helpers ────────────────────────────────────
@@ -299,6 +306,7 @@ export default function App() {
             <button
               onClick={() => { setAppState('landing'); setMessages([]) }}
               className="p-1.5 -ml-1 rounded-lg hover:bg-gray-100 transition-colors text-gray-500 text-sm font-sans flex items-center gap-1"
+              aria-label="Go back to landing page"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -310,6 +318,7 @@ export default function App() {
             <button
               onClick={() => setSidebarOpen(true)}
               className="md:hidden p-1.5 -ml-1 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Open conversation history"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -336,6 +345,9 @@ export default function App() {
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="User menu"
+                aria-expanded={showUserMenu}
+                aria-haspopup="true"
               >
                 {user.user_metadata?.avatar_url ? (
                   <img src={user.user_metadata.avatar_url} alt="" className="w-7 h-7 rounded-full" referrerPolicy="no-referrer" />
@@ -349,7 +361,7 @@ export default function App() {
                 </svg>
               </button>
               {showUserMenu && (
-                <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
+                <div className="absolute right-0 top-full mt-1 w-56 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50" role="menu">
                   <div className="px-3 py-2 border-b border-gray-100">
                     <p className="text-sm font-medium text-gray-800 truncate">{user.user_metadata?.full_name || 'User'}</p>
                     <p className="text-xs text-gray-400 truncate">{user.email}</p>
@@ -357,6 +369,7 @@ export default function App() {
                   <button
                     onClick={() => { setShowUserMenu(false); setShowLibrary(true) }}
                     className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
+                    role="menuitem"
                   >
                     My Library
                     {userBooks.length > 0 && <span className="ml-auto text-xs text-gray-400">{userBooks.length} books</span>}
@@ -364,12 +377,14 @@ export default function App() {
                   <button
                     onClick={() => { setShowUserMenu(false); setShowImportModal(true) }}
                     className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
+                    role="menuitem"
                   >
                     Import Goodreads
                   </button>
                   <button
                     onClick={handleSignOut}
                     className="w-full text-left px-3 py-2 text-sm font-sans text-gray-600 hover:bg-gray-50 flex items-center gap-2"
+                    role="menuitem"
                   >
                      Sign Out
                   </button>
@@ -398,10 +413,12 @@ export default function App() {
             className="flex-1 resize-none bg-transparent text-base font-sans font-light focus:outline-none overflow-hidden leading-6 py-2.5"
             disabled={isStreaming}
             style={{ minHeight: '44px', maxHeight: '120px' }}
+            aria-label="Ask about books"
           />
           <button
             type="submit"
             disabled={!hasText || isStreaming}
+            aria-label="Send message"
             className={`ml-2 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all send-glow ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700 scale-100'
@@ -654,7 +671,7 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div className="max-w-2xl mx-auto px-4 py-6 space-y-1">
+            <div className="max-w-2xl mx-auto px-4 py-6 space-y-1" role="log" aria-live="polite" aria-label="Chat messages">
               {messages.map((msg, i) => (
                 <ChatMessage key={msg.id || i} message={msg} isStreaming={isStreaming && i === messages.length - 1 && msg.role === 'model'} />
               ))}
@@ -734,7 +751,7 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div className="max-w-2xl mx-auto px-4 py-6 space-y-1">
+            <div className="max-w-2xl mx-auto px-4 py-6 space-y-1" role="log" aria-live="polite" aria-label="Chat messages">
               {messages.map((msg, i) => (
                 <ChatMessage key={msg.id || i} message={msg} isStreaming={isStreaming && i === messages.length - 1 && msg.role === 'model'} />
               ))}
