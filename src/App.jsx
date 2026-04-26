@@ -29,7 +29,10 @@ export default function App() {
   const [dragging, setDragging] = useState(false)
   const [importError, setImportError] = useState(null)
 
+  const [showScrollBtn, setShowScrollBtn] = useState(false)
+
   const messagesEndRef = useRef(null)
+  const chatScrollRef = useRef(null)
   const textareaRef = useRef(null)
   const menuRef = useRef(null)
   const fileRef = useRef(null)
@@ -132,9 +135,21 @@ export default function App() {
     }
   }, [])
 
+  // Track scroll position for scroll-to-bottom button
+  function handleChatScroll(e) {
+    const el = e.target
+    const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight
+    setShowScrollBtn(distanceFromBottom > 200)
+  }
+
+  function scrollToBottom() {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   // ── Conversation helpers ────────────────────────────────────
   async function selectConversation(convoId) {
     setActiveConvoId(convoId)
+    setShowScrollBtn(false)
     setSidebarOpen(false)
     if (dbReady) {
       const { data } = await supabase
@@ -150,6 +165,7 @@ export default function App() {
     setActiveConvoId(null)
     setMessages([])
     setInput('')
+    setShowScrollBtn(false)
     setSidebarOpen(false)
     setTimeout(() => textareaRef.current?.focus(), 100)
   }
@@ -640,10 +656,10 @@ export default function App() {
     const hasMessages = messages.length > 0
 
     return (
-      <div className="h-dvh flex flex-col bg-[#f2f2f2]">
+      <div className="h-dvh flex flex-col bg-[#f2f2f2] relative">
         {renderHeader()}
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto" onScroll={handleChatScroll} ref={chatScrollRef}>
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10 animate-fade-in">
@@ -680,6 +696,22 @@ export default function App() {
           )}
         </div>
 
+        {/* Scroll to bottom button */}
+        {showScrollBtn && messages.length > 0 && (
+          <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10">
+            <button
+              onClick={scrollToBottom}
+              className="scroll-to-bottom flex items-center gap-1.5 px-3 py-1.5 bg-white text-gray-500 text-xs font-sans rounded-full shadow-lg border border-gray-200 hover:bg-gray-50 hover:text-gray-700"
+              aria-label="Scroll to latest messages"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+              </svg>
+              Latest
+            </button>
+          </div>
+        )}
+
         {renderInput()}
       </div>
     )
@@ -700,7 +732,7 @@ export default function App() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 relative">
         {renderHeader()}
 
         {showLibrary ? (
@@ -712,7 +744,7 @@ export default function App() {
           />
         ) : (
         <>
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto" onScroll={handleChatScroll} ref={chatScrollRef}>
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10 animate-fade-in">
@@ -759,6 +791,22 @@ export default function App() {
             </div>
           )}
         </div>
+
+        {/* Scroll to bottom button */}
+        {showScrollBtn && messages.length > 0 && (
+          <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10">
+            <button
+              onClick={scrollToBottom}
+              className="scroll-to-bottom flex items-center gap-1.5 px-3 py-1.5 bg-white text-gray-500 text-xs font-sans rounded-full shadow-lg border border-gray-200 hover:bg-gray-50 hover:text-gray-700"
+              aria-label="Scroll to latest messages"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+              </svg>
+              Latest
+            </button>
+          </div>
+        )}
 
         {renderInput()}
         </>
