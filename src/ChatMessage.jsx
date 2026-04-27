@@ -37,10 +37,10 @@ export default function ChatMessage({ message, isStreaming }) {
               </ReactMarkdown>
             </div>
           ) : isStreaming ? (
-            <div className="flex gap-1 py-1">
-              <span className="typing-dot w-1.5 h-1.5 bg-gray-400 rounded-full" />
-              <span className="typing-dot w-1.5 h-1.5 bg-gray-400 rounded-full" />
-              <span className="typing-dot w-1.5 h-1.5 bg-gray-400 rounded-full" />
+            <div className="flex items-end gap-1.5 py-1 h-6" aria-label="Book Brain is thinking…" role="status">
+              <span className="typing-dot w-2 h-2 bg-amber-500 rounded-full" />
+              <span className="typing-dot w-2 h-2 bg-amber-500 rounded-full" />
+              <span className="typing-dot w-2 h-2 bg-amber-500 rounded-full" />
             </div>
           ) : null}
         </div>
