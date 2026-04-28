@@ -371,6 +371,15 @@ select.input-focus:focus {
   transform: scale(0.99);
 }
 
+/* ── Copy-to-clipboard button on messages ──────────────────── */
+
+.copy-btn {
+  transition: opacity 0.15s ease, color 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
+}
+.copy-btn:active {
+  transform: scale(0.9);
+}
+
 /* ── Scroll-to-bottom button ───────────────────────────────── */
 
 .scroll-to-bottom {
