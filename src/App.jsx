@@ -30,6 +30,7 @@ export default function App() {
   const [importError, setImportError] = useState(null)
 
   const [showScrollBtn, setShowScrollBtn] = useState(false)
+  const [scrolledFromTop, setScrolledFromTop] = useState(false)
 
   const messagesEndRef = useRef(null)
   const chatScrollRef = useRef(null)
@@ -135,11 +136,12 @@ export default function App() {
     }
   }, [])
 
-  // Track scroll position for scroll-to-bottom button
+  // Track scroll position for scroll-to-bottom button and top shadow
   function handleChatScroll(e) {
     const el = e.target
     const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight
     setShowScrollBtn(distanceFromBottom > 200)
+    setScrolledFromTop(el.scrollTop > 12)
   }
 
   function scrollToBottom() {
@@ -150,6 +152,7 @@ export default function App() {
   async function selectConversation(convoId) {
     setActiveConvoId(convoId)
     setShowScrollBtn(false)
+    setScrolledFromTop(false)
     setSidebarOpen(false)
     if (dbReady) {
       const { data } = await supabase
@@ -166,6 +169,7 @@ export default function App() {
     setMessages([])
     setInput('')
     setShowScrollBtn(false)
+    setScrolledFromTop(false)
     setSidebarOpen(false)
     setTimeout(() => textareaRef.current?.focus(), 100)
   }
@@ -659,7 +663,9 @@ export default function App() {
       <div className="h-dvh flex flex-col bg-[#f2f2f2] relative">
         {renderHeader()}
 
-        <div className="flex-1 overflow-y-auto" onScroll={handleChatScroll} ref={chatScrollRef}>
+        <div className="flex-1 overflow-y-auto relative" onScroll={handleChatScroll} ref={chatScrollRef}>
+          {/* Top scroll shadow */}
+          <div className={`chat-scroll-shadow-top ${scrolledFromTop ? 'visible' : ''}`} aria-hidden="true" />
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10 animate-fade-in">
@@ -744,7 +750,9 @@ export default function App() {
           />
         ) : (
         <>
-        <div className="flex-1 overflow-y-auto" onScroll={handleChatScroll} ref={chatScrollRef}>
+        <div className="flex-1 overflow-y-auto relative" onScroll={handleChatScroll} ref={chatScrollRef}>
+          {/* Top scroll shadow */}
+          <div className={`chat-scroll-shadow-top ${scrolledFromTop ? 'visible' : ''}`} aria-hidden="true" />
           {!hasMessages ? (
             <div className="max-w-2xl mx-auto px-4 pt-12 md:pt-20">
               <div className="text-center mb-10 animate-fade-in">

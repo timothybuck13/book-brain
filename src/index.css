@@ -408,3 +408,23 @@ select.input-focus:focus {
     transform: translateY(0) scale(1);
   }
 }
+
+/* ── Chat scroll shadow ────────────────────────────────────── */
+
+.chat-scroll-shadow-top {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  margin-bottom: -24px;
+  background: linear-gradient(to bottom, #f2f2f2, transparent);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.chat-scroll-shadow-top.visible {
+  opacity: 1;
+}
