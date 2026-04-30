@@ -1,7 +1,33 @@
 import { useState, useEffect } from 'react'
 
+function relativeTime(dateStr) {
+  if (!dateStr) return ''
+  const now = Date.now()
+  const then = new Date(dateStr).getTime()
+  const diffSec = Math.round((now - then) / 1000)
+  if (diffSec < 60) return 'Just now'
+  const diffMin = Math.round(diffSec / 60)
+  if (diffMin < 60) return `${diffMin}m ago`
+  const diffHr = Math.round(diffMin / 60)
+  if (diffHr < 24) return `${diffHr}h ago`
+  const diffDay = Math.round(diffHr / 24)
+  if (diffDay === 1) return 'Yesterday'
+  if (diffDay < 7) return `${diffDay}d ago`
+  const diffWeek = Math.round(diffDay / 7)
+  if (diffWeek < 5) return `${diffWeek}w ago`
+  const date = new Date(dateStr)
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
 export default function Sidebar({ conversations, activeConvoId, onSelect, onNew, onDelete, isOpen, onClose }) {
   const [confirmDelete, setConfirmDelete] = useState(null)
+  const [, setTick] = useState(0)
+
+  // Refresh relative timestamps every 60s
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 60000)
+    return () => clearInterval(id)
+  }, [])
 
   // Close sidebar on Escape key (mobile)
   useEffect(() => {
@@ -59,9 +85,12 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
               >
                 <button
                   onClick={() => onSelect(convo.id)}
-                  className="flex-1 text-left px-3 py-2.5 text-sm font-sans truncate min-w-0"
+                  className="flex-1 text-left px-3 py-2.5 min-w-0"
                 >
-                  {convo.title || 'Untitled'}
+                  <span className="block text-sm font-sans truncate">{convo.title || 'Untitled'}</span>
+                  {convo.created_at && (
+                    <span className="block text-[11px] font-sans text-gray-400 mt-0.5">{relativeTime(convo.created_at)}</span>
+                  )}
                 </button>
                 {confirmDelete === convo.id ? (
                   <div className="flex items-center gap-1 pr-2 flex-shrink-0">
