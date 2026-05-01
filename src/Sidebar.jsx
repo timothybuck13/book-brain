@@ -128,11 +128,13 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
           <button
             onClick={onNew}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 btn-press"
+            title="New Chat (⌘N)"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             New Chat
+            <kbd className="hidden md:inline-flex ml-auto items-center gap-0.5 text-[10px] font-sans text-amber-200/70 bg-amber-700/40 px-1.5 py-0.5 rounded">⌘N</kbd>
           </button>
         </div>
       </aside>

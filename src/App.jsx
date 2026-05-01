@@ -136,6 +136,37 @@ export default function App() {
     }
   }, [])
 
+  // Global keyboard shortcuts
+  useEffect(() => {
+    function handleGlobalKeyDown(e) {
+      // Don't trigger shortcuts when typing in an input/textarea or inside a contenteditable
+      const tag = e.target.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) {
+        return
+      }
+
+      // Cmd/Ctrl+N → New chat (only in chat state)
+      if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+        if (appState === 'chat') {
+          e.preventDefault()
+          startNewChat()
+        }
+        return
+      }
+
+      // "/" → Focus chat input (only in chat or demo states, not during library view)
+      if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if ((appState === 'chat' || appState === 'demo') && !showLibrary && !showImportModal) {
+          e.preventDefault()
+          textareaRef.current?.focus()
+        }
+        return
+      }
+    }
+    document.addEventListener('keydown', handleGlobalKeyDown)
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown)
+  }, [appState, showLibrary, showImportModal]) // eslint-disable-line react-hooks/exhaustive-deps
+
   // Track scroll position for scroll-to-bottom button and top shadow
   function handleChatScroll(e) {
     const el = e.target
