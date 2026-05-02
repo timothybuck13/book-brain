@@ -31,12 +31,25 @@ export default function App() {
 
   const [showScrollBtn, setShowScrollBtn] = useState(false)
   const [scrolledFromTop, setScrolledFromTop] = useState(false)
+  const [toasts, setToasts] = useState([])
 
   const messagesEndRef = useRef(null)
   const chatScrollRef = useRef(null)
   const textareaRef = useRef(null)
   const menuRef = useRef(null)
   const fileRef = useRef(null)
+
+  // ── Toast helper ────────────────────────────────────────────
+  const showToast = useCallback((message, type = 'success') => {
+    const id = Date.now() + Math.random()
+    setToasts(prev => [...prev, { id, message, type, exiting: false }])
+    setTimeout(() => {
+      setToasts(prev => prev.map(t => t.id === id ? { ...t, exiting: true } : t))
+    }, 2500)
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id))
+    }, 2700)
+  }, [])
 
   // ── Auth + initial routing ──────────────────────────────────
   useEffect(() => {
@@ -212,6 +225,7 @@ export default function App() {
     }
     setConversations(prev => prev.filter(c => c.id !== convoId))
     if (activeConvoId === convoId) startNewChat()
+    showToast('Conversation deleted')
   }
 
   // ── Chat submit ─────────────────────────────────────────────
@@ -486,6 +500,39 @@ export default function App() {
             Powered by Gemini · Built by <a href="https://timothybuck.me" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-500">Timothy Buck</a>
           </p>
         )}
+      </div>
+    )
+  }
+
+  // ── Toast container ─────────────────────────────────────────
+  function renderToasts() {
+    if (toasts.length === 0) return null
+    return (
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2 pointer-events-none">
+        {toasts.map(toast => (
+          <div
+            key={toast.id}
+            role="status"
+            aria-live="polite"
+            className={`${toast.exiting ? 'toast-exit' : 'toast-enter'} pointer-events-auto px-4 py-2.5 rounded-full shadow-lg border text-sm font-sans font-medium flex items-center gap-2 ${
+              toast.type === 'error'
+                ? 'bg-red-50 border-red-200 text-red-700'
+                : 'bg-white border-gray-200 text-gray-700'
+            }`}
+          >
+            {toast.type === 'success' && (
+              <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            )}
+            {toast.type === 'error' && (
+              <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+            )}
+            {toast.message}
+          </div>
+        ))}
       </div>
     )
   }
@@ -778,6 +825,7 @@ export default function App() {
             userBooks={userBooks}
             setUserBooks={setUserBooks}
             onClose={() => setShowLibrary(false)}
+            showToast={showToast}
           />
         ) : (
         <>
@@ -859,9 +907,12 @@ export default function App() {
           onClose={() => setShowImportModal(false)}
           onImportComplete={(res) => {
             getUserBooks(user.id).then(books => setUserBooks(books))
+            showToast(`${res?.imported || 0} books imported`)
           }}
         />
       )}
+
+      {renderToasts()}
     </div>
   )
 }

@@ -4,6 +4,16 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-05-02 14:00 UTC
+**Change:** Toast notification system — added a lightweight toast/snackbar system for user action feedback. Toasts slide up from the bottom of the screen with a spring animation, auto-dismiss after 2.5s with a fade-out exit, and support success (green checkmark) and error (red warning) types. Wired up to: book added to library, book removed, all books deleted, conversation deleted, and import completion (shows count). Error variants added for failed add/delete operations. CSS keyframe animations (`toastIn` slide-up + scale, `toastOut` fade-down), `pointer-events-none` container with `pointer-events-auto` toasts, `role="status"` + `aria-live="polite"` for screen reader accessibility.
+**Files:** src/index.css, src/App.jsx, src/LibraryView.jsx
+**Commit:** 80441b6
+
+## 2026-05-01 14:00 UTC
+**Change:** Keyboard shortcuts — added global keyboard shortcuts for power users. `⌘/Ctrl+N` starts a new chat (in chat view only), `/` focuses the chat input (in chat or demo view, skipped when in library or import modal). Shortcuts are suppressed when already typing in an input/textarea. Added a discoverable `⌘N` kbd badge on the sidebar's "New Chat" button (desktop only) and a title tooltip. Respects context — shortcuts only activate in relevant app states.
+**Files:** src/App.jsx, src/Sidebar.jsx
+**Commit:** 2e7fc36
+
 ## 2026-04-24 04:00 UTC
 **Change:** Smooth page/view transitions and fade-in animations — added CSS keyframe animations (fadeIn, fadeInUp, fadeInScale, messageIn, backdropIn) with staggered delay utilities. Applied to: landing page (logo scale-in, staggered CTA buttons), onboarding steps, demo/chat empty states (staggered suggestion cards), chat messages (slide-up entrance), and import modal (backdrop fade + content scale-in).
 **Files:** src/index.css, src/App.jsx, src/ChatMessage.jsx, src/ImportModal.jsx

@@ -428,3 +428,35 @@ select.input-focus:focus {
 .chat-scroll-shadow-top.visible {
   opacity: 1;
 }
+
+/* ── Toast notifications ───────────────────────────────────── */
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+}
+
+.toast-enter {
+  animation: toastIn 0.25s ease-out both;
+}
+
+.toast-exit {
+  animation: toastOut 0.2s ease-in both;
+}

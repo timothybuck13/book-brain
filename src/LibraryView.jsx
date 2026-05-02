@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from 'react'
 import { addUserBook, deleteUserBook, deleteUserBooks } from './lib/supabase'
 
-export default function LibraryView({ user, userBooks, setUserBooks, onClose }) {
+export default function LibraryView({ user, userBooks, setUserBooks, onClose, showToast }) {
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('date_read')
   const [showAddForm, setShowAddForm] = useState(false)
@@ -53,8 +53,10 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
       setAddRating(0)
       setAddDate('')
       setShowAddForm(false)
+      showToast?.('Book added to library')
     } catch (err) {
       console.error('Failed to add book:', err)
+      showToast?.('Failed to add book', 'error')
     }
     setSaving(false)
   }
@@ -64,8 +66,10 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
       await deleteUserBook(bookId)
       setUserBooks(prev => prev.filter(b => b.id !== bookId))
       setDeleteConfirm(null)
+      showToast?.('Book removed')
     } catch (err) {
       console.error('Failed to delete book:', err)
+      showToast?.('Failed to delete book', 'error')
     }
   }
 
@@ -74,8 +78,10 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose }) 
       await deleteUserBooks(user.id)
       setUserBooks([])
       setDeleteAllConfirm(false)
+      showToast?.('All books deleted')
     } catch (err) {
       console.error('Failed to delete all books:', err)
+      showToast?.('Failed to delete books', 'error')
     }
   }
 
