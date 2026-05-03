@@ -429,6 +429,17 @@ select.input-focus:focus {
   opacity: 1;
 }
 
+/* ── Search highlight in library ───────────────────────────── */
+
+.search-highlight {
+  background-color: rgba(251, 191, 36, 0.25);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 /* ── Toast notifications ───────────────────────────────────── */
 
 @keyframes toastIn {

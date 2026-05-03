@@ -1,6 +1,27 @@
 import { useState, useMemo, useRef } from 'react'
 import { addUserBook, deleteUserBook, deleteUserBooks } from './lib/supabase'
 
+function HighlightText({ text, query }) {
+  if (!query || !query.trim()) return <>{text}</>
+  const q = query.trim()
+  // Escape regex special chars
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const regex = new RegExp(`(${escaped})`, 'gi')
+  const parts = text.split(regex)
+  if (parts.length === 1) return <>{text}</>
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.toLowerCase() === q.toLowerCase() ? (
+          <mark key={i} className="search-highlight">{part}</mark>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  )
+}
+
 export default function LibraryView({ user, userBooks, setUserBooks, onClose, showToast }) {
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('date_read')
@@ -302,8 +323,8 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
                 className="group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="font-sans text-sm font-medium text-gray-800 truncate">{book.title}</p>
-                  <p className="font-sans text-xs text-gray-400 truncate">{book.author}</p>
+                  <p className="font-sans text-sm font-medium text-gray-800 truncate"><HighlightText text={book.title} query={search} /></p>
+                  <p className="font-sans text-xs text-gray-400 truncate"><HighlightText text={book.author} query={search} /></p>
                 </div>
                 <div className="flex items-center gap-3 flex-shrink-0">
                   {book.rating > 0 && (
