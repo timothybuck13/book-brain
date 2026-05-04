@@ -33,7 +33,9 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   const [saving, setSaving] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [deleteAllConfirm, setDeleteAllConfirm] = useState(false)
+  const [recentlyAdded, setRecentlyAdded] = useState(new Set())
   const searchRef = useRef(null)
+  const bookListRef = useRef(null)
 
   const filtered = useMemo(() => {
     let books = [...userBooks]
@@ -75,6 +77,20 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
       setAddDate('')
       setShowAddForm(false)
       showToast?.('Book added to library')
+      // Highlight the new row briefly
+      setRecentlyAdded(prev => new Set(prev).add(book.id))
+      setTimeout(() => {
+        // Scroll the new book into view
+        const el = document.getElementById(`book-row-${book.id}`)
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }, 50)
+      setTimeout(() => {
+        setRecentlyAdded(prev => {
+          const next = new Set(prev)
+          next.delete(book.id)
+          return next
+        })
+      }, 2200)
     } catch (err) {
       console.error('Failed to add book:', err)
       showToast?.('Failed to add book', 'error')
@@ -320,7 +336,8 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
             {filtered.map(book => (
               <div
                 key={book.id}
-                className="group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover"
+                id={`book-row-${book.id}`}
+                className={`group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover${recentlyAdded.has(book.id) ? ' book-just-added' : ''}`}
               >
                 <div className="flex-1 min-w-0">
                   <p className="font-sans text-sm font-medium text-gray-800 truncate"><HighlightText text={book.title} query={search} /></p>

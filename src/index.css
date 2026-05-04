@@ -471,3 +471,24 @@ select.input-focus:focus {
 .toast-exit {
   animation: toastOut 0.2s ease-in both;
 }
+
+/* ── Book just-added highlight flash ───────────────────────── */
+
+@keyframes bookAddedFlash {
+  0% {
+    background-color: rgba(251, 191, 36, 0.28);
+    box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.15);
+  }
+  70% {
+    background-color: rgba(251, 191, 36, 0.08);
+    box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.04);
+  }
+  100% {
+    background-color: white;
+    box-shadow: none;
+  }
+}
+
+.book-just-added {
+  animation: bookAddedFlash 2s ease-out both;
+}
