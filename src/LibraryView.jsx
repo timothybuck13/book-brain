@@ -123,17 +123,39 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   }
 
   function StarRating({ rating, interactive, onChange }) {
+    const [hoverRating, setHoverRating] = useState(0)
+    const displayRating = interactive && hoverRating > 0 ? hoverRating : (rating || 0)
+
+    function getStarColor(star) {
+      if (star <= displayRating) {
+        // Hovered but not yet selected — lighter amber preview
+        if (interactive && hoverRating > 0 && star > (rating || 0)) return 'text-amber-400 opacity-70'
+        return 'text-amber-500'
+      }
+      return 'text-gray-200'
+    }
+
     return (
-      <div className="flex gap-0.5">
+      <div
+        className="flex gap-0.5"
+        onMouseLeave={() => interactive && setHoverRating(0)}
+        role={interactive ? 'radiogroup' : 'img'}
+        aria-label={interactive ? 'Rate this book' : `${rating || 0} out of 5 stars`}
+      >
         {[1, 2, 3, 4, 5].map(star => (
           <button
             key={star}
             type="button"
             onClick={() => interactive && onChange?.(star === rating ? 0 : star)}
-            className={`${interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'} transition-transform`}
+            onMouseEnter={() => interactive && setHoverRating(star)}
+            className={`${interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'} transition-all duration-150`}
+            role={interactive ? 'radio' : undefined}
+            aria-checked={interactive ? star === rating : undefined}
+            aria-label={interactive ? `${star} star${star > 1 ? 's' : ''}` : undefined}
+            tabIndex={interactive ? 0 : -1}
           >
             <svg
-              className={`w-4 h-4 ${star <= (rating || 0) ? 'text-amber-500' : 'text-gray-200'}`}
+              className={`w-4 h-4 transition-colors duration-150 ${getStarColor(star)}`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
