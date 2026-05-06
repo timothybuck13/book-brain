@@ -1,5 +1,34 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { addUserBook, deleteUserBook, deleteUserBooks } from './lib/supabase'
+
+function AnimatedCount({ value, duration = 600 }) {
+  const [display, setDisplay] = useState(0)
+  const prevValue = useRef(0)
+
+  useEffect(() => {
+    const from = prevValue.current
+    const to = value
+    if (from === to) return
+    const start = performance.now()
+    let raf
+    function tick(now) {
+      const elapsed = now - start
+      const progress = Math.min(elapsed / duration, 1)
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplay(Math.round(from + (to - from) * eased))
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        prevValue.current = to
+      }
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [value, duration])
+
+  return <>{display}</>
+}
 
 function HighlightText({ text, query }) {
   if (!query || !query.trim()) return <>{text}</>
@@ -173,7 +202,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
         <div className="flex items-center gap-3">
           <h2 className="font-sans font-semibold text-lg">My Library</h2>
-          <span className="text-sm text-gray-400 font-sans">{userBooks.length} books</span>
+          <span className="text-sm text-gray-400 font-sans"><AnimatedCount value={userBooks.length} /> books</span>
         </div>
         <div className="flex items-center">
           

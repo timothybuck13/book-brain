@@ -7,6 +7,35 @@ import ChatMessage from './ChatMessage'
 import ImportModal from './ImportModal'
 import LibraryView from './LibraryView'
 
+function AnimatedCount({ value, duration = 800 }) {
+  const [display, setDisplay] = useState(0)
+  const prevValue = useRef(0)
+
+  useEffect(() => {
+    const from = prevValue.current
+    const to = value
+    if (from === to) return
+    const start = performance.now()
+    let raf
+    function tick(now) {
+      const elapsed = now - start
+      const progress = Math.min(elapsed / duration, 1)
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplay(Math.round(from + (to - from) * eased))
+      if (progress < 1) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        prevValue.current = to
+      }
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [value, duration])
+
+  return <>{display}</>
+}
+
 export default function App() {
   // App state: 'loading' | 'landing' | 'demo' | 'onboarding' | 'chat'
   const [appState, setAppState] = useState('loading')
@@ -437,7 +466,7 @@ export default function App() {
                     role="menuitem"
                   >
                     My Library
-                    {userBooks.length > 0 && <span className="ml-auto text-xs text-gray-400">{userBooks.length} books</span>}
+                    {userBooks.length > 0 && <span className="ml-auto text-xs text-gray-400"><AnimatedCount value={userBooks.length} /> books</span>}
                   </button>
                   <button
                     onClick={() => { setShowUserMenu(false); setShowImportModal(true) }}
@@ -699,7 +728,7 @@ export default function App() {
                   </svg>
                 </div>
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-2">
-                  {importResult?.imported || 0} books imported!
+                  <AnimatedCount value={importResult?.imported || 0} /> books imported!
                 </h2>
                 {importResult?.skipped > 0 && (
                   <p className="font-sans text-sm text-gray-400 mb-2">{importResult.skipped} duplicates skipped</p>
@@ -838,7 +867,7 @@ export default function App() {
                 <img src="/logo.jpg" alt="Book Brain" className="w-16 h-16 rounded-xl mb-4 mx-auto" />
                 <h2 className="font-sans font-semibold text-2xl md:text-3xl tracking-wide mb-3">
                   {userBooks.length > 0
-                    ? `Your ${userBooks.length}-Book Library`
+                    ? <>Your <AnimatedCount value={userBooks.length} />-Book Library</>
                     : 'Book Brain'}
                 </h2>
                 <p className="text-gray-500 font-sans text-sm md:text-base leading-relaxed max-w-md mx-auto">
