@@ -490,6 +490,27 @@ select.input-focus:focus {
   transform-origin: top right;
 }
 
+/* ── Search clear button ───────────────────────────────────── */
+
+@keyframes searchClearIn {
+  from {
+    opacity: 0;
+    scale: 0.7;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.search-clear-btn {
+  animation: searchClearIn 0.15s ease-out both;
+}
+
+.search-clear-btn:active {
+  scale: 0.85;
+}
+
 /* ── Book just-added highlight flash ───────────────────────── */
 
 @keyframes bookAddedFlash {

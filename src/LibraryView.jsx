@@ -231,8 +231,19 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search by title or author..."
-              className="w-full pl-9 pr-3 py-2 text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg focus:outline-none input-focus"
+              className="w-full pl-9 pr-8 py-2 text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg focus:outline-none input-focus"
             />
+            {search && (
+              <button
+                onClick={() => { setSearch(''); searchRef.current?.focus() }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-200 transition-all search-clear-btn"
+                aria-label="Clear search"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
           </div>
           <div className="flex items-center">
             {deleteAllConfirm ? (
