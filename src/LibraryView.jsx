@@ -395,11 +395,12 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
 
           {/* Book list */}
           <div className="space-y-1">
-            {filtered.map(book => (
+            {filtered.map((book, i) => (
               <div
                 key={book.id}
                 id={`book-row-${book.id}`}
-                className={`group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover${recentlyAdded.has(book.id) ? ' book-just-added' : ''}`}
+                className={`group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover book-row-enter${recentlyAdded.has(book.id) ? ' book-just-added' : ''}`}
+                style={{ animationDelay: `${Math.min(i * 30, 600)}ms` }}
               >
                 <div className="flex-1 min-w-0">
                   <p className="font-sans text-sm font-medium text-gray-800 truncate"><HighlightText text={book.title} query={search} /></p>
