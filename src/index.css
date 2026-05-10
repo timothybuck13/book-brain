@@ -548,3 +548,31 @@ select.input-focus:focus {
 .book-row-enter {
   animation: bookRowIn 0.3s ease-out both;
 }
+
+/* ── Streaming progress bar ────────────────────────────────── */
+
+@keyframes streamingSlide {
+  0% {
+    transform: translateX(-100%);
+    width: 40%;
+  }
+  50% {
+    width: 60%;
+  }
+  100% {
+    transform: translateX(250%);
+    width: 40%;
+  }
+}
+
+.streaming-bar {
+  animation: streamingSlide 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streaming-bar {
+    animation: none;
+    width: 100%;
+    opacity: 0.5;
+  }
+}

@@ -394,7 +394,7 @@ export default function App() {
     const showAvatar = !!user && (appState === 'chat' || appState === 'onboarding')
 
     return (
-      <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
+      <header className="relative flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
         <div className="flex items-center gap-3">
           {showBack && (
             <button
@@ -487,6 +487,12 @@ export default function App() {
             </div>
           )}
         </div>
+        {/* Streaming progress bar */}
+        {isStreaming && (
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 overflow-hidden" role="progressbar" aria-label="Loading response">
+            <div className="streaming-bar h-full bg-amber-500 rounded-full" />
+          </div>
+        )}
       </header>
     )
   }
