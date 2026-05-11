@@ -77,9 +77,9 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
             conversations.map((convo) => (
               <div
                 key={convo.id}
-                className={`group flex items-center gap-1 rounded-lg cursor-pointer sidebar-row ${
+                className={`group flex items-center gap-1 rounded-lg cursor-pointer sidebar-row relative ${
                   activeConvoId === convo.id
-                    ? 'bg-amber-50 text-amber-800'
+                    ? 'bg-amber-50 text-amber-800 sidebar-active'
                     : 'hover:bg-gray-50 text-gray-600'
                 }`}
               >

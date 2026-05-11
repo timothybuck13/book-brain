@@ -371,6 +371,26 @@ select.input-focus:focus {
   transform: scale(0.99);
 }
 
+/* Active conversation left-edge indicator */
+.sidebar-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background-color: #d97706;
+  animation: indicator-slide-in 0.2s ease-out;
+}
+@keyframes indicator-slide-in {
+  from { opacity: 0; top: 45%; bottom: 45%; }
+  to { opacity: 1; top: 20%; bottom: 20%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-active::before { animation: none; }
+}
+
 /* ── Copy-to-clipboard button on messages ──────────────────── */
 
 .copy-btn {
