@@ -246,6 +246,11 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
             )}
           </div>
           <div className="flex items-center">
+            {search.trim() && filtered.length > 0 && (
+              <span className="text-xs font-sans text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full mr-2 search-results-badge">
+                {filtered.length} {filtered.length === 1 ? 'result' : 'results'}
+              </span>
+            )}
             {deleteAllConfirm ? (
               <div className="flex items-center gap-2">
                 <span className="text-xs text-red-600 font-sans">Delete all?</span>
