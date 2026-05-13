@@ -308,7 +308,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
         <div className="max-w-2xl mx-auto px-4 py-3">
           {/* Add Book Form */}
           {showAddForm && (
-            <form onSubmit={handleAdd} className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
+            <form onSubmit={handleAdd} className="add-book-form bg-white rounded-xl border border-gray-200 p-4 mb-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                 <input
                   type="text"
