@@ -855,6 +855,7 @@ export default function App() {
         {renderHeader()}
 
         {showLibrary ? (
+          <div key="library" className="animate-view-switch contents">
           <LibraryView
             user={user}
             userBooks={userBooks}
@@ -862,8 +863,9 @@ export default function App() {
             onClose={() => setShowLibrary(false)}
             showToast={showToast}
           />
+          </div>
         ) : (
-        <>
+        <div key="chat" className="animate-view-switch contents">
         <div className="flex-1 overflow-y-auto relative" onScroll={handleChatScroll} ref={chatScrollRef}>
           {/* Top scroll shadow */}
           <div className={`chat-scroll-shadow-top ${scrolledFromTop ? 'visible' : ''}`} aria-hidden="true" />
@@ -931,7 +933,7 @@ export default function App() {
         )}
 
         {renderInput()}
-        </>
+        </div>
         )}
       </div>
 

@@ -131,6 +131,17 @@
 .typing-dot:nth-child(3) { animation-delay: 0.3s; }
 
 /* Page/view transition animations */
+@keyframes viewSwitch {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-view-switch {
+  animation: viewSwitch 0.25s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-view-switch { animation: none; }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
