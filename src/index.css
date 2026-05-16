@@ -113,6 +113,53 @@
   margin: 1rem 0;
 }
 
+/* Inline code */
+.prose-chat code {
+  font-family: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background-color: rgba(217, 119, 6, 0.08);
+  color: #92400e;
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+/* Fenced code blocks */
+.prose-chat pre {
+  margin: 0.75rem 0;
+  padding: 0.875rem 1rem;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Reset inline styles inside code blocks */
+.prose-chat pre code {
+  background: none;
+  color: #e5e7eb;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.82em;
+  line-height: 1.65;
+  word-break: normal;
+}
+
+/* Code block scrollbar */
+.prose-chat pre::-webkit-scrollbar {
+  height: 4px;
+}
+.prose-chat pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+.prose-chat pre::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+.prose-chat pre::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
 /* Typing animation — smooth bouncing wave */
 @keyframes typingBounce {
   0%, 60%, 100% {
