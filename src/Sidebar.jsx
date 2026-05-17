@@ -110,7 +110,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
                 ) : (
                   <button
                     onClick={(e) => { e.stopPropagation(); setConfirmDelete(convo.id) }}
-                    className="opacity-0 group-hover:opacity-100 p-1.5 mr-1 text-gray-300 hover:text-red-400 transition-all flex-shrink-0"
+                    className="opacity-0 group-hover:opacity-100 hover-action p-1.5 mr-1 text-gray-300 hover:text-red-400 transition-all flex-shrink-0"
                     aria-label={`Delete conversation: ${convo.title || 'Untitled'}`}
                   >
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

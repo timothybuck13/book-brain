@@ -42,3 +42,8 @@ Hourly UI improvements applied autonomously by Hatch.
 ## 2026-04-25 14:00 UTC
 **Change:** Accessibility improvements — added ARIA attributes, keyboard navigation, focus management, and reduced-motion support. Key changes: ImportModal gets `role="dialog"`, `aria-modal`, `aria-label`, focus trapping (Tab cycles within modal), and Escape-to-close. User menu gets `aria-expanded`, `aria-haspopup`, `role="menu"`/`role="menuitem"`, and Escape-to-close. Sidebar gets `role="navigation"`, `aria-label`, and Escape-to-close on mobile. All icon-only buttons get descriptive `aria-label` (hamburger, close, delete, send). Chat textarea gets `aria-label`. Message containers get `role="log"` and `aria-live="polite"` for screen readers. CSS adds `:focus-visible` amber outline for keyboard users (hidden for mouse), `.sr-only` utility, and `prefers-reduced-motion: reduce` media query that disables all animations.
 **Files:** src/index.css, src/App.jsx, src/ImportModal.jsx, src/Sidebar.jsx, src/LibraryView.jsx
+
+## 2026-05-17 14:00 UTC
+**Change:** Touch-friendly action buttons — on touch-only devices (phones, tablets), delete buttons (book rows, sidebar conversations) and copy buttons (chat messages) are now visible at low opacity instead of being completely hidden behind hover states. Uses `@media (hover: none) and (pointer: coarse)` to detect touch devices. Buttons appear at 35% opacity and brighten to full on tap. Mouse users retain the existing hover-to-reveal behavior unchanged. Added `.hover-action` utility class to the three hidden-action-button patterns: library book delete, sidebar conversation delete, and chat message copy.
+**Files:** src/index.css, src/LibraryView.jsx, src/Sidebar.jsx, src/ChatMessage.jsx
+**Commit:** (see git log)

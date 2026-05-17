@@ -70,7 +70,7 @@ export default function ChatMessage({ message, isStreaming }) {
         <div className="flex items-center gap-2 mb-1">
           <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Book Brain</span>
           {hasContent && !isStreaming && (
-            <span className="opacity-0 group-hover/msg:opacity-100 transition-opacity duration-150">
+            <span className="opacity-0 group-hover/msg:opacity-100 hover-action transition-opacity duration-150">
               <CopyButton text={message.content} />
             </span>
           )}

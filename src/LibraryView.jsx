@@ -438,7 +438,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
                   ) : (
                     <button
                       onClick={() => setDeleteConfirm(book.id)}
-                      className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-100 transition-all"
+                      className="opacity-0 group-hover:opacity-100 hover-action p-1 rounded hover:bg-gray-100 transition-all"
                       aria-label={`Delete ${book.title}`}
                     >
                       <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

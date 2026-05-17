@@ -685,6 +685,18 @@ select.input-focus:focus {
   }
 }
 
+/* ── Touch-device action buttons ───────────────────── */
+/* On touch-only devices (phones, tablets), reveal hidden action buttons
+   (delete, copy) at low opacity so they're discoverable without hover. */
+@media (hover: none) and (pointer: coarse) {
+  .hover-action {
+    opacity: 0.35 !important;
+  }
+  .hover-action:active {
+    opacity: 1 !important;
+  }
+}
+
 /* ── Slide-down form animation ─────────────────────── */
 @keyframes slide-down {
   from {
