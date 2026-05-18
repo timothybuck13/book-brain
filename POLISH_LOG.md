@@ -47,3 +47,7 @@ Hourly UI improvements applied autonomously by Hatch.
 **Change:** Touch-friendly action buttons — on touch-only devices (phones, tablets), delete buttons (book rows, sidebar conversations) and copy buttons (chat messages) are now visible at low opacity instead of being completely hidden behind hover states. Uses `@media (hover: none) and (pointer: coarse)` to detect touch devices. Buttons appear at 35% opacity and brighten to full on tap. Mouse users retain the existing hover-to-reveal behavior unchanged. Added `.hover-action` utility class to the three hidden-action-button patterns: library book delete, sidebar conversation delete, and chat message copy.
 **Files:** src/index.css, src/LibraryView.jsx, src/Sidebar.jsx, src/ChatMessage.jsx
 **Commit:** (see git log)
+
+## 2026-05-18 14:00 UTC
+**Change:** Smooth exit animation on book row deletion — when a book is deleted from the library, the row now fades out with a slide-left + scale-down + height collapse animation (0.35s ease-in-out) before being removed from state. Uses a `deletingIds` set to track rows mid-animation. `pointer-events: none` prevents interaction during exit. Respects `prefers-reduced-motion` by hiding instantly instead of animating.
+**Files:** src/index.css, src/LibraryView.jsx

@@ -697,6 +697,43 @@ select.input-focus:focus {
   }
 }
 
+/* ── Book row exit (delete) animation ──────────────── */
+
+@keyframes bookRowOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    max-height: 80px;
+    margin-bottom: 4px;
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(-16px) scale(0.97);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-16px) scale(0.97);
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+  }
+}
+
+.book-row-exit {
+  animation: bookRowOut 0.35s ease-in-out forwards;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-row-exit {
+    animation: none;
+    display: none;
+  }
+}
+
 /* ── Slide-down form animation ─────────────────────── */
 @keyframes slide-down {
   from {

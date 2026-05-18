@@ -63,6 +63,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [deleteAllConfirm, setDeleteAllConfirm] = useState(false)
   const [recentlyAdded, setRecentlyAdded] = useState(new Set())
+  const [deletingIds, setDeletingIds] = useState(new Set())
   const searchRef = useRef(null)
   const bookListRef = useRef(null)
 
@@ -130,9 +131,18 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   async function handleDelete(bookId) {
     try {
       await deleteUserBook(bookId)
-      setUserBooks(prev => prev.filter(b => b.id !== bookId))
       setDeleteConfirm(null)
-      showToast?.('Book removed')
+      // Animate out, then remove from state
+      setDeletingIds(prev => new Set(prev).add(bookId))
+      setTimeout(() => {
+        setUserBooks(prev => prev.filter(b => b.id !== bookId))
+        setDeletingIds(prev => {
+          const next = new Set(prev)
+          next.delete(bookId)
+          return next
+        })
+        showToast?.('Book removed')
+      }, 320)
     } catch (err) {
       console.error('Failed to delete book:', err)
       showToast?.('Failed to delete book', 'error')
@@ -404,7 +414,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
               <div
                 key={book.id}
                 id={`book-row-${book.id}`}
-                className={`group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover book-row-enter${recentlyAdded.has(book.id) ? ' book-just-added' : ''}`}
+                className={`group bg-white rounded-xl border border-gray-100 px-4 py-3 flex items-center gap-3 card-hover book-row-enter${recentlyAdded.has(book.id) ? ' book-just-added' : ''}${deletingIds.has(book.id) ? ' book-row-exit' : ''}`}
                 style={{ animationDelay: `${Math.min(i * 30, 600)}ms` }}
               >
                 <div className="flex-1 min-w-0">
