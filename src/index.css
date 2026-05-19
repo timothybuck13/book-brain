@@ -735,6 +735,12 @@ select.input-focus:focus {
 }
 
 /* ── Slide-down form animation ─────────────────────── */
+
+/* ── Sidebar time-group headers ────────────────────── */
+.sidebar-group-header {
+  animation: fadeIn 0.2s ease-out both;
+}
+
 @keyframes slide-down {
   from {
     opacity: 0;

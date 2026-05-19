@@ -19,6 +19,39 @@ function relativeTime(dateStr) {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
+function getTimeGroup(dateStr) {
+  if (!dateStr) return 'Earlier'
+  const now = new Date()
+  const then = new Date(dateStr)
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const yesterdayStart = new Date(todayStart)
+  yesterdayStart.setDate(yesterdayStart.getDate() - 1)
+  const weekStart = new Date(todayStart)
+  weekStart.setDate(weekStart.getDate() - 6)
+
+  if (then >= todayStart) return 'Today'
+  if (then >= yesterdayStart) return 'Yesterday'
+  if (then >= weekStart) return 'This Week'
+  return 'Earlier'
+}
+
+function groupConversations(conversations) {
+  const groups = []
+  const order = ['Today', 'Yesterday', 'This Week', 'Earlier']
+  const grouped = {}
+  for (const convo of conversations) {
+    const group = getTimeGroup(convo.created_at)
+    if (!grouped[group]) grouped[group] = []
+    grouped[group].push(convo)
+  }
+  for (const label of order) {
+    if (grouped[label]?.length > 0) {
+      groups.push({ label, conversations: grouped[label] })
+    }
+  }
+  return groups
+}
+
 export default function Sidebar({ conversations, activeConvoId, onSelect, onNew, onDelete, isOpen, onClose }) {
   const [confirmDelete, setConfirmDelete] = useState(null)
   const [, setTick] = useState(0)
@@ -28,6 +61,8 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
     const id = setInterval(() => setTick(t => t + 1), 60000)
     return () => clearInterval(id)
   }, [])
+
+  const groups = groupConversations(conversations)
 
   // Close sidebar on Escape key (mobile)
   useEffect(() => {
@@ -74,7 +109,12 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
               <p className="text-gray-400 font-sans text-[11px] leading-relaxed">Start a chat to get<br />personalized recommendations.</p>
             </div>
           ) : (
-            conversations.map((convo) => (
+            groups.map((group) => (
+              <div key={group.label}>
+                <div className="sidebar-group-header px-3 pt-3 pb-1 first:pt-1">
+                  <span className="text-[10px] font-sans font-semibold text-gray-400 uppercase tracking-widest">{group.label}</span>
+                </div>
+                {group.conversations.map((convo) => (
               <div
                 key={convo.id}
                 className={`group flex items-center gap-1 rounded-lg cursor-pointer sidebar-row relative ${
@@ -118,6 +158,8 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
                     </svg>
                   </button>
                 )}
+              </div>
+                ))}
               </div>
             ))
           )}
