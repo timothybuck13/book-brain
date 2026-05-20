@@ -209,6 +209,54 @@ export default function App() {
     return () => document.removeEventListener('keydown', handleGlobalKeyDown)
   }, [appState, showLibrary, showImportModal]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Dynamic document title based on current context
+  useEffect(() => {
+    const base = 'Book Brain'
+
+    if (appState === 'loading') {
+      document.title = base
+      return
+    }
+
+    if (appState === 'landing') {
+      document.title = `${base} · Personalized Book Recommendations`
+      return
+    }
+
+    if (appState === 'onboarding') {
+      document.title = `Set Up Your Library · ${base}`
+      return
+    }
+
+    if (showLibrary) {
+      document.title = `My Library · ${base}`
+      return
+    }
+
+    if (isStreaming) {
+      document.title = `Thinking… · ${base}`
+      return
+    }
+
+    if (activeConvoId) {
+      const activeConvo = conversations.find(c => c.id === activeConvoId)
+      if (activeConvo?.title) {
+        const title = activeConvo.title.length > 50
+          ? activeConvo.title.slice(0, 47) + '…'
+          : activeConvo.title
+        document.title = `${title} · ${base}`
+        return
+      }
+    }
+
+    if (appState === 'demo') {
+      document.title = `Demo · ${base}`
+      return
+    }
+
+    document.title = base
+  }, [appState, isStreaming, activeConvoId, conversations, showLibrary])
+
   // Track scroll position for scroll-to-bottom button and top shadow
   function handleChatScroll(e) {
     const el = e.target

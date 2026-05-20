@@ -48,6 +48,16 @@ Hourly UI improvements applied autonomously by Hatch.
 **Files:** src/index.css, src/LibraryView.jsx, src/Sidebar.jsx, src/ChatMessage.jsx
 **Commit:** (see git log)
 
+## 2026-05-20 14:00 UTC
+**Change:** Dynamic document title — the browser tab now reflects the current app context instead of always showing "Book Brain". Title updates include: "Personalized Book Recommendations" suffix on landing page, "Set Up Your Library" during onboarding, "My Library" when viewing books, "Thinking…" during AI response streaming, active conversation title (truncated to 50 chars) when chatting, and "Demo" in demo mode. Falls back to plain "Book Brain" for new-chat state. Improves tab management for multi-tab users and provides a subtle streaming status indicator in the browser chrome.
+**Files:** src/App.jsx
+**Commit:** (see git log)
+
+## 2026-05-19 14:00 UTC
+**Change:** Time-based conversation group headers in sidebar — conversations are now grouped under "Today", "Yesterday", "This Week", and "Earlier" headers based on their creation date. Uses a `getTimeGroup()` function that compares each conversation's timestamp against midnight boundaries and a 7-day rolling window. The `groupConversations()` function preserves the existing sort order within each group. Headers use tiny uppercase tracking-widest labels (10px) in gray-400 with a subtle fade-in animation via the existing `fadeIn` keyframe. The grouping recalculates every 60 seconds alongside the existing relative-time ticker, so conversations automatically move between groups at midnight. Empty groups are hidden. `sidebar-group-header` CSS class added to `index.css`.
+**Files:** src/Sidebar.jsx, src/index.css
+**Commit:** 31d6f84
+
 ## 2026-05-18 14:00 UTC
 **Change:** Smooth exit animation on book row deletion — when a book is deleted from the library, the row now fades out with a slide-left + scale-down + height collapse animation (0.35s ease-in-out) before being removed from state. Uses a `deletingIds` set to track rows mid-animation. `pointer-events: none` prevents interaction during exit. Respects `prefers-reduced-motion` by hiding instantly instead of animating.
 **Files:** src/index.css, src/LibraryView.jsx
