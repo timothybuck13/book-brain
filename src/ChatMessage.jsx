@@ -90,6 +90,7 @@ export default function ChatMessage({ message, isStreaming }) {
               >
                 {message.content}
               </ReactMarkdown>
+              {isStreaming && <span className="streaming-cursor" aria-hidden="true" />}
             </div>
           ) : isStreaming ? (
             <div className="flex items-end gap-1.5 py-1 h-6" aria-label="Book Brain is thinking…" role="status">
