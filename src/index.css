@@ -789,3 +789,26 @@ select.input-focus:focus {
     animation: none;
   }
 }
+
+/* ── Cycling placeholder text in chat input ────────────────── */
+
+@keyframes placeholderCycle {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.placeholder-cycle {
+  animation: placeholderCycle 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placeholder-cycle {
+    animation: none;
+  }
+}

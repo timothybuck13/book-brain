@@ -36,6 +36,14 @@ function AnimatedCount({ value, duration = 800 }) {
   return <>{display}</>
 }
 
+const CHAT_PLACEHOLDERS = [
+  'Ask about books…',
+  'What should I read next?',
+  'Find me a page-turner…',
+  'What are my reading patterns?',
+  'Suggest something outside my comfort zone…',
+]
+
 export default function App() {
   // App state: 'loading' | 'landing' | 'demo' | 'onboarding' | 'chat'
   const [appState, setAppState] = useState('loading')
@@ -61,6 +69,8 @@ export default function App() {
   const [showScrollBtn, setShowScrollBtn] = useState(false)
   const [scrolledFromTop, setScrolledFromTop] = useState(false)
   const [toasts, setToasts] = useState([])
+  const [placeholderIdx, setPlaceholderIdx] = useState(0)
+  const [inputFocused, setInputFocused] = useState(false)
 
   const messagesEndRef = useRef(null)
   const chatScrollRef = useRef(null)
@@ -256,6 +266,15 @@ export default function App() {
 
     document.title = base
   }, [appState, isStreaming, activeConvoId, conversations, showLibrary])
+
+  // Cycle placeholder suggestions when chat input is empty and unfocused
+  useEffect(() => {
+    if (input || inputFocused) return
+    const timer = setInterval(() => {
+      setPlaceholderIdx(prev => (prev + 1) % CHAT_PLACEHOLDERS.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [input, inputFocused])
 
   // Track scroll position for scroll-to-bottom button and top shadow
   function handleChatScroll(e) {
@@ -551,18 +570,30 @@ export default function App() {
     return (
       <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pb-4 pt-2">
         <form onSubmit={handleSubmit} className="chat-input-bar max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-5 pr-2.5 py-1">
-          <textarea
-            ref={textareaRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
-            placeholder="Ask about books..."
-            rows={1}
-            className="flex-1 resize-none bg-transparent text-base font-sans font-light focus:outline-none overflow-hidden leading-6 py-2.5"
-            disabled={isStreaming}
-            style={{ minHeight: '44px', maxHeight: '120px' }}
-            aria-label="Ask about books"
-          />
+          <div className="flex-1 relative">
+            <textarea
+              ref={textareaRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
+              rows={1}
+              className="w-full resize-none bg-transparent text-base font-sans font-light focus:outline-none overflow-hidden leading-6 py-2.5"
+              disabled={isStreaming}
+              style={{ minHeight: '44px', maxHeight: '120px' }}
+              aria-label="Ask about books"
+            />
+            {!input && (
+              <span
+                key={inputFocused ? 'focused' : `ph-${placeholderIdx}`}
+                className={`absolute inset-0 flex items-center text-base font-sans font-light text-gray-400 pointer-events-none select-none${!inputFocused ? ' placeholder-cycle' : ''}`}
+                aria-hidden="true"
+              >
+                {inputFocused ? 'Ask about books…' : CHAT_PLACEHOLDERS[placeholderIdx]}
+              </span>
+            )}
+          </div>
           <button
             type="submit"
             disabled={!hasText || isStreaming}

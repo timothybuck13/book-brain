@@ -4,6 +4,10 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-05-22 14:00 UTC
+**Change:** Cycling animated placeholder text in chat input — the static "Ask about books..." placeholder now rotates through five different suggestion prompts ("What should I read next?", "Find me a page-turner…", "What are my reading patterns?", "Suggest something outside my comfort zone…") every 4 seconds with a subtle fade-in-up animation. Uses a positioned overlay span instead of the native placeholder attribute for full animation control. On focus, snaps to a static "Ask about books…" text without animation. Cycling pauses whenever the input has text or is focused, and restarts from the next suggestion when re-blurred. `placeholder-cycle` CSS keyframe (opacity + translateY) with reduced-motion fallback.
+**Files:** src/App.jsx, src/index.css
+
 ## 2026-05-02 14:00 UTC
 **Change:** Toast notification system — added a lightweight toast/snackbar system for user action feedback. Toasts slide up from the bottom of the screen with a spring animation, auto-dismiss after 2.5s with a fade-out exit, and support success (green checkmark) and error (red warning) types. Wired up to: book added to library, book removed, all books deleted, conversation deleted, and import completion (shows count). Error variants added for failed add/delete operations. CSS keyframe animations (`toastIn` slide-up + scale, `toastOut` fade-down), `pointer-events-none` container with `pointer-events-auto` toasts, `role="status"` + `aria-live="polite"` for screen reader accessibility.
 **Files:** src/index.css, src/App.jsx, src/LibraryView.jsx
