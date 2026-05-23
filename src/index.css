@@ -792,6 +792,20 @@ select.input-focus:focus {
 
 /* ── Cycling placeholder text in chat input ────────────────── */
 
+/* ── Onboarding step progress indicator ────────────────────── */
+
+.step-dot-active {
+  box-shadow: 0 0 6px rgba(217, 119, 6, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-dot-active {
+    box-shadow: none;
+  }
+}
+
+/* ── Cycling placeholder text ──────────────────────────────── */
+
 @keyframes placeholderCycle {
   from {
     opacity: 0;

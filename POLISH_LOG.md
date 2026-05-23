@@ -4,6 +4,10 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-05-23 14:00 UTC
+**Change:** Onboarding step progress indicator — added a modern iOS-style pill/dot progress indicator to the 3-step onboarding flow (upload → importing → done). The active step renders as an elongated amber pill (`w-6 h-1.5`) with a subtle amber glow, completed steps as small amber dots (`w-1.5 h-1.5`), and upcoming steps as small gray dots. All three transition smoothly between states with `transition-all duration-500 ease-out`, so the pill visually slides and morphs as the user progresses through onboarding. Uses `role="group"` with a dynamic `aria-label` for screen readers ("Step 1 of 3", etc.). Respects `prefers-reduced-motion` via the existing global rule that shortens all transition durations. New `.step-dot-active` CSS class adds a warm glow shadow to the active indicator.
+**Files:** src/App.jsx, src/index.css
+
 ## 2026-05-22 14:00 UTC
 **Change:** Cycling animated placeholder text in chat input — the static "Ask about books..." placeholder now rotates through five different suggestion prompts ("What should I read next?", "Find me a page-turner…", "What are my reading patterns?", "Suggest something outside my comfort zone…") every 4 seconds with a subtle fade-in-up animation. Uses a positioned overlay span instead of the native placeholder attribute for full animation control. On focus, snaps to a static "Ask about books…" text without animation. Cycling pauses whenever the input has text or is focused, and restarts from the next suggestion when re-blurred. `placeholder-cycle` CSS keyframe (opacity + translateY) with reduced-motion fallback.
 **Files:** src/App.jsx, src/index.css

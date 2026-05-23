@@ -731,6 +731,28 @@ export default function App() {
         {renderHeader()}
         <div className="flex-1 flex items-center justify-center px-4 overflow-y-auto">
           <div className="max-w-lg w-full py-8">
+            {/* Step progress indicator */}
+            <div className="flex items-center justify-center gap-1.5 mb-8" role="group" aria-label={`Step ${['upload', 'importing', 'done'].indexOf(onboardingStep) + 1} of 3`}>
+              {['upload', 'importing', 'done'].map((step, i) => {
+                const currentIdx = ['upload', 'importing', 'done'].indexOf(onboardingStep)
+                const isActive = i === currentIdx
+                const isCompleted = i < currentIdx
+                return (
+                  <div
+                    key={step}
+                    className={`rounded-full transition-all duration-500 ease-out ${
+                      isActive
+                        ? 'w-6 h-1.5 bg-amber-500 step-dot-active'
+                        : isCompleted
+                        ? 'w-1.5 h-1.5 bg-amber-400'
+                        : 'w-1.5 h-1.5 bg-gray-200'
+                    }`}
+                    aria-hidden="true"
+                  />
+                )
+              })}
+            </div>
+
             {onboardingStep === 'upload' && (
               <div className="text-center animate-fade-in">
                 
