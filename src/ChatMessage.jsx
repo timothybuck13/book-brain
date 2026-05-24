@@ -86,6 +86,11 @@ export default function ChatMessage({ message, isStreaming }) {
                       {children}
                     </a>
                   ),
+                  table: ({ children }) => (
+                    <div className="table-wrapper">
+                      <table>{children}</table>
+                    </div>
+                  ),
                 }}
               >
                 {message.content}

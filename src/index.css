@@ -113,6 +113,61 @@
   margin: 1rem 0;
 }
 
+/* Tables — for book comparisons, reading stats, etc. */
+.prose-chat .table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0.75rem 0;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+.prose-chat table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  margin: 0;
+}
+.prose-chat thead {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.prose-chat th {
+  font-weight: 600;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  color: #374151;
+  white-space: nowrap;
+}
+.prose-chat td {
+  padding: 0.45rem 0.75rem;
+  color: #4b5563;
+  border-top: 1px solid #f3f4f6;
+}
+.prose-chat tbody tr:first-child td {
+  border-top: none;
+}
+.prose-chat tbody tr:hover {
+  background-color: rgba(217, 119, 6, 0.04);
+}
+.prose-chat tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+.prose-chat tbody tr:nth-child(even):hover {
+  background-color: rgba(217, 119, 6, 0.06);
+}
+
+/* Responsive: horizontal scroll hint on small screens */
+@media (max-width: 480px) {
+  .prose-chat table {
+    font-size: 0.78rem;
+  }
+  .prose-chat th,
+  .prose-chat td {
+    padding: 0.4rem 0.6rem;
+  }
+}
+
 /* Inline code */
 .prose-chat code {
   font-family: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
