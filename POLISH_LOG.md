@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-05-24 14:00 UTC
+**Change:** Styled markdown tables in chat — GFM tables rendered by the AI (book comparisons, reading stats, genre breakdowns) now display with a clean bordered container, subtle header background (`#f9fafb`), zebra-striped rows, warm amber row hover highlight, and responsive horizontal scrolling on small screens. Added a custom `table` component to ReactMarkdown that wraps `<table>` in a `.table-wrapper` div for overflow control with rounded corners. Mobile breakpoint (`max-width: 480px`) tightens padding and font size. Hover states stack correctly with zebra stripes (even rows get slightly stronger amber tint on hover).
+**Files:** src/ChatMessage.jsx, src/index.css
+**Commit:** 6da2036
+
 ## 2026-05-23 14:00 UTC
 **Change:** Onboarding step progress indicator — added a modern iOS-style pill/dot progress indicator to the 3-step onboarding flow (upload → importing → done). The active step renders as an elongated amber pill (`w-6 h-1.5`) with a subtle amber glow, completed steps as small amber dots (`w-1.5 h-1.5`), and upcoming steps as small gray dots. All three transition smoothly between states with `transition-all duration-500 ease-out`, so the pill visually slides and morphs as the user progresses through onboarding. Uses `role="group"` with a dynamic `aria-label` for screen readers ("Step 1 of 3", etc.). Respects `prefers-reduced-motion` via the existing global rule that shortens all transition durations. New `.step-dot-active` CSS class adds a warm glow shadow to the active indicator.
 **Files:** src/App.jsx, src/index.css
