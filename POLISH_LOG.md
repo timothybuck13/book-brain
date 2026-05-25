@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-05-25 14:00 UTC
+**Change:** Smooth textarea resize animation and dynamic header shadow on scroll. The chat textarea now animates height changes smoothly (0.15s ease transition) when the user types multi-line content, instead of snapping instantly. The technique suppresses the CSS transition during scrollHeight measurement, restores the previous height, forces a reflow, then sets the target height — so the transition only fires on the visible change. Consolidated the duplicate `.chat-input-bar textarea` CSS blocks (caret-color + transition). Also added a dynamic header shadow: when the chat area is scrolled, the header gains a subtle `box-shadow: 0 1px 8px rgba(0,0,0,0.06)` with a 0.3s transition, and its bottom border fades to transparent — giving a clean visual elevation cue. Both animations respect `prefers-reduced-motion` via the existing global override.
+**Files:** src/App.jsx, src/index.css
+**Commit:** 2a8d823
+
 ## 2026-05-24 14:00 UTC
 **Change:** Styled markdown tables in chat — GFM tables rendered by the AI (book comparisons, reading stats, genre breakdowns) now display with a clean bordered container, subtle header background (`#f9fafb`), zebra-striped rows, warm amber row hover highlight, and responsive horizontal scrolling on small screens. Added a custom `table` component to ReactMarkdown that wraps `<table>` in a `.table-wrapper` div for overflow control with rounded corners. Mobile breakpoint (`max-width: 480px`) tightens padding and font size. Hover states stack correctly with zebra stripes (even rows get slightly stronger amber tint on hover).
 **Files:** src/ChatMessage.jsx, src/index.css
