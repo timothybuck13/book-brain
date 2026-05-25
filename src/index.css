@@ -431,6 +431,12 @@
   background-color: #fff;
 }
 
+/* Textarea smooth resize + caret color */
+.chat-input-bar textarea {
+  transition: height 0.15s ease;
+  caret-color: #d97706;
+}
+
 /* Chat input bar — container lifts and glows when any child is focused */
 .chat-input-bar {
   transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
@@ -439,11 +445,6 @@
   border-color: #e5e7eb;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06), 0 0 0 3px rgba(217, 119, 6, 0.08);
   transform: translateY(-1px);
-}
-
-/* Textarea caret color */
-.chat-input-bar textarea {
-  caret-color: #d97706;
 }
 
 /* Select dropdown focus */
@@ -577,6 +578,16 @@ select.input-focus:focus {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* ── Dynamic header shadow on scroll ───────────────────────── */
+
+.header-elevation {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.header-elevation.scrolled {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  border-color: transparent;
 }
 
 /* ── Chat scroll shadow ────────────────────────────────────── */

@@ -164,12 +164,20 @@ export default function App() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Auto-resize textarea
+  // Auto-resize textarea with smooth height transition
   useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 120) + 'px'
-    }
+    const ta = textareaRef.current
+    if (!ta) return
+    const prev = ta.style.height
+    // Suppress transition while measuring
+    ta.style.transition = 'none'
+    ta.style.height = 'auto'
+    const target = Math.min(ta.scrollHeight, 120) + 'px'
+    // Restore previous height instantly so we can animate to new height
+    ta.style.height = prev || target
+    ta.offsetHeight // force reflow
+    ta.style.transition = ''
+    ta.style.height = target
   }, [input])
 
   // Close user menu on outside click or Escape
@@ -461,7 +469,7 @@ export default function App() {
     const showAvatar = !!user && (appState === 'chat' || appState === 'onboarding')
 
     return (
-      <header className="relative flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
+      <header className={`relative flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0 header-elevation${scrolledFromTop ? ' scrolled' : ''}`}>
         <div className="flex items-center gap-3">
           {showBack && (
             <button
