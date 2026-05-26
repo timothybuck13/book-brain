@@ -52,11 +52,23 @@ function CopyButton({ text }) {
 export default function ChatMessage({ message, isStreaming }) {
   const isUser = message.role === 'user'
 
+  // Format timestamp for hover display
+  const timeLabel = message.created_at
+    ? new Date(message.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+    : null
+
   if (isUser) {
     return (
-      <div className="flex justify-end mb-4 animate-message-in">
-        <div className="max-w-[85%] bg-[#1a1a1a] text-white rounded-2xl rounded-br-md px-4 py-2.5 font-sans text-sm leading-relaxed">
-          {message.content}
+      <div className="group/msg flex justify-end mb-4 animate-message-in">
+        <div className="flex items-end gap-2">
+          {timeLabel && (
+            <span className="msg-timestamp opacity-0 group-hover/msg:opacity-100 transition-opacity duration-200 text-[11px] font-sans text-gray-400 whitespace-nowrap pb-1.5 select-none">
+              {timeLabel}
+            </span>
+          )}
+          <div className="max-w-[85%] bg-[#1a1a1a] text-white rounded-2xl rounded-br-md px-4 py-2.5 font-sans text-sm leading-relaxed">
+            {message.content}
+          </div>
         </div>
       </div>
     )
@@ -69,6 +81,11 @@ export default function ChatMessage({ message, isStreaming }) {
       <div className="max-w-[30rem]">
         <div className="flex items-center gap-2 mb-1">
           <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">Book Brain</span>
+          {timeLabel && !isStreaming && (
+            <span className="msg-timestamp opacity-0 group-hover/msg:opacity-100 transition-opacity duration-200 text-[11px] font-sans text-gray-400 whitespace-nowrap select-none">
+              {timeLabel}
+            </span>
+          )}
           {hasContent && !isStreaming && (
             <span className="opacity-0 group-hover/msg:opacity-100 hover-action transition-opacity duration-150">
               <CopyButton text={message.content} />

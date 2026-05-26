@@ -308,7 +308,7 @@ export default function App() {
         .select('*')
         .eq('conversation_id', convoId)
         .order('created_at', { ascending: true })
-      if (data) setMessages(data.map(m => ({ role: m.role, content: m.content, id: m.id })))
+      if (data) setMessages(data.map(m => ({ role: m.role, content: m.content, id: m.id, created_at: m.created_at })))
     }
   }
 
@@ -341,7 +341,7 @@ export default function App() {
     setInput('')
     setIsStreaming(true)
 
-    const userMsg = { role: 'user', content: text, id: 'temp-user-' + Date.now() }
+    const userMsg = { role: 'user', content: text, id: 'temp-user-' + Date.now(), created_at: new Date().toISOString() }
     const newMessages = [...messages, userMsg]
     setMessages(newMessages)
 
@@ -376,7 +376,7 @@ export default function App() {
 
       // Placeholder for AI response
       const aiMsgId = 'temp-ai-' + Date.now()
-      setMessages(prev => [...prev, { role: 'model', content: '', id: aiMsgId }])
+      setMessages(prev => [...prev, { role: 'model', content: '', id: aiMsgId, created_at: new Date().toISOString() }])
 
       // Stream from Gemini
       const geminiMessages = newMessages.map(m => ({ role: m.role, content: m.content }))
@@ -401,7 +401,7 @@ export default function App() {
       console.error('Chat error:', err)
       setMessages(prev => {
         const withoutEmpty = prev.filter(m => !(m.role === 'model' && !m.content))
-        return [...withoutEmpty, { role: 'model', content: 'Sorry, something went wrong. Please try again.', id: 'error-' + Date.now() }]
+        return [...withoutEmpty, { role: 'model', content: 'Sorry, something went wrong. Please try again.', id: 'error-' + Date.now(), created_at: new Date().toISOString() }]
       })
     }
 

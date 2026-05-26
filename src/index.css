@@ -786,6 +786,10 @@ select.input-focus:focus {
   .hover-action:active {
     opacity: 1 !important;
   }
+  /* Show message timestamps persistently on touch devices */
+  .msg-timestamp {
+    opacity: 0.6 !important;
+  }
 }
 
 /* ── Book row exit (delete) animation ──────────────── */
