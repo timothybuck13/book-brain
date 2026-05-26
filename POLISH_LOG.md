@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-05-26 14:00 UTC
+**Change:** Hover-revealed message timestamps on chat bubbles — hovering over any message (user or AI) now reveals the exact time it was sent, following the pattern used by iMessage, WhatsApp, and Slack. For user messages, the timestamp appears to the left of the bubble, aligned to the bottom; for AI messages, it appears inline next to the "Book Brain" label alongside the existing copy button. Timestamps use 12-hour format (`h:mm AM/PM`). On touch devices (`hover: none` + `pointer: coarse`), timestamps display at persistent 60% opacity since hover isn't available. Threaded `created_at` through the full message lifecycle: loaded from Supabase on conversation select, and stamped with `new Date().toISOString()` on new user messages, AI streaming placeholders, and error messages. Uses the existing `group-hover/msg` pattern with `transition-opacity duration-200` for a smooth fade-in.
+**Files:** src/App.jsx, src/ChatMessage.jsx, src/index.css
+**Commit:** 11c5395
+
 ## 2026-05-25 14:00 UTC
 **Change:** Smooth textarea resize animation and dynamic header shadow on scroll. The chat textarea now animates height changes smoothly (0.15s ease transition) when the user types multi-line content, instead of snapping instantly. The technique suppresses the CSS transition during scrollHeight measurement, restores the previous height, forces a reflow, then sets the target height — so the transition only fires on the visible change. Consolidated the duplicate `.chat-input-bar textarea` CSS blocks (caret-color + transition). Also added a dynamic header shadow: when the chat area is scrolled, the header gains a subtle `box-shadow: 0 1px 8px rgba(0,0,0,0.06)` with a 0.3s transition, and its bottom border fades to transparent — giving a clean visual elevation cue. Both animations respect `prefers-reduced-motion` via the existing global override.
 **Files:** src/App.jsx, src/index.css
