@@ -495,7 +495,7 @@ export default function App() {
             </button>
           )}
           <div className="flex items-center gap-2">
-            <img src="/logo.jpg" alt="Book Brain" className="w-7 h-7 rounded-md" />
+            <img src="/logo.jpg" alt="Book Brain" className="w-7 h-7 rounded-md logo-hover" />
             <h1 className="font-sans font-semibold text-lg tracking-wide">Book Brain</h1>
           </div>
         </div>
