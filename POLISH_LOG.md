@@ -7,7 +7,7 @@ Hourly UI improvements applied autonomously by Hatch.
 ## 2026-05-27 14:00 UTC
 **Change:** Logo hover micro-interaction — the Book Brain header logo now has a playful hover effect on desktop: it scales up slightly (1.06×) and rotates -3° with a smooth cubic-bezier transition, then springs back on click (0.96×). Adds personality and tactile feedback to the brand mark without being distracting. Limited to devices with fine pointers (`hover: hover`), so touch devices are unaffected. Respects `prefers-reduced-motion` by disabling the transform entirely.
 **Files:** src/App.jsx, src/index.css
-**Commit:** 
+**Commit:** cfb2a63
 
 ## 2026-05-26 14:00 UTC
 **Change:** Hover-revealed message timestamps on chat bubbles — hovering over any message (user or AI) now reveals the exact time it was sent, following the pattern used by iMessage, WhatsApp, and Slack. For user messages, the timestamp appears to the left of the bubble, aligned to the bottom; for AI messages, it appears inline next to the "Book Brain" label alongside the existing copy button. Timestamps use 12-hour format (`h:mm AM/PM`). On touch devices (`hover: none` + `pointer: coarse`), timestamps display at persistent 60% opacity since hover isn't available. Threaded `created_at` through the full message lifecycle: loaded from Supabase on conversation select, and stamped with `new Date().toISOString()` on new user messages, AI streaming placeholders, and error messages. Uses the existing `group-hover/msg` pattern with `transition-opacity duration-200` for a smooth fade-in.
