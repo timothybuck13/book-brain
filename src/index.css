@@ -922,3 +922,24 @@ select.input-focus:focus {
     animation: none;
   }
 }
+
+/* ── Empty state icon float ────────────────────────────────── */
+
+@keyframes emptyFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.empty-icon-float {
+  animation: emptyFloat 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .empty-icon-float {
+    animation: none;
+  }
+}
