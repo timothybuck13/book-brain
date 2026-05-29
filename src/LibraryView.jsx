@@ -64,8 +64,9 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   const [deleteAllConfirm, setDeleteAllConfirm] = useState(false)
   const [recentlyAdded, setRecentlyAdded] = useState(new Set())
   const [deletingIds, setDeletingIds] = useState(new Set())
+  const [showScrollTop, setShowScrollTop] = useState(false)
   const searchRef = useRef(null)
-  const bookListRef = useRef(null)
+  const scrollContainerRef = useRef(null)
 
   const filtered = useMemo(() => {
     let books = [...userBooks]
@@ -88,6 +89,15 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
     })
     return books
   }, [userBooks, search, sortBy])
+
+  function handleScroll(e) {
+    const el = e.target
+    setShowScrollTop(el.scrollTop > 300)
+  }
+
+  function scrollToTop() {
+    scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   async function handleAdd(e) {
     e.preventDefault()
@@ -314,7 +324,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
       </div>
 
       {/* Scrollable book list */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto relative" ref={scrollContainerRef} onScroll={handleScroll}>
         <div className="max-w-2xl mx-auto px-4 py-3">
           {/* Add Book Form */}
           {showAddForm && (
@@ -461,6 +471,18 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
             ))}
           </div>
         </div>
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className="absolute bottom-6 right-6 scroll-to-bottom flex items-center gap-1.5 px-3 py-1.5 bg-white text-gray-500 text-xs font-sans rounded-full shadow-lg border border-gray-200 hover:bg-gray-50 hover:text-gray-700"
+            aria-label="Scroll to top"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+            </svg>
+            Top
+          </button>
+        )}
       </div>
     </div>
   )
