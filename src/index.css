@@ -943,3 +943,23 @@ select.input-focus:focus {
     animation: none;
   }
 }
+
+/* ── New Chat button icon rotation ─────────────────────────── */
+
+.new-chat-btn svg {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+}
+
+.new-chat-btn:hover svg {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .new-chat-btn svg {
+    transition: none;
+  }
+  .new-chat-btn:hover svg {
+    transform: none;
+  }
+}

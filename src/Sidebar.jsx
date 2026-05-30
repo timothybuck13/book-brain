@@ -169,7 +169,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         <div className="p-3 border-t border-gray-200">
           <button
             onClick={onNew}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 btn-press"
+            className="new-chat-btn w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 text-white text-sm font-sans hover:bg-amber-700 btn-press"
             title="New Chat (⌘N)"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
