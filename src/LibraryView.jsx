@@ -219,7 +219,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-[#f2f2f2]">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white/80 backdrop-blur-sm supports-[backdrop-filter]:bg-white/80 flex-shrink-0">
         <div className="flex items-center gap-3">
           <h2 className="font-sans font-semibold text-lg">My Library</h2>
           <span className="text-sm text-gray-400 font-sans"><AnimatedCount value={userBooks.length} /> books</span>
@@ -239,7 +239,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
       </div>
 
       {/* Search + Actions */}
-      <div className="px-4 py-3 bg-white border-b border-gray-100 flex-shrink-0">
+      <div className="px-4 py-3 bg-white/80 backdrop-blur-sm supports-[backdrop-filter]:bg-white/80 border-b border-gray-100 flex-shrink-0">
         <div className="max-w-2xl mx-auto space-y-2">
           <div className="relative">
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
