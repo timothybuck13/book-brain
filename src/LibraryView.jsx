@@ -68,6 +68,11 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   const searchRef = useRef(null)
   const scrollContainerRef = useRef(null)
 
+  // Auto-focus search input when library opens for quick keyboard access
+  useEffect(() => {
+    searchRef.current?.focus()
+  }, [])
+
   const filtered = useMemo(() => {
     let books = [...userBooks]
     if (search.trim()) {
