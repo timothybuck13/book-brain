@@ -126,6 +126,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
                 <button
                   onClick={() => onSelect(convo.id)}
                   className="flex-1 text-left px-3 py-2.5 min-w-0"
+                  aria-current={activeConvoId === convo.id ? 'page' : undefined}
                 >
                   <span className="block text-sm font-sans truncate">{convo.title || 'Untitled'}</span>
                   {convo.created_at && (
