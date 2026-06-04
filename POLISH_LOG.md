@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-06-04 14:00 UTC
+**Change:** Prevent scroll chaining on mobile — added `overscroll-contain` to the main chat scroll containers in both demo and authenticated chat views. This stops the page from scrolling when the user reaches the top/bottom of the chat list on touch devices, avoiding accidental body scroll and improving the feel of the chat interface. Pure Tailwind utility class, no JS needed.
+**Files:** src/App.jsx
+**Commit:** 
+
 ## 2026-05-27 14:00 UTC
 **Change:** Logo hover micro-interaction — the Book Brain header logo now has a playful hover effect on desktop: it scales up slightly (1.06×) and rotates -3° with a smooth cubic-bezier transition, then springs back on click (0.96×). Adds personality and tactile feedback to the brand mark without being distracting. Limited to devices with fine pointers (`hover: hover`), so touch devices are unaffected. Respects `prefers-reduced-motion` by disabling the transform entirely.
 **Files:** src/App.jsx, src/index.css

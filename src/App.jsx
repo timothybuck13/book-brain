@@ -892,7 +892,7 @@ export default function App() {
       <div className="h-dvh flex flex-col bg-[#f2f2f2] relative">
         {renderHeader()}
 
-        <div className="flex-1 overflow-y-auto relative" onScroll={handleChatScroll} ref={chatScrollRef}>
+        <div className="flex-1 overflow-y-auto relative overscroll-contain" onScroll={handleChatScroll} ref={chatScrollRef}>
           {/* Top scroll shadow */}
           <div className={`chat-scroll-shadow-top ${scrolledFromTop ? 'visible' : ''}`} aria-hidden="true" />
           {!hasMessages ? (
@@ -982,7 +982,7 @@ export default function App() {
           </div>
         ) : (
         <div key="chat" className="animate-view-switch contents">
-        <div className="flex-1 overflow-y-auto relative" onScroll={handleChatScroll} ref={chatScrollRef}>
+        <div className="flex-1 overflow-y-auto relative overscroll-contain" onScroll={handleChatScroll} ref={chatScrollRef}>
           {/* Top scroll shadow */}
           <div className={`chat-scroll-shadow-top ${scrolledFromTop ? 'visible' : ''}`} aria-hidden="true" />
           {!hasMessages ? (
