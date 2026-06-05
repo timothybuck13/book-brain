@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-06-05 14:00 UTC
+**Change:** Copy feedback tooltip — clicking the copy button on AI messages now shows a small "Copied!" tooltip that pops up above the button with a fade-up animation, in addition to the checkmark icon swap. Provides clearer, more immediate confirmation that the message text was copied to clipboard, especially helpful for keyboard/screen-reader users who get the aria-label update and for sighted users who get a transient visual cue.
+**Files:** src/ChatMessage.jsx
+**Commit:** 996de4c
+
 ## 2026-06-04 14:00 UTC
 **Change:** Prevent scroll chaining on mobile — added `overscroll-contain` to the main chat scroll containers in both demo and authenticated chat views. This stops the page from scrolling when the user reaches the top/bottom of the chat list on touch devices, avoiding accidental body scroll and improving the feel of the chat interface. Pure Tailwind utility class, no JS needed.
 **Files:** src/App.jsx
