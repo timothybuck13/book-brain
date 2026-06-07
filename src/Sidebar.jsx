@@ -78,7 +78,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black/30 z-40 md:hidden" onClick={onClose} aria-hidden="true" />
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden" onClick={onClose} aria-hidden="true" />
       )}
 
       <aside
