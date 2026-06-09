@@ -372,8 +372,14 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
                 <button
                   type="submit"
                   disabled={saving || !addTitle.trim() || !addAuthor.trim()}
-                  className="px-4 py-1.5 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50"
+                  className="px-4 py-1.5 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 transition-colors disabled:opacity-50 flex items-center gap-1.5"
                 >
+                  {saving && (
+                    <svg className="w-3.5 h-3.5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+                      <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                    </svg>
+                  )}
                   {saving ? 'Saving...' : 'Save'}
                 </button>
                 <button
