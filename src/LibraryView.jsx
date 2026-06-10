@@ -73,6 +73,48 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
     searchRef.current?.focus()
   }, [])
 
+  // Escape key handling — progressive dismissal
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key !== 'Escape') return
+
+      // 1. Cancel book delete confirmation
+      if (deleteConfirm) {
+        e.preventDefault()
+        setDeleteConfirm(null)
+        return
+      }
+      // 2. Cancel delete-all confirmation
+      if (deleteAllConfirm) {
+        e.preventDefault()
+        setDeleteAllConfirm(false)
+        return
+      }
+      // 3. Close Add Book form
+      if (showAddForm) {
+        e.preventDefault()
+        setShowAddForm(false)
+        setAddTitle('')
+        setAddAuthor('')
+        setAddRating(0)
+        setAddDate('')
+        return
+      }
+      // 4. Clear search if active
+      if (search) {
+        e.preventDefault()
+        setSearch('')
+        searchRef.current?.focus()
+        return
+      }
+      // 5. Close library view
+      e.preventDefault()
+      onClose()
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [deleteConfirm, deleteAllConfirm, showAddForm, search, onClose])
+
   const filtered = useMemo(() => {
     let books = [...userBooks]
     if (search.trim()) {
