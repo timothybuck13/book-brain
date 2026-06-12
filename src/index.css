@@ -497,6 +497,15 @@
 .chat-input-bar textarea {
   transition: height 0.15s ease;
   caret-color: #d97706;
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb transparent;
+}
+.chat-input-bar textarea::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-input-bar textarea::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 2px;
 }
 
 /* Chat input bar — container lifts and glows when any child is focused */

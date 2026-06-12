@@ -576,7 +576,7 @@ export default function App() {
   function renderInput() {
     const hasText = input.trim().length > 0
     return (
-      <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pb-4 pt-2">
+      <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pt-2" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
         <form onSubmit={handleSubmit} className="chat-input-bar max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-5 pr-2.5 py-1">
           <div className="flex-1 relative">
             <textarea
@@ -587,7 +587,7 @@ export default function App() {
               onFocus={() => setInputFocused(true)}
               onBlur={() => setInputFocused(false)}
               rows={1}
-              className="w-full resize-none bg-transparent text-base font-sans font-light focus:outline-none overflow-hidden leading-6 py-2.5"
+              className="w-full resize-none bg-transparent text-base font-sans font-light focus:outline-none overflow-y-auto leading-6 py-2.5"
               disabled={isStreaming}
               style={{ minHeight: '44px', maxHeight: '120px' }}
               aria-label="Ask about books"
