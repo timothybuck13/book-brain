@@ -60,6 +60,22 @@ function CodeBlock({ inline, className, children }) {
   const [copied, setCopied] = useState(false)
   const codeText = String(children).replace(/\n$/, '')
 
+  const lang = (className || '').match(/language-([\w-]+)/)?.[1] || ''
+  const langLabel = {
+    js: 'javascript', javascript: 'javascript',
+    ts: 'typescript', typescript: 'typescript',
+    jsx: 'jsx', tsx: 'tsx',
+    py: 'python', python: 'python',
+    rb: 'ruby', ruby: 'ruby',
+    go: 'go', rust: 'rust', rs: 'rust',
+    php: 'php', java: 'java', c: 'c', cpp: 'c++', 'c++': 'c++',
+    cs: 'c#', csharp: 'c#',
+    sh: 'shell', bash: 'shell', zsh: 'shell', shell: 'shell',
+    sql: 'sql', json: 'json', yaml: 'yaml', yml: 'yaml',
+    html: 'html', css: 'css',
+    md: 'markdown', markdown: 'markdown',
+  }[lang.toLowerCase()] || lang
+
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(codeText)
@@ -89,6 +105,9 @@ function CodeBlock({ inline, className, children }) {
 
   return (
     <div className="code-block-wrapper group/code">
+      {langLabel && (
+        <span className="code-lang-badge" aria-hidden="true">{langLabel}</span>
+      )}
       <button
         onClick={handleCopy}
         className={`code-copy-btn ${copied ? 'copied' : ''}`}
@@ -106,7 +125,7 @@ function CodeBlock({ inline, className, children }) {
         )}
         <span className="hidden sm:inline">{copied ? 'Copied!' : 'Copy'}</span>
       </button>
-      <pre>
+      <pre className={langLabel ? 'has-lang' : ''}>
         <code className={className}>{children}</code>
       </pre>
     </div>
