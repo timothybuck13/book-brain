@@ -77,6 +77,7 @@ export default function App() {
   const textareaRef = useRef(null)
   const menuRef = useRef(null)
   const fileRef = useRef(null)
+  const autoScrollRef = useRef(true)
 
   // ── Toast helper ────────────────────────────────────────────
   const showToast = useCallback((message, type = 'success') => {
@@ -159,10 +160,14 @@ export default function App() {
     return () => { mounted = false; subscription.unsubscribe() }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Auto-scroll
+  // Smart auto-scroll — only scroll if user is already near the bottom,
+  // so reading earlier messages isn't interrupted by new content
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    if (!autoScrollRef.current) return
+    // Instant scroll during streaming to avoid queued smooth-scroll jank,
+    // smooth for discrete new messages
+    messagesEndRef.current?.scrollIntoView({ behavior: isStreaming ? 'auto' : 'smooth' })
+  }, [messages, isStreaming])
 
   // Auto-resize textarea with smooth height transition
   useEffect(() => {
@@ -288,17 +293,21 @@ export default function App() {
   function handleChatScroll(e) {
     const el = e.target
     const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight
+    // Pause auto-scroll if user scrolls up to read history; resume when near bottom
+    autoScrollRef.current = distanceFromBottom < 150
     setShowScrollBtn(distanceFromBottom > 200)
     setScrolledFromTop(el.scrollTop > 12)
   }
 
   function scrollToBottom() {
+    autoScrollRef.current = true
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   // ── Conversation helpers ────────────────────────────────────
   async function selectConversation(convoId) {
     setActiveConvoId(convoId)
+    autoScrollRef.current = true
     setShowScrollBtn(false)
     setScrolledFromTop(false)
     setSidebarOpen(false)
@@ -316,6 +325,7 @@ export default function App() {
     setActiveConvoId(null)
     setMessages([])
     setInput('')
+    autoScrollRef.current = true
     setShowScrollBtn(false)
     setScrolledFromTop(false)
     setSidebarOpen(false)
@@ -340,6 +350,7 @@ export default function App() {
 
     setInput('')
     setIsStreaming(true)
+    autoScrollRef.current = true
 
     const userMsg = { role: 'user', content: text, id: 'temp-user-' + Date.now(), created_at: new Date().toISOString() }
     const newMessages = [...messages, userMsg]
