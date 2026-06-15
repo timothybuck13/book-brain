@@ -63,16 +63,38 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
   }, [])
 
   const groups = groupConversations(conversations)
+  const flatConvos = groups.flatMap(g => g.conversations)
 
-  // Close sidebar on Escape key (mobile)
+  // Keyboard navigation: ↑/↓ to move, Enter/Space to select, Esc to cancel
+  function handleListKeyDown(e) {
+    if (flatConvos.length === 0) return
+    const currentIdx = flatConvos.findIndex(c => c.id === activeConvoId)
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      const next = flatConvos[Math.min(currentIdx + 1, flatConvos.length - 1)]
+      if (next) { onSelect(next.id); setConfirmDelete(null); setTimeout(() => document.getElementById(`convo-${next.id}`)?.focus(), 0) }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      const idx = currentIdx < 0 ? flatConvos.length : currentIdx
+      const prev = flatConvos[Math.max(idx - 1, 0)]
+      if (prev) { onSelect(prev.id); setConfirmDelete(null); setTimeout(() => document.getElementById(`convo-${prev.id}`)?.focus(), 0) }
+    }
+  }
+
+  // Close sidebar on Escape key, or cancel delete confirmation first
   useEffect(() => {
-    if (!isOpen) return
     function handleKeyDown(e) {
-      if (e.key === 'Escape') onClose()
+      if (e.key !== 'Escape') return
+      if (confirmDelete) {
+        e.preventDefault()
+        setConfirmDelete(null)
+        return
+      }
+      if (isOpen) onClose()
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, onClose])
+  }, [isOpen, onClose, confirmDelete])
 
   return (
     <>
@@ -97,7 +119,13 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         </div>
 
         {/* Conversations list */}
-        <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
+        <div
+          className="flex-1 overflow-y-auto p-2 space-y-0.5"
+          role="listbox"
+          aria-label="Conversations"
+          tabIndex={flatConvos.length > 0 ? 0 : -1}
+          onKeyDown={handleListKeyDown}
+        >
           {conversations.length === 0 ? (
             <div className="text-center py-10 px-4 animate-fade-in">
               <div className="mx-auto mb-3 w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center">
@@ -124,9 +152,12 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
                 }`}
               >
                 <button
+                  id={`convo-${convo.id}`}
                   onClick={() => onSelect(convo.id)}
                   className="flex-1 text-left px-3 py-2.5 min-w-0"
                   aria-current={activeConvoId === convo.id ? 'page' : undefined}
+                  title={convo.title || 'Untitled'}
+                  tabIndex={activeConvoId === convo.id ? 0 : -1}
                 >
                   <span className="block text-sm font-sans truncate">{convo.title || 'Untitled'}</span>
                   {convo.created_at && (
