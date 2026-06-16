@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-06-16 14:00 UTC
+**Change:** Keyboard-accessible star rating in Library — the "Add Book" rating picker now fully supports keyboard navigation. Arrow Left/Right (and Up/Down) adjust the rating by 1, Home/End jump to 0/5 stars, and number keys 1–5 set the rating directly. Implements proper roving tabindex (only the selected star, or star 1 if unrated, is in the tab order) and moves focus to the newly selected star after each keyboard change, matching WAI-ARIA radiogroup patterns. Improves accessibility for keyboard-only and screen-reader users without changing mouse/touch behavior.
+**Files:** src/LibraryView.jsx
+**Commit:** 
+
 ## 2026-06-05 14:00 UTC
 **Change:** Copy feedback tooltip — clicking the copy button on AI messages now shows a small "Copied!" tooltip that pops up above the button with a fade-up animation, in addition to the checkmark icon swap. Provides clearer, more immediate confirmation that the message text was copied to clipboard, especially helpful for keyboard/screen-reader users who get the aria-label update and for sighted users who get a transient visual cue.
 **Files:** src/ChatMessage.jsx
