@@ -149,7 +149,7 @@ export default function ChatMessage({ message, isStreaming }) {
               {timeLabel}
             </span>
           )}
-          <div className="max-w-[85%] bg-[#1a1a1a] text-white rounded-2xl rounded-br-md px-4 py-2.5 font-sans text-sm leading-relaxed chat-bubble-hover">
+          <div className="max-w-[85%] bg-[#1a1a1a] text-white rounded-2xl rounded-br-md px-4 py-2.5 font-sans text-sm leading-relaxed chat-bubble-hover whitespace-pre-wrap break-words">
             {message.content}
           </div>
         </div>

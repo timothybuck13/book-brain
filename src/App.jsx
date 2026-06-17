@@ -417,6 +417,9 @@ export default function App() {
     }
 
     setIsStreaming(false)
+    // Auto-focus input after AI response so the user can continue chatting
+    // without clicking back in. setTimeout lets React flush the DOM first.
+    setTimeout(() => textareaRef.current?.focus(), 50)
   }, [input, isStreaming, messages, activeConvoId, dbReady, user, appState, userBooks])
 
   // ── Auth actions ────────────────────────────────────────────
