@@ -7,7 +7,7 @@ Hourly UI improvements applied autonomously by Hatch.
 ## 2026-06-18 14:00 UTC
 **Change:** Fixed markdown list rendering in chat — bulleted and numbered lists from AI responses now display proper markers. Tailwind's preflight was stripping `list-style`, so lists appeared as plain indented text. Restored `list-style-type: disc` / `decimal` with amber-colored markers (`::marker { color: #d97706 }`) matching the brand, plus a touch of left padding for better alignment. Also added missing heading styles for h1, h2, h5, h6 (previously only h3/h4 were styled), with consistent weight, spacing, and proportional sizing.
 **Files:** src/index.css
-**Commit:** 
+**Commit:** 6d55480
 
 ## 2026-06-16 14:00 UTC
 **Change:** Keyboard-accessible star rating in Library — the "Add Book" rating picker now fully supports keyboard navigation. Arrow Left/Right (and Up/Down) adjust the rating by 1, Home/End jump to 0/5 stars, and number keys 1–5 set the rating directly. Implements proper roving tabindex (only the selected star, or star 1 if unrated, is in the tab order) and moves focus to the newly selected star after each keyboard change, matching WAI-ARIA radiogroup patterns. Improves accessibility for keyboard-only and screen-reader users without changing mouse/touch behavior.
