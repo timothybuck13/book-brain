@@ -67,6 +67,10 @@
 }
 
 /* Markdown content styling */
+.prose-chat {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 .prose-chat p {
   margin-bottom: 0.75rem;
 }
@@ -98,12 +102,22 @@
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 0.5px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .prose-chat a:hover {
   text-decoration-thickness: 1.5px;
 }
 .prose-chat em {
   font-style: italic;
+}
+.prose-chat img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0.75rem 0;
+  border: 1px solid #e5e7eb;
 }
 .prose-chat h1, .prose-chat h2, .prose-chat h3, .prose-chat h4, .prose-chat h5, .prose-chat h6 {
   font-weight: 700;

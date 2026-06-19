@@ -175,7 +175,7 @@ export default function ChatMessage({ message, isStreaming }) {
             </span>
           )}
         </div>
-        <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 font-sans text-sm leading-relaxed text-gray-800 shadow-sm border border-gray-100 chat-bubble-hover">
+        <div className="bg-white rounded-2xl rounded-tl-md px-4 py-3 font-sans text-sm leading-relaxed text-gray-800 shadow-sm border border-gray-100 chat-bubble-hover break-words">
           {hasContent ? (
             <div className="prose-chat">
               <ReactMarkdown
