@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-06-20 14:00 UTC
+**Change:** Graceful image loading in chat — markdown images from AI responses now load with a smooth fade-in once decoded, preventing pop-in layout shift. Added `loading="lazy"` and `decoding="async"` for performance. Images are constrained to 320px max-height with `object-fit: contain` so large book covers or charts don't blow out chat bubbles. Includes a subtle hover lift with soft shadow on desktop, centered with a soft gray loading background. Respects `prefers-reduced-motion`.
+**Files:** src/ChatMessage.jsx, src/index.css
+**Commit:** db8e3b0
+
 ## 2026-06-18 14:00 UTC
 **Change:** Fixed markdown list rendering in chat — bulleted and numbered lists from AI responses now display proper markers. Tailwind's preflight was stripping `list-style`, so lists appeared as plain indented text. Restored `list-style-type: disc` / `decimal` with amber-colored markers (`::marker { color: #d97706 }`) matching the brand, plus a touch of left padding for better alignment. Also added missing heading styles for h1, h2, h5, h6 (previously only h3/h4 were styled), with consistent weight, spacing, and proportional sizing.
 **Files:** src/index.css
