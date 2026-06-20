@@ -132,6 +132,20 @@ function CodeBlock({ inline, className, children }) {
   )
 }
 
+function ChatImage({ src, alt }) {
+  const [loaded, setLoaded] = useState(false)
+  return (
+    <img
+      src={src}
+      alt={alt || ''}
+      loading="lazy"
+      decoding="async"
+      onLoad={() => setLoaded(true)}
+      className={`chat-md-img${loaded ? ' loaded' : ''}`}
+    />
+  )
+}
+
 export default function ChatMessage({ message, isStreaming }) {
   const isUser = message.role === 'user'
 
@@ -192,6 +206,7 @@ export default function ChatMessage({ message, isStreaming }) {
                     </div>
                   ),
                   code: CodeBlock,
+                  img: ChatImage,
                 }}
               >
                 {message.content}

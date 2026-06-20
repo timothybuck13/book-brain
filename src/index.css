@@ -111,13 +111,44 @@
 .prose-chat em {
   font-style: italic;
 }
+/* Markdown images — fade-in, constrained height, subtle hover lift */
 .prose-chat img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 10px;
   display: block;
-  margin: 0.75rem 0;
+  margin: 0.75rem auto;
   border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+/* ChatImage component adds .chat-md-img for graceful fade-in */
+.chat-md-img {
+  opacity: 0;
+  transform: scale(0.995);
+  transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.2s ease;
+}
+.chat-md-img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .prose-chat img:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+  .chat-md-img.loaded:hover {
+    transform: translateY(-1px) scale(1.005);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-md-img {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 .prose-chat h1, .prose-chat h2, .prose-chat h3, .prose-chat h4, .prose-chat h5, .prose-chat h6 {
   font-weight: 700;
