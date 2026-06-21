@@ -7,7 +7,7 @@ Hourly UI improvements applied autonomously by Hatch.
 ## 2026-06-21 14:00 UTC
 **Change:** Send button icon refresh with hover nudge — replaced the ambiguous up-arrow (which conflicted visually with the "scroll to latest" down-arrow) with a clear paper-plane send icon. Adds a subtle micro-interaction: on hover the plane nudges 1px up-right, giving tactile "sending" feedback, with a gentle press-scale on click. Includes a `title="Send message (Enter)"` tooltip for keyboard discoverability. Respects `prefers-reduced-motion`.
 **Files:** src/App.jsx, src/index.css
-**Commit:** (pending)
+**Commit:** 794dc8b
 
 ## 2026-06-20 14:00 UTC
 **Change:** Graceful image loading in chat — markdown images from AI responses now load with a smooth fade-in once decoded, preventing pop-in layout shift. Added `loading="lazy"` and `decoding="async"` for performance. Images are constrained to 320px max-height with `object-fit: contain` so large book covers or charts don't blow out chat bubbles. Includes a subtle hover lift with soft shadow on desktop, centered with a soft gray loading background. Respects `prefers-reduced-motion`.
