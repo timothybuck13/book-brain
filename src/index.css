@@ -645,6 +645,27 @@ select.input-focus:focus {
   box-shadow: 0 0 12px rgba(217, 119, 6, 0.4);
 }
 
+/* Send icon — subtle nudge toward top-right on hover */
+.send-icon {
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+}
+.send-glow:not(:disabled):hover .send-icon {
+  transform: translateX(1px) translateY(-1px);
+}
+.send-glow:not(:disabled):active .send-icon {
+  transform: translateX(0) translateY(0) scale(0.94);
+}
+@media (prefers-reduced-motion: reduce) {
+  .send-icon {
+    transition: none;
+  }
+  .send-glow:not(:disabled):hover .send-icon,
+  .send-glow:not(:disabled):active .send-icon {
+    transform: none;
+  }
+}
+
 /* Sidebar conversation row hover highlight */
 .sidebar-row {
   transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;

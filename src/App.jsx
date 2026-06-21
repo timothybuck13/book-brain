@@ -620,6 +620,7 @@ export default function App() {
             type="submit"
             disabled={!hasText || isStreaming}
             aria-label={isStreaming ? "Sending message..." : "Send message"}
+            title={hasText && !isStreaming ? "Send message (Enter)" : undefined}
             className={`ml-2 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all send-glow ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700 scale-100'
@@ -632,8 +633,8 @@ export default function App() {
                 <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
               </svg>
             ) : (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+              <svg className="w-4 h-4 send-icon" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L6 12zm0 0h7.5" />
               </svg>
             )}
           </button>
