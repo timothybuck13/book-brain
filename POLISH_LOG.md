@@ -4,6 +4,16 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-06-23 14:00 UTC
+**Change:** Chat composer clear button + Escape-to-clear — adds a subtle × clear button inside the chat input that appears when text is present (matching the Library search clear UX). Clicking clears the composer and refocuses for fast retry/editing. Also adds Escape key handling: pressing Esc while typing clears the input instead of bubbling up. The keyboard hint was updated to include "Esc to clear" for discoverability. Uses the existing `search-clear-btn` fade-in animation, respects `prefers-reduced-motion`, and is hidden during AI streaming to avoid accidental clears.
+**Files:** src/App.jsx
+**Commit:** 
+
+## 2026-06-22 14:00 UTC
+**Change:** Keyboard shortcut hint below chat composer — adds a subtle "Enter to send · Shift + Enter for new line" hint under the input. Desktop-only (`hidden md:block`), fades in on focus/typing (`opacity-0 → opacity-100`, 200ms), hidden on mobile to save space. Improves keyboard discoverability for new users, matching standard chat UI patterns (ChatGPT, Claude, etc.). Uses `<kbd>` elements for semantic markup, `aria-hidden="true"` since it's decorative/discoverability-only.
+**Files:** src/App.jsx
+**Commit:** 3601e03
+
 ## 2026-06-21 14:00 UTC
 **Change:** Send button icon refresh with hover nudge — replaced the ambiguous up-arrow (which conflicted visually with the "scroll to latest" down-arrow) with a clear paper-plane send icon. Adds a subtle micro-interaction: on hover the plane nudges 1px up-right, giving tactile "sending" feedback, with a gentle press-scale on click. Includes a `title="Send message (Enter)"` tooltip for keyboard discoverability. Respects `prefers-reduced-motion`.
 **Files:** src/App.jsx, src/index.css

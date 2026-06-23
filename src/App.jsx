@@ -589,6 +589,25 @@ export default function App() {
   // ── Chat input bar ──────────────────────────────────────────
   function renderInput() {
     const hasText = input.trim().length > 0
+
+    function clearInput() {
+      setInput('')
+      textareaRef.current?.focus()
+    }
+
+    function handleInputKeyDown(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+        handleSubmit()
+        return
+      }
+      if (e.key === 'Escape' && hasText) {
+        e.preventDefault()
+        e.stopPropagation()
+        clearInput()
+      }
+    }
+
     return (
       <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pt-2" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
         <form onSubmit={handleSubmit} className="chat-input-bar max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-5 pr-2.5 py-1">
@@ -597,7 +616,7 @@ export default function App() {
               ref={textareaRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit() } }}
+              onKeyDown={handleInputKeyDown}
               onFocus={() => setInputFocused(true)}
               onBlur={() => setInputFocused(false)}
               rows={1}
@@ -616,12 +635,25 @@ export default function App() {
               </span>
             )}
           </div>
+          {hasText && !isStreaming && (
+            <button
+              type="button"
+              onClick={clearInput}
+              className="ml-1 flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all search-clear-btn"
+              aria-label="Clear message"
+              title="Clear (Esc)"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
           <button
             type="submit"
             disabled={!hasText || isStreaming}
             aria-label={isStreaming ? "Sending message..." : "Send message"}
             title={hasText && !isStreaming ? "Send message (Enter)" : undefined}
-            className={`ml-2 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all send-glow ${
+            className={`ml-1.5 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all send-glow ${
               hasText && !isStreaming
                 ? 'bg-amber-600 text-white hover:bg-amber-700 scale-100'
                 : 'bg-gray-100 text-gray-300 scale-90'
@@ -646,7 +678,7 @@ export default function App() {
           }`}
           aria-hidden="true"
         >
-          <kbd className="font-sans">Enter</kbd> to send · <kbd className="font-sans">Shift + Enter</kbd> for new line
+          <kbd className="font-sans">Enter</kbd> to send · <kbd className="font-sans">Shift + Enter</kbd> for new line · <kbd className="font-sans">Esc</kbd> to clear
         </div>
         {!user && (
           <p className="text-center text-xs text-gray-400 mt-2 font-sans">
