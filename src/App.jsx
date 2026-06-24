@@ -673,12 +673,12 @@ export default function App() {
         </form>
         {/* Keyboard shortcut hint — desktop only, fades in on focus */}
         <div
-          className={`hidden md:block max-w-2xl mx-auto text-right text-[11px] font-sans text-gray-400 transition-opacity duration-200 mt-1.5 pr-1 ${
+          className={`chat-input-hint hidden md:block max-w-2xl mx-auto text-right text-[11px] font-sans text-gray-400 transition-opacity duration-200 mt-1.5 pr-1 ${
             inputFocused || hasText ? 'opacity-100' : 'opacity-0'
           }`}
           aria-hidden="true"
         >
-          <kbd className="font-sans">Enter</kbd> to send · <kbd className="font-sans">Shift + Enter</kbd> for new line · <kbd className="font-sans">Esc</kbd> to clear
+          <kbd>Enter</kbd> to send · <kbd>Shift</kbd> + <kbd>Enter</kbd> for new line · <kbd>Esc</kbd> to clear
         </div>
         {!user && (
           <p className="text-center text-xs text-gray-400 mt-2 font-sans">

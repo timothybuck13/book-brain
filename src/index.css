@@ -1168,3 +1168,31 @@ select.input-focus:focus {
     transform: none;
   }
 }
+
+/* ── Keyboard keycaps ──────────────────────────────────────── */
+
+/* Style <kbd> elements as subtle keycaps matching Book Brain's warm UI.
+   Used in the chat composer shortcut hint. Custom-styled kbd badges
+   (like the sidebar ⌘N) override these with utility classes. */
+kbd {
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 0.72em;
+  font-weight: 500;
+  line-height: 1;
+  color: #57534e;
+  background: #fff;
+  border: 1px solid #d6d3d1;
+  border-bottom-color: #c8c5c2;
+  border-radius: 4px;
+  padding: 2px 5px 2.5px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), inset 0 -0.5px 0 rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
+  vertical-align: baseline;
+  margin: 0 1px;
+}
+
+/* Slightly tighter in the chat hint where text is 11px */
+.chat-input-hint kbd {
+  font-size: 0.82em;
+}
+
