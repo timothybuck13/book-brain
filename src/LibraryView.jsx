@@ -65,6 +65,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   const [recentlyAdded, setRecentlyAdded] = useState(new Set())
   const [deletingIds, setDeletingIds] = useState(new Set())
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const searchRef = useRef(null)
   const scrollContainerRef = useRef(null)
 
@@ -140,6 +141,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
   function handleScroll(e) {
     const el = e.target
     setShowScrollTop(el.scrollTop > 300)
+    setScrolled(el.scrollTop > 12)
   }
 
   function scrollToTop() {
@@ -329,7 +331,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
       </div>
 
       {/* Search + Actions */}
-      <div className="px-4 py-3 bg-white/80 backdrop-blur-sm supports-[backdrop-filter]:bg-white/80 border-b border-gray-100 flex-shrink-0">
+      <div className={`px-4 py-3 bg-white/80 backdrop-blur-sm supports-[backdrop-filter]:bg-white/80 border-b border-gray-100 flex-shrink-0 header-elevation${scrolled ? ' scrolled' : ''}`}>
         <div className="max-w-2xl mx-auto space-y-2">
           <div className="relative">
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -414,7 +416,9 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
       </div>
 
       {/* Scrollable book list */}
-      <div className="flex-1 overflow-y-auto relative" ref={scrollContainerRef} onScroll={handleScroll}>
+      <div className="flex-1 overflow-y-auto relative overscroll-contain" ref={scrollContainerRef} onScroll={handleScroll}>
+        {/* Top scroll shadow */}
+        <div className={`chat-scroll-shadow-top ${scrolled ? 'visible' : ''}`} aria-hidden="true" />
         <div className="max-w-2xl mx-auto px-4 py-3">
           {/* Add Book Form */}
           {showAddForm && (
