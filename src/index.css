@@ -793,6 +793,34 @@ select.input-focus:focus {
   opacity: 1;
 }
 
+/* Bottom fade above the chat input — softens the hard edge where
+   scrolling messages meet the composer background. Always visible
+   at low opacity so the transition feels natural; slightly stronger
+   when the scroll-to-latest button is showing. */
+.chat-scroll-fade-bottom {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  margin-top: -32px;
+  background: linear-gradient(to top, #f2f2f2 20%, transparent);
+  z-index: 5;
+  opacity: 0.9;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.chat-scroll-fade-bottom.elevated {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-scroll-fade-bottom {
+    transition: none;
+  }
+}
+
 /* ── Search highlight in library ───────────────────────────── */
 
 .search-highlight {

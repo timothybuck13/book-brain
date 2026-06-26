@@ -985,6 +985,10 @@ export default function App() {
               <div ref={messagesEndRef} />
             </div>
           )}
+          {/* Bottom fade above composer */}
+          {hasMessages && (
+            <div className={`chat-scroll-fade-bottom ${showScrollBtn ? 'elevated' : ''}`} aria-hidden="true" />
+          )}
         </div>
 
         {/* Scroll to bottom button */}
@@ -1085,6 +1089,10 @@ export default function App() {
               ))}
               <div ref={messagesEndRef} />
             </div>
+          )}
+          {/* Bottom fade above composer */}
+          {hasMessages && (
+            <div className={`chat-scroll-fade-bottom ${showScrollBtn ? 'elevated' : ''}`} aria-hidden="true" />
           )}
         </div>
 
