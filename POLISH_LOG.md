@@ -7,7 +7,7 @@ Hourly UI improvements applied autonomously by Hatch.
 ## 2026-06-26 14:00 UTC
 **Change:** Chat scroll bottom fade — adds a subtle gradient fade (32px, `#f2f2f2` → transparent) pinned to the bottom of the chat scroll area, just above the composer. Messages now softly dissolve into the input background instead of hard-clipping, matching the existing top scroll shadow and giving the chat a more polished, finished feel. Fade opacity bumps slightly when the "Latest" scroll-to-bottom button is visible for extra visual separation. Respects `prefers-reduced-motion`. Applied to both demo and authenticated chat views.
 **Files:** src/index.css, src/App.jsx
-**Commit:** 
+**Commit:** becaf7f
 
 ## 2026-06-23 14:00 UTC
 **Change:** Chat composer clear button + Escape-to-clear — adds a subtle × clear button inside the chat input that appears when text is present (matching the Library search clear UX). Clicking clears the composer and refocuses for fast retry/editing. Also adds Escape key handling: pressing Esc while typing clears the input instead of bubbling up. The keyboard hint was updated to include "Esc to clear" for discoverability. Uses the existing `search-clear-btn` fade-in animation, respects `prefers-reduced-motion`, and is hidden during AI streaming to avoid accidental clears.
