@@ -302,7 +302,7 @@
   border-radius: 6px;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
   backdrop-filter: blur(4px);
   z-index: 2;
 }
@@ -318,15 +318,42 @@
   color: #e5e7eb;
 }
 
+.code-copy-btn:active {
+  transform: scale(0.94);
+}
+
 .code-copy-btn.copied {
   color: #4ade80;
   border-color: rgba(74, 222, 128, 0.3);
 }
 
+/* Touch-friendly code copy — matches the May 17 hover-action polish
+   for message copy / delete buttons. Uses capability detection
+   instead of viewport width, so tablets and hybrid devices work too.
+   Larger tap target, persistent low-opacity visibility, full opacity
+   on tap / focus / copied. */
+@media (hover: none) and (pointer: coarse) {
+  .code-copy-btn {
+    opacity: 0.7;
+    padding: 7px 10px;
+    top: 6px;
+    right: 6px;
+  }
+  .code-copy-btn:active,
+  .code-copy-btn:focus-visible,
+  .code-copy-btn.copied {
+    opacity: 1;
+  }
+}
+
+/* Small-screen fallback for browsers without hover media query support */
 @media (max-width: 480px) {
   .code-copy-btn {
     opacity: 0.7;
-    padding: 4px 6px;
+  }
+  .code-copy-btn.copied,
+  .code-copy-btn:focus-visible {
+    opacity: 1;
   }
 }
 
