@@ -80,7 +80,7 @@ function CodeBlock({ inline, className, children }) {
     try {
       await navigator.clipboard.writeText(codeText)
       setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
+      setTimeout(() => setCopied(false), 1800)
     } catch {
       const ta = document.createElement('textarea')
       ta.value = codeText
@@ -91,7 +91,7 @@ function CodeBlock({ inline, className, children }) {
       document.execCommand('copy')
       document.body.removeChild(ta)
       setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
+      setTimeout(() => setCopied(false), 1800)
     }
   }, [codeText])
 
@@ -125,6 +125,15 @@ function CodeBlock({ inline, className, children }) {
         )}
         <span className="hidden sm:inline">{copied ? 'Copied!' : 'Copy'}</span>
       </button>
+      {copied && (
+        <span
+          className="absolute top-0 right-2 -translate-y-full px-2 py-0.5 text-[10px] font-sans font-medium bg-gray-900 text-white rounded-md whitespace-nowrap pointer-events-none z-10 shadow-lg animate-fade-in-up"
+          role="status"
+          aria-live="polite"
+        >
+          Copied!
+        </span>
+      )}
       <pre className={langLabel ? 'has-lang' : ''}>
         <code className={className}>{children}</code>
       </pre>
