@@ -7,7 +7,7 @@ Hourly UI improvements applied autonomously by Hatch.
 ## 2026-06-29 14:00 UTC
 **Change:** Message copy button polish — brings the AI message copy button up to parity with the code-block copy UX (June 27–28). Adds a subtle hover background with border (`bg-gray-50`, `border-gray-200`) for clearer affordance, increases tap target to 36×32px on touch devices with persistent low-opacity visibility, and adds a green success state (`bg-green-50`, `border-green-200`) when copied. The "Copied!" tooltip now includes `role="status"` / `aria-live="polite"` for screen-reader announcement, matching the code-block accessibility fix. Button press scales to 0.94× with smooth transitions, respecting `prefers-reduced-motion`.
 **Files:** src/ChatMessage.jsx, src/index.css
-**Commit:** 
+**Commit:** 8bbe2fc
 
 ## 2026-06-26 14:00 UTC
 **Change:** Chat scroll bottom fade — adds a subtle gradient fade (32px, `#f2f2f2` → transparent) pinned to the bottom of the chat scroll area, just above the composer. Messages now softly dissolve into the input background instead of hard-clipping, matching the existing top scroll shadow and giving the chat a more polished, finished feel. Fade opacity bumps slightly when the "Latest" scroll-to-bottom button is visible for extra visual separation. Respects `prefers-reduced-motion`. Applied to both demo and authenticated chat views.
