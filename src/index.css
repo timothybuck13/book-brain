@@ -755,10 +755,49 @@ select.input-focus:focus {
 /* ── Copy-to-clipboard button on messages ──────────────────── */
 
 .copy-btn {
-  transition: opacity 0.15s ease, color 0.15s ease, background-color 0.15s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 6px;
+  border-radius: 8px;
+  color: #9ca3af;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: opacity 0.15s ease, color 0.15s ease, background-color 0.15s ease, transform 0.1s ease, border-color 0.15s ease;
+  cursor: pointer;
 }
+
+.copy-btn:hover {
+  color: #4b5563;
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
+}
+
 .copy-btn:active {
-  transform: scale(0.9);
+  transform: scale(0.94);
+}
+
+.copy-btn.copied,
+.copy-btn.copied:hover {
+  color: #16a34a;
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+/* Touch-friendly message copy — matches code-block copy polish.
+   Larger tap target, persistent low-opacity visibility on touch devices. */
+@media (hover: none) and (pointer: coarse) {
+  .copy-btn {
+    padding: 7px 8px;
+    min-width: 36px;
+    min-height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-btn {
+    transition: none;
+  }
 }
 
 /* ── Scroll-to-bottom button ───────────────────────────────── */

@@ -29,11 +29,7 @@ function CopyButton({ text }) {
     <div className="relative inline-block">
       <button
         onClick={handleCopy}
-        className={`copy-btn p-1 rounded-md transition-all ${
-          copied
-            ? 'text-green-500 bg-green-50'
-            : 'text-gray-300 hover:text-gray-500 hover:bg-gray-100'
-        }`}
+        className={`copy-btn${copied ? ' copied' : ''}`}
         aria-label={copied ? 'Copied to clipboard' : 'Copy message'}
         title={copied ? 'Copied!' : 'Copy'}
       >
@@ -48,7 +44,11 @@ function CopyButton({ text }) {
         )}
       </button>
       {copied && (
-        <span className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-sans font-medium bg-gray-900 text-white rounded-md whitespace-nowrap pointer-events-none animate-fade-in-up shadow-lg">
+        <span
+          className="absolute -top-7 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-sans font-medium bg-gray-900 text-white rounded-md whitespace-nowrap pointer-events-none z-10 shadow-lg animate-fade-in-up"
+          role="status"
+          aria-live="polite"
+        >
           Copied!
         </span>
       )}
