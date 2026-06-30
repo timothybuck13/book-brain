@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function relativeTime(dateStr) {
   if (!dateStr) return ''
@@ -55,6 +55,12 @@ function groupConversations(conversations) {
 export default function Sidebar({ conversations, activeConvoId, onSelect, onNew, onDelete, isOpen, onClose }) {
   const [confirmDelete, setConfirmDelete] = useState(null)
   const [, setTick] = useState(0)
+  const [scrolled, setScrolled] = useState(false)
+  const scrollContainerRef = React.useRef(null)
+
+  function handleScroll(e) {
+    setScrolled(e.target.scrollTop > 12)
+  }
 
   // Refresh relative timestamps every 60s
   useEffect(() => {
@@ -114,18 +120,23 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
         md:translate-x-0
       `}>
         {/* Header */}
-        <div className="px-4 py-3 border-b border-gray-200">
+        <div className={`px-4 py-3 border-b border-gray-200 bg-white relative z-10 header-elevation${scrolled ? ' scrolled' : ''}`}>
           <h2 className="font-sans font-semibold text-sm text-gray-500 uppercase tracking-wider">History</h2>
         </div>
 
         {/* Conversations list */}
         <div
-          className="flex-1 overflow-y-auto p-2 space-y-0.5"
+          className="flex-1 overflow-y-auto overscroll-contain relative"
           role="listbox"
           aria-label="Conversations"
           tabIndex={flatConvos.length > 0 ? 0 : -1}
           onKeyDown={handleListKeyDown}
+          onScroll={handleScroll}
+          ref={scrollContainerRef}
         >
+          {/* Top scroll shadow */}
+          <div className={`chat-scroll-shadow-top ${scrolled ? 'visible' : ''}`} aria-hidden="true" style={{ background: 'linear-gradient(to bottom, white, transparent)' }} />
+          <div className="p-2 space-y-0.5">
           {conversations.length === 0 ? (
             <div className="text-center py-10 px-4 animate-fade-in">
               <div className="mx-auto mb-3 w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center">
@@ -195,6 +206,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
               </div>
             ))
           )}
+        </div>
         </div>
 
         {/* New Chat button at bottom */}
