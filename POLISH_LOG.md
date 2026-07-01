@@ -4,6 +4,11 @@ Hourly UI improvements applied autonomously by Hatch.
 
 ---
 
+## 2026-07-01 14:00 UTC
+**Change:** Streaming send-button loading state — the chat composer send button was low-contrast gray-on-gray during AI response streaming, making it hard to tell what was happening. Reworked the streaming state with proper accessibility: amber-50 background with amber-600 spinner for clear contrast, a gentle pulsing glow ring (`sendPulse` 1.8s) to indicate active work, and full-opacity scale (no more shrunken disabled look). The input bar now shows a subtle amber glow border while streaming, the textarea dims to 60% opacity, and the placeholder changes to "Book Brain is thinking…" instead of cycling suggestions — making it immediately obvious the AI is working and input is temporarily locked. Added `aria-busy="true"` on the composer form and improved screen-reader labels ("Book Brain is responding…"). All animations respect `prefers-reduced-motion`.
+**Files:** src/App.jsx, src/index.css
+**Commit:** 
+
 ## 2026-06-29 14:00 UTC
 **Change:** Message copy button polish — brings the AI message copy button up to parity with the code-block copy UX (June 27–28). Adds a subtle hover background with border (`bg-gray-50`, `border-gray-200`) for clearer affordance, increases tap target to 36×32px on touch devices with persistent low-opacity visibility, and adds a green success state (`bg-green-50`, `border-green-200`) when copied. The "Copied!" tooltip now includes `role="status"` / `aria-live="polite"` for screen-reader announcement, matching the code-block accessibility fix. Button press scales to 0.94× with smooth transitions, respecting `prefers-reduced-motion`.
 **Files:** src/ChatMessage.jsx, src/index.css

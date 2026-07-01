@@ -610,7 +610,7 @@ export default function App() {
 
     return (
       <div className="flex-shrink-0 bg-[#f2f2f2] px-4 pt-2" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-        <form onSubmit={handleSubmit} className="chat-input-bar max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-5 pr-2.5 py-1">
+        <form onSubmit={handleSubmit} className={`chat-input-bar max-w-2xl mx-auto flex items-center bg-white rounded-full shadow-sm border border-gray-200 pl-5 pr-2.5 py-1${isStreaming ? ' streaming' : ''}`} aria-busy={isStreaming || undefined}>
           <div className="flex-1 relative">
             <textarea
               ref={textareaRef}
@@ -623,15 +623,24 @@ export default function App() {
               className="w-full resize-none bg-transparent text-base font-sans font-light focus:outline-none overflow-y-auto leading-6 py-2.5"
               disabled={isStreaming}
               style={{ minHeight: '44px', maxHeight: '120px' }}
-              aria-label="Ask about books"
+              aria-label={isStreaming ? "Book Brain is responding, input disabled" : "Ask about books"}
+              placeholder={isStreaming ? "Book Brain is thinking…" : undefined}
             />
-            {!input && (
+            {!input && !isStreaming && (
               <span
                 key={inputFocused ? 'focused' : `ph-${placeholderIdx}`}
                 className={`absolute inset-0 flex items-center text-base font-sans font-light text-gray-400 pointer-events-none select-none${!inputFocused ? ' placeholder-cycle' : ''}`}
                 aria-hidden="true"
               >
                 {inputFocused ? 'Ask about books…' : CHAT_PLACEHOLDERS[placeholderIdx]}
+              </span>
+            )}
+            {!input && isStreaming && (
+              <span
+                className="absolute inset-0 flex items-center text-base font-sans font-light text-gray-400 pointer-events-none select-none"
+                aria-hidden="true"
+              >
+                Book Brain is thinking…
               </span>
             )}
           </div>
@@ -651,16 +660,18 @@ export default function App() {
           <button
             type="submit"
             disabled={!hasText || isStreaming}
-            aria-label={isStreaming ? "Sending message..." : "Send message"}
-            title={hasText && !isStreaming ? "Send message (Enter)" : undefined}
-            className={`ml-1.5 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all send-glow ${
-              hasText && !isStreaming
-                ? 'bg-amber-600 text-white hover:bg-amber-700 scale-100'
-                : 'bg-gray-100 text-gray-300 scale-90'
+            aria-label={isStreaming ? "Book Brain is responding…" : "Send message"}
+            title={isStreaming ? "AI is responding…" : hasText ? "Send message (Enter)" : undefined}
+            className={`ml-1.5 flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+              isStreaming
+                ? 'bg-amber-50 text-amber-600 scale-100 streaming-send'
+                : hasText
+                  ? 'bg-amber-600 text-white hover:bg-amber-700 scale-100 send-glow'
+                  : 'bg-gray-100 text-gray-300 scale-90'
             }`}
           >
             {isStreaming ? (
-              <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+              <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
                 <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
               </svg>
