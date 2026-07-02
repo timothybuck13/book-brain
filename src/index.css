@@ -1273,22 +1273,29 @@ select.input-focus:focus {
   }
 }
 
-/* ── New Chat button icon rotation ─────────────────────────── */
+/* ── Icon rotate on hover ──────────────────────────────────── */
+/* Used by the New Chat button in the sidebar and Add Book buttons
+   in the library — the plus icon spins 90° on hover for a playful,
+   consistent micro-interaction. */
 
-.new-chat-btn svg {
+.new-chat-btn svg,
+.add-book-btn svg {
   transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform-origin: center;
 }
 
-.new-chat-btn:hover svg {
+.new-chat-btn:hover svg,
+.add-book-btn:hover svg {
   transform: rotate(90deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .new-chat-btn svg {
+  .new-chat-btn svg,
+  .add-book-btn svg {
     transition: none;
   }
-  .new-chat-btn:hover svg {
+  .new-chat-btn:hover svg,
+  .add-book-btn:hover svg {
     transform: none;
   }
 }

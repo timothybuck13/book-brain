@@ -403,7 +403,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
               </select>
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
-                className="flex items-center gap-1.5 px-3 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press"
+                className="add-book-btn flex items-center gap-1.5 px-3 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -506,7 +506,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
                   <p className="text-gray-400 font-sans text-xs mb-4">Add books manually or import your Goodreads history to get started.</p>
                   <button
                     onClick={() => setShowAddForm(true)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press"
+                    className="add-book-btn inline-flex items-center gap-1.5 px-4 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
