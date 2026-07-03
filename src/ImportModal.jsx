@@ -138,13 +138,17 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
             </div>
 
             <div
-              className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${
-                dragging ? 'border-amber-400 bg-amber-50' : 'border-gray-200 hover:border-gray-300'
+              role="button"
+              tabIndex={0}
+              aria-label="Upload Goodreads CSV – click to browse or drag and drop a file"
+              className={`import-dropzone border-2 border-dashed rounded-xl p-8 text-center cursor-pointer ${
+                dragging ? 'border-amber-400 bg-amber-50 dragging' : 'border-gray-200 hover:border-gray-300'
               }`}
               onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
               onDragLeave={() => setDragging(false)}
               onDrop={handleDrop}
               onClick={() => fileRef.current?.click()}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileRef.current?.click() } }}
             >
               <input
                 ref={fileRef}
@@ -152,8 +156,9 @@ export default function ImportModal({ userId, onClose, onImportComplete }) {
                 accept=".csv"
                 onChange={handleFileSelect}
                 className="hidden"
+                tabIndex={-1}
               />
-              <div className="mx-auto mb-3 w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
+              <div className="import-dropzone-icon mx-auto mb-3 w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                 </svg>

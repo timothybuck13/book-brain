@@ -1327,3 +1327,64 @@ kbd {
   font-size: 0.82em;
 }
 
+/* ── Goodreads import drop zone ─────────────────────────────── */
+/* Keyboard-accessible, with subtle hover lift and focus ring. Used in
+   both onboarding (App.jsx) and re-import modal (ImportModal.jsx). */
+
+.import-dropzone {
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+              transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.2s ease;
+}
+
+.import-dropzone:hover {
+  border-color: #fbbf24;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.import-dropzone:focus-visible {
+  outline: 2px solid #d97706;
+  outline-offset: 2px;
+  border-color: #f59e0b;
+  background-color: rgba(255, 251, 235, 0.6);
+}
+
+.import-dropzone:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.import-dropzone.dragging {
+  transform: scale(1.01);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.12);
+  border-color: #f59e0b;
+}
+
+.import-dropzone-icon {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-color 0.2s ease;
+}
+
+.import-dropzone:hover .import-dropzone-icon,
+.import-dropzone:focus-visible .import-dropzone-icon,
+.import-dropzone.dragging .import-dropzone-icon {
+  transform: translateY(-2px) scale(1.05);
+  background-color: #fef3c7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .import-dropzone,
+  .import-dropzone-icon {
+    transition: none;
+  }
+  .import-dropzone:hover,
+  .import-dropzone.dragging {
+    transform: none;
+  }
+  .import-dropzone:hover .import-dropzone-icon,
+  .import-dropzone:focus-visible .import-dropzone-icon,
+  .import-dropzone.dragging .import-dropzone-icon {
+    transform: none;
+  }
+}
+
