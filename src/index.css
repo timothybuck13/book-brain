@@ -1388,3 +1388,71 @@ kbd {
   }
 }
 
+/* ── Star rating interactive polish ────────────────────────── */
+/* Improves keyboard accessibility, touch target size, and
+   micro-interactions for the Add Book rating picker.
+   Interactive stars get hover lift, press feedback, and a clear
+   amber focus ring. Respects prefers-reduced-motion. */
+
+.star-rating-btn {
+  position: relative;
+  padding: 3px;
+  margin: -3px;
+  border-radius: 6px;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-color 0.15s ease,
+              box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-rating-btn:hover {
+  transform: scale(1.14);
+  background-color: rgba(251, 191, 36, 0.13);
+}
+
+.star-rating-btn:active {
+  transform: scale(0.93);
+}
+
+.star-rating-btn:focus-visible {
+  outline: 2px solid #d97706;
+  outline-offset: 2px;
+  background-color: rgba(255, 251, 235, 0.9);
+  box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.12);
+}
+
+.star-rating-btn-static {
+  padding: 2px;
+  margin: -2px;
+  border-radius: 4px;
+}
+
+/* Larger tap targets on touch devices — WCAG 2.5.5 friendly */
+@media (hover: none) and (pointer: coarse) {
+  .star-rating-btn {
+    padding: 6px;
+    margin: -4px;
+  }
+  .star-rating-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Ensure focus ring is not clipped inside Add Book form */
+.add-book-form .star-rating-btn:focus-visible {
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-rating-btn,
+  .star-rating-btn-static {
+    transition: none;
+  }
+  .star-rating-btn:hover,
+  .star-rating-btn:active,
+  .star-rating-btn:focus-visible {
+    transform: none;
+  }
+}
+
