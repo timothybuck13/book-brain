@@ -79,17 +79,68 @@ export default function App() {
   const menuRef = useRef(null)
   const fileRef = useRef(null)
   const autoScrollRef = useRef(true)
+  const toastTimeoutsRef = useRef(new Map())
 
   // ── Toast helper ────────────────────────────────────────────
   const showToast = useCallback((message, type = 'success') => {
     const id = Date.now() + Math.random()
     setToasts(prev => [...prev, { id, message, type, exiting: false }])
-    setTimeout(() => {
+    const exitTimeout = setTimeout(() => {
       setToasts(prev => prev.map(t => t.id === id ? { ...t, exiting: true } : t))
     }, 2500)
+    const removeTimeout = setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id))
+      toastTimeoutsRef.current.delete(id)
+    }, 2700)
+    toastTimeoutsRef.current.set(id, { exitTimeout, removeTimeout })
+  }, [])
+
+  const dismissToast = useCallback((id) => {
+    const timeouts = toastTimeoutsRef.current.get(id)
+    if (timeouts) {
+      clearTimeout(timeouts.exitTimeout)
+      clearTimeout(timeouts.removeTimeout)
+      toastTimeoutsRef.current.delete(id)
+    }
+    setToasts(prev => prev.map(t => t.id === id ? { ...t, exiting: true } : t))
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id))
-    }, 2700)
+    }, 200)
+  }, [])
+
+  const pauseToast = useCallback((id) => {
+    const timeouts = toastTimeoutsRef.current.get(id)
+    if (timeouts) {
+      clearTimeout(timeouts.exitTimeout)
+      clearTimeout(timeouts.removeTimeout)
+      toastTimeoutsRef.current.delete(id)
+    }
+  }, [])
+
+  const resumeToast = useCallback((id) => {
+    setToasts(prev => {
+      const t = prev.find(x => x.id === id)
+      if (!t || t.exiting) return prev
+      return prev
+    })
+    const exitTimeout = setTimeout(() => {
+      setToasts(prev => prev.map(t => t.id === id ? { ...t, exiting: true } : t))
+    }, 1200)
+    const removeTimeout = setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id))
+      toastTimeoutsRef.current.delete(id)
+    }, 1400)
+    toastTimeoutsRef.current.set(id, { exitTimeout, removeTimeout })
+  }, [])
+
+  // Clean up toast timers on unmount
+  useEffect(() => {
+    return () => {
+      toastTimeoutsRef.current.forEach(({ exitTimeout, removeTimeout }) => {
+        clearTimeout(exitTimeout)
+        clearTimeout(removeTimeout)
+      })
+    }
   }, [])
 
   // ── Auth + initial routing ──────────────────────────────────
@@ -711,9 +762,18 @@ export default function App() {
         {toasts.map(toast => (
           <div
             key={toast.id}
-            role="status"
+            role="button"
+            tabIndex={0}
+            aria-label={`Dismiss: ${toast.message}`}
             aria-live="polite"
-            className={`${toast.exiting ? 'toast-exit' : 'toast-enter'} pointer-events-auto px-4 py-2.5 rounded-full shadow-lg border text-sm font-sans font-medium flex items-center gap-2 ${
+            title="Click to dismiss"
+            onClick={() => dismissToast(toast.id)}
+            onMouseEnter={() => pauseToast(toast.id)}
+            onMouseLeave={() => resumeToast(toast.id)}
+            onFocus={() => pauseToast(toast.id)}
+            onBlur={() => resumeToast(toast.id)}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') { e.preventDefault(); dismissToast(toast.id) } }}
+            className={`${toast.exiting ? 'toast-exit' : 'toast-enter'} pointer-events-auto px-4 py-2.5 rounded-full shadow-lg border text-sm font-sans font-medium flex items-center gap-2 cursor-pointer select-none hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${
               toast.type === 'error'
                 ? 'bg-red-50 border-red-200 text-red-700'
                 : 'bg-white border-gray-200 text-gray-700'
@@ -729,7 +789,10 @@ export default function App() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
               </svg>
             )}
-            {toast.message}
+            <span>{toast.message}</span>
+            <svg className="w-3 h-3 ml-1 opacity-40 hover:opacity-80 flex-shrink-0 hidden sm:block" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </div>
         ))}
       </div>
