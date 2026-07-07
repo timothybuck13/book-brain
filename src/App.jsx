@@ -758,7 +758,7 @@ export default function App() {
   function renderToasts() {
     if (toasts.length === 0) return null
     return (
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2 pointer-events-none">
+      <div className="fixed left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2 pointer-events-none px-4 w-full max-w-sm" style={{ bottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}>
         {toasts.map(toast => (
           <div
             key={toast.id}
@@ -773,10 +773,10 @@ export default function App() {
             onFocus={() => pauseToast(toast.id)}
             onBlur={() => resumeToast(toast.id)}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') { e.preventDefault(); dismissToast(toast.id) } }}
-            className={`${toast.exiting ? 'toast-exit' : 'toast-enter'} pointer-events-auto px-4 py-2.5 rounded-full shadow-lg border text-sm font-sans font-medium flex items-center gap-2 cursor-pointer select-none hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${
+            className={`${toast.exiting ? 'toast-exit' : 'toast-enter'} pointer-events-auto px-4 py-2.5 rounded-full shadow-lg border text-sm font-sans font-medium flex items-center gap-2 cursor-pointer select-none hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all backdrop-blur-md backdrop-saturate-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${
               toast.type === 'error'
-                ? 'bg-red-50 border-red-200 text-red-700'
-                : 'bg-white border-gray-200 text-gray-700'
+                ? 'bg-red-50/90 supports-[backdrop-filter]:bg-red-50/80 border-red-200/80 text-red-700'
+                : 'bg-white/90 supports-[backdrop-filter]:bg-white/80 border-gray-200/80 text-gray-700'
             }`}
           >
             {toast.type === 'success' && (

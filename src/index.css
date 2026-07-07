@@ -1002,10 +1002,14 @@ select.input-focus:focus {
 
 .toast-enter {
   animation: toastIn 0.25s ease-out both;
+  will-change: transform, opacity;
+  /* Frosted glass hint — promotes to compositor layer for smooth blur */
+  transform: translateZ(0);
 }
 
 .toast-exit {
   animation: toastOut 0.2s ease-in both;
+  will-change: transform, opacity;
 }
 
 /* ── Dropdown menu animation ───────────────────────────────── */
