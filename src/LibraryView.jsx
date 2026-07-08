@@ -319,10 +319,9 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
           <span className="text-sm text-gray-400 font-sans"><AnimatedCount value={userBooks.length} /> books</span>
         </div>
         <div className="flex items-center">
-          
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+            className="w-10 h-10 md:w-9 md:h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 active:bg-gray-200 active:scale-[0.94] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-1 library-close-btn"
             aria-label="Close library"
           >
             <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -350,7 +349,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
             {search && (
               <button
                 onClick={() => { setSearch(''); searchRef.current?.focus() }}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-200 transition-all search-clear-btn"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 active:scale-90 active:bg-gray-200 transition-all search-clear-btn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
                 aria-label="Clear search"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
@@ -396,7 +395,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
-                className="text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 focus:outline-none input-focus"
+                className="text-base md:text-sm font-sans bg-gray-50 border border-gray-200 rounded-lg px-3 min-h-[40px] py-2 focus:outline-none input-focus"
               >
                 <option value="date_read">Date Read</option>
                 <option value="title">Title</option>
@@ -405,7 +404,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
               </select>
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
-                className="add-book-btn flex items-center gap-1.5 px-3 py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press"
+                className="add-book-btn flex items-center gap-1.5 px-3 min-h-[40px] py-2 bg-amber-600 text-white text-sm font-sans rounded-lg hover:bg-amber-700 btn-press active:scale-[0.97]"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -560,7 +559,7 @@ export default function LibraryView({ user, userBooks, setUserBooks, onClose, sh
                   ) : (
                     <button
                       onClick={() => setDeleteConfirm(book.id)}
-                      className="opacity-0 group-hover:opacity-100 hover-action p-1 rounded hover:bg-gray-100 transition-all"
+                      className="opacity-0 group-hover:opacity-100 hover-action w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 active:bg-gray-200 active:scale-90 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 transition-all"
                       aria-label={`Delete ${book.title}`}
                     >
                       <svg className="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

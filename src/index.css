@@ -1392,6 +1392,34 @@ kbd {
   }
 }
 
+/* ── Library toolbar touch targets polish ─────────────────── */
+/* Increases minimum hit area to 40px per WCAG, adds press scale
+   and focus ring for all toolbar icon buttons. Improves search
+   clear affordance and delete button accessibility. */
+
+.library-close-btn {
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+.library-close-btn:active {
+  background-color: #f3f4f6;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .library-close-btn {
+    background-color: #f9fafb;
+    border: 1px solid #f3f4f6;
+  }
+}
+
+/* Book row delete button – ensure 32px touch target + visible focus */
+@media (hover: none) and (pointer: coarse) {
+  .hover-action {
+    min-width: 32px;
+    min-height: 32px;
+    opacity: 0.5 !important;
+  }
+}
+
 /* ── Star rating interactive polish ────────────────────────── */
 /* Improves keyboard accessibility, touch target size, and
    micro-interactions for the Add Book rating picker.
