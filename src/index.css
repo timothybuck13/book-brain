@@ -1193,6 +1193,26 @@ select.input-focus:focus {
 /* ── Sidebar time-group headers ────────────────────── */
 .sidebar-group-header {
   animation: fadeIn 0.2s ease-out both;
+  /* Sticky with frosted glass — keeps time labels visible while scrolling long history */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+@supports not (backdrop-filter: blur(8px)) {
+  .sidebar-group-header {
+    background: rgba(255, 255, 255, 0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-group-header {
+    animation: none;
+  }
 }
 
 @keyframes slide-down {

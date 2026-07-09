@@ -150,7 +150,7 @@ export default function Sidebar({ conversations, activeConvoId, onSelect, onNew,
           ) : (
             groups.map((group) => (
               <div key={group.label}>
-                <div className="sidebar-group-header px-3 pt-3 pb-1 first:pt-1">
+                <div className="sidebar-group-header sticky top-0 z-[1] -mx-2 px-5 pt-3 pb-2 bg-white/85 backdrop-blur-sm supports-[backdrop-filter]:bg-white/75 border-b border-gray-100/70 first:pt-2">
                   <span className="text-[10px] font-sans font-semibold text-gray-400 uppercase tracking-widest">{group.label}</span>
                 </div>
                 {group.conversations.map((convo) => (
